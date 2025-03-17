@@ -1,0 +1,98 @@
+---
+import Header from '../components/Header.astro';
+import PricingNav from '../components/service-pricing/PricingNav.astro';
+import PricingSection from '../components/service-pricing/PricingSection.astro';
+import Layout from '../layouts/Layout.astro';
+import BookButtonGroup from '../components/buttons/BookingButtonGroup.astro';
+import Footer from '../components/Footer.astro';
+
+const hair_services = [
+    { serviceName: "Women's Haircut & Blow-dry", price: '$55' },
+    { serviceName: "Men's Haircut", price: '$30' },
+    { serviceName: "Children's Cut (up to 12)", price: '$30' },
+    { serviceName: "Shampoo & Style", price: '$35' },
+    { serviceName: "Updo", description: "*Bridal updos priced upon consultation", price: '$60' },
+    { serviceName: "Bridal Updo", price: 'Priced upon consultation' },
+    { serviceName: "Micro-Link Hair Extensions", price: 'Priced upon consultation' },
+    { serviceName: "Full Highlight w/Blow-dry", price: 'Starting at $140' },
+    { serviceName: "Partial Highlight w/Blow-dry", price: 'Starting at $125' },
+    { serviceName: "Full Highlight w/Haircut", price: 'Starting at $160' },
+    { serviceName: "Partial Highlight w/Haircut", price: 'Starting at $145' },
+    { serviceName: "New Growth Touch-up w/Blow-dry", price: '$90' },
+    { serviceName: "New Growth Touch-up w/Haircut", price: '$115' },
+    { serviceName: "Dimensional Color w/Blow-dry", price: 'Starting at $130' },
+    { serviceName: "Dimensional Color w/Haircut", price: 'Starting at $140' },
+    { serviceName: "Balayage", price: 'Priced upon consultation' },
+    { serviceName: "Keratin Smoothing Treatment", description: "*Lasts 3-5 months", price: '$275' },
+    { serviceName: "Keratin Smoothing Treatment (Express)", description: "*Lasts 4-6 weeks", price: '$150' },
+    { serviceName: "Chemical Straightening & Retexturizing", price: 'Priced upon consultation' },
+    { serviceName: "Permanent Wave", price: '$120' }
+]
+
+const nail_services = [
+    { serviceName: "Manicure", price: "$27" },
+    { serviceName: "Gel Manicure", price: "$45" },
+    { serviceName: "Dip Manicure", price: "$55" },
+    { serviceName: "Spa Pedicure", price: "$60" },
+    { serviceName: "Classic Pedicure", price: "$50" }
+]
+
+const waxing_makeup = [
+    { serviceName: "Brow Wax", price: "$15" },
+    { serviceName: "Lip Wax", price: "$10" },
+    { serviceName: "Makeup Application", price: "$35" }
+]
+---
+
+<Layout title="Services">
+    <main>
+        <Header />
+        <PricingNav />
+
+        <BookButtonGroup />
+
+        <h2 id="hair">Hair</h2>
+        {hair_services.map((service) => (
+            <PricingSection serviceName={service.serviceName} price={service.price} description={service.description}/>
+        ))}
+
+        <BookButtonGroup />
+
+        <h2 id="nails">Nails</h2></h2>
+        {nail_services.map((service) => (
+            <PricingSection serviceName={service.serviceName} price={service.price} />
+        ))}
+
+        <BookButtonGroup />
+
+        <h2 id="waxing">Waxing & Makeup</h2>
+        {waxing_makeup.map((service) => (
+            <PricingSection serviceName={service.serviceName} price={service.price} />
+        ))}
+
+        <BookButtonGroup />
+
+        <Footer />
+
+    </main>
+</Layout>
+
+<style>
+    h2 {
+        display: flex;
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-weight: 700;
+        text-align: left;
+        padding-left: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 0;
+        font-size: 2.0rem;
+  }
+
+  @media (max-width: 769px) {
+    h2 {
+      font-size: 2.0rem;
+    }
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import image from '../assets/Glow Salon - Landing Page WIP (1).png'
+// const bookingUrl = 'https://na0.meevo.com/CustomerPortal/login?tenantId=103761&locationId=106841'
+---
+
+<section class="hero-container">
+  <img src={image.src} alt="Glow Salon" />
+    <a 
+      href="tel:+13178453073"
+      class="book-now">Call to Book
+    </a>
+</section>
+
+<style>
+  .hero-container {
+    width: 100vw;
+    position: relative;
+  }
+
+  .hero-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .book-now {
+    text-decoration: none;
+    position: absolute;
+        right: 200px;
+        top: 55%;
+    z-index: 10;
+        padding: 20px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        background-color: #333333;
+        color: #fcefe3;
+        border-radius: 9999px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 1400px) {
+      .book-now {
+          right: 100px;
+          top: 55%;
+          padding: 18px 36px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .book-now {
+          right: 100px;
+          top: 55%;
+          padding: 16px 32px;
+      }
+    }
+  
+    @media (max-width: 1024px) {
+        .book-now {
+            right: 80px;
+            top: 55%;
+            font-size: 1.1rem;
+            padding: 16px 32px;
+        }
+    }
+  
+      @media (max-width: 768px) {
+        .book-now {
+          right: 60px;
+          top: 55%;
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .book-now {
+          right: 20px;
+          top: 55%;
+          font-size: 0.7rem;
+          padding: 5px 12px;
+        }
+      }
+</style>

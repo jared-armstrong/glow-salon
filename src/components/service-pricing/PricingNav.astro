@@ -1,0 +1,29 @@
+---
+---
+<nav class="pricing-nav">
+  <a href={Astro.url.pathname === '/' ? '#' : '/'}>Home</a>
+  <a href="#hair">Hair</a>
+  <a href="#nails">Nails</a>
+  <a href="#waxing">Waxing & Makeup</a>
+</nav>
+
+<style>
+  .pricing-nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 1rem 0;
+
+    background-color: #FCEFE3;
+  }
+
+  .pricing-nav a {
+    font-family: 'Brush Script MT', cursive;
+    color: #333333;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+</style>

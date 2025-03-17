@@ -1,0 +1,70 @@
+---
+import hairServiceImage from '../assets/services/hair-services.jpg'
+import Card from './Card.astro';
+import nailServiceImage from '../assets/services/nail-services.jpg'
+import makeupServiceImage from '../assets/services/makeup-services.jpg';
+
+const services = [
+  {
+    image: hairServiceImage.src,
+    serviceName: 'Hair'
+  },
+  {
+    image: nailServiceImage.src,
+    serviceName: 'Nails'
+  },
+  {
+    image: makeupServiceImage.src,
+    serviceName: 'Waxing & Makeup'
+  }
+]
+
+import { getPermalink } from '../utils/permalinks.js';
+
+---
+
+<section class="salon-services">
+  <h1 class="section-header">Our Services</h1>
+  <div class="cards">
+    {services.map((service) => (
+      <a href={getPermalink('/services')}>
+      <Card image={service.image} serviceName={service.serviceName} />
+      </a>
+    ))}
+  </div>  
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+  .salon-services {
+    width: 100%;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    color: #333333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 3.5rem;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  @media (max-width: 769px) {
+    .cards {
+      flex-direction: column;
+    }
+    .section-header {
+      font-size: 2.0rem;
+    }
+  }
+</style>

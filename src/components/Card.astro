@@ -1,0 +1,77 @@
+---
+interface Props {
+  image?: string;
+  serviceName: string;
+}
+
+const { image = "/default-image.jpg", serviceName } = Astro.props;
+---
+
+<div class="card">
+  <div class="image-container">
+    <img src={image} alt={serviceName} />
+    <div class="overlay">
+      <p class="service-name">{serviceName}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #333333
+  }
+
+  .image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .service-name {
+    color: white;
+    font-family: 'Brush Script MT', cursive; 
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+        margin: 2.0rem auto;
+        max-width: 300px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .card {
+        margin: 3.5rem;
+        height: 400px;
+    }
+    .image-container {
+      height: 400px;
+    }
+  }
+</style>
