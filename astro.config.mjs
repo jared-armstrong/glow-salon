@@ -17,7 +17,7 @@ export default defineConfig({
 
   integrations: [react()],
 
-  site: 'https://glowsalonwestclay.com',
+  site: 'https://www.glowsalonwestclay.com',
 
   output: 'server',
   adapter: node({
