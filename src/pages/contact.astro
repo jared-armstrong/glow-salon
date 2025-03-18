@@ -22,7 +22,7 @@ import HomeButton from '../components/buttons/HomeButton.astro';
                 <p>Carmel, Indiana 46032, United States</p>
                 <p><a href="tel:3178463073">317-846-3073</a></p>
 
-                <h2>Hours</h2>
+                <h2>Business Hours</h2>
                 <p><strong>Sunday:</strong> Closed</p>
                 <p><strong>Monday:</strong> Closed</p>
                 <p><strong>Tuesday:</strong> By appointment only</p>
@@ -45,11 +45,13 @@ import HomeButton from '../components/buttons/HomeButton.astro';
 
     h2 {
         font-family: 'Poppins', sans-serif;
-        color: #333333
     }
 
     p {
         font-family: 'Brush Script MT', cursive; 
+    }
+
+    p strong {
         color: #333333;
     }
 
@@ -68,7 +70,6 @@ import HomeButton from '../components/buttons/HomeButton.astro';
   }
 
   .info-section {
-      background: #f9f9f9;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -77,22 +78,21 @@ import HomeButton from '../components/buttons/HomeButton.astro';
 
   .info-section h2 {
       font-size: 1.4rem;
-      color: #333;
+      color: #333333;
       margin-bottom: 10px;
-      border-bottom: 2px solid #D9A695;
+      border-bottom: 3px solid #e7d7c9;
       padding-bottom: 5px;
   }
 
   .info-section p {
       font-size: 1rem;
-      margin: 5px 0;
-      color: #555;
+      margin: 12px 0;
+      color: #333333;
   }
 
   .info-section a {
-      color: #D9A695;
+      color: #333333;
       text-decoration: none;
-      font-weight: bold;
   }
 
   .info-section a:hover {
