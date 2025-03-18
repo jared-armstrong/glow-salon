@@ -1,3 +1,7 @@
+---
+import Logo from '../assets/glow-salon-header-logo.png';
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +13,36 @@
             background-color: #333333;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         h1 {
             color: #ede9e3;
-            font-family: 'Safira March'
+            font-family: 'Safira March';
+            margin: 0;
+        }
+
+        .logo {
+            display: none; /* Hide logo by default */
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 120px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        @media (min-width: 769px) {
+            .logo {
+                display: block; /* Show logo only for screens larger than 768px */
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
+        <img src={Logo.src} alt="Glow Salon Logo" class="logo" />
         <h1>Glow Salon and Spa</h1>
     </header>
 
