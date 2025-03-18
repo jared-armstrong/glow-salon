@@ -19,8 +19,10 @@ export default defineConfig({
 
   site: 'https://www.glowsalonwestclay.com',
 
-  output: 'server',
+  output: 'static',
+
   adapter: node({
     mode: 'standalone',
-  }),
+  })
+
 });
