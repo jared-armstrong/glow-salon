@@ -5,6 +5,7 @@ import PricingSection from '../components/service-pricing/PricingSection.astro';
 import Layout from '../layouts/Layout.astro';
 import BookButtonGroup from '../components/buttons/BookingButtonGroup.astro';
 import Footer from '../components/Footer.astro';
+import HomeButton from '../components/buttons/HomeButton.astro';
 
 const hair_services = [
     { serviceName: "Women's Haircut & Blow-dry", price: '$55' },
@@ -47,30 +48,38 @@ const waxing_makeup = [
 <Layout title="Services">
     <main>
         <Header />
-        <PricingNav />
+        <HomeButton />
 
-        <BookButtonGroup />
+        <div class="button-group-top">
+            <BookButtonGroup />
+        </div>
 
         <h2 id="hair">Hair</h2>
         {hair_services.map((service) => (
             <PricingSection serviceName={service.serviceName} price={service.price} description={service.description}/>
         ))}
 
-        <BookButtonGroup />
+        <div class="button-group">
+            <BookButtonGroup />
+        </div>
 
         <h2 id="nails">Nails</h2></h2>
         {nail_services.map((service) => (
             <PricingSection serviceName={service.serviceName} price={service.price} />
         ))}
 
-        <BookButtonGroup />
+        <div class="button-group">
+            <BookButtonGroup />
+        </div>
 
         <h2 id="waxing">Waxing & Makeup</h2>
         {waxing_makeup.map((service) => (
             <PricingSection serviceName={service.serviceName} price={service.price} />
         ))}
 
-        <BookButtonGroup />
+        <div class="button-group">
+            <BookButtonGroup />
+        </div>
 
         <Footer />
 
@@ -78,6 +87,19 @@ const waxing_makeup = [
 </Layout>
 
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .button-group-top {
+        margin-top: 100px;
+    }
+
+    .button-group {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
     h2 {
         display: flex;
         font-family: 'Safira March';

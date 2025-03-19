@@ -7,17 +7,20 @@ import makeupServiceImage from '../assets/services/makeup-services.jpg';
 const services = [
   {
     image: hairServiceImage.src,
-    serviceName: 'Hair'
+    serviceName: 'Hair',
+    sectionId: 'hair'
   },
   {
     image: nailServiceImage.src,
-    serviceName: 'Nails'
+    serviceName: 'Nails',
+    sectionId: 'nails'
   },
   {
     image: makeupServiceImage.src,
-    serviceName: 'Waxing & Makeup'
+    serviceName: 'Waxing & Makeup',
+    sectionId: 'waxing'
   }
-]
+];
 
 import { getPermalink } from '../utils/permalinks.js';
 
@@ -27,8 +30,8 @@ import { getPermalink } from '../utils/permalinks.js';
   <h1 class="section-header">Our Services</h1>
   <div class="cards">
     {services.map((service) => (
-      <a href={getPermalink('/services')}>
-      <Card image={service.image} serviceName={service.serviceName} />
+      <a href={getPermalink(`/services#${service.sectionId}`)}>
+        <Card image={service.image} serviceName={service.serviceName} />
       </a>
     ))}
   </div>  
