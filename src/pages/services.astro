@@ -1,6 +1,5 @@
 ---
 import Header from '../components/Header.astro';
-import PricingNav from '../components/service-pricing/PricingNav.astro';
 import PricingSection from '../components/service-pricing/PricingSection.astro';
 import Layout from '../layouts/Layout.astro';
 import BookButtonGroup from '../components/buttons/BookingButtonGroup.astro';
@@ -8,7 +7,8 @@ import Footer from '../components/Footer.astro';
 import HomeButton from '../components/buttons/HomeButton.astro';
 
 const hair_services = [
-    { serviceName: "Women's Haircut & Blow-dry", price: '$55' },
+    { serviceName: "Women's Short Haircut & Blow-dry", price: '$55' },
+    { serviceName: "Women's Long Haircut & Blow-dry", price: '$65'},
     { serviceName: "Men's Haircut", price: '$35' },
     { serviceName: "Children's Cut (up to 12)", price: '$30' },
     { serviceName: "Shampoo & Style", price: '$35' },
@@ -19,10 +19,10 @@ const hair_services = [
     { serviceName: "Partial Highlight w/Blow-dry", price: 'Starting at $125' },
     { serviceName: "Full Highlight w/Haircut", price: 'Starting at $160' },
     { serviceName: "Partial Highlight w/Haircut", price: 'Starting at $145' },
-    { serviceName: "New Growth Touch-up w/Blow-dry", price: '$90' },
-    { serviceName: "New Growth Touch-up w/Haircut", price: '$115' },
+    { serviceName: "New Growth Touch-up w/Blow-dry", price: '$100' },
+    { serviceName: "New Growth Touch-up w/Haircut", price: '$130' },
     { serviceName: "Dimensional Color w/Blow-dry", price: 'Starting at $130' },
-    { serviceName: "Dimensional Color w/Haircut", price: 'Starting at $140' },
+    { serviceName: "Dimensional Color w/Haircut", price: 'Starting at $150' },
     { serviceName: "Balayage", price: 'Priced upon consultation' },
     { serviceName: "Keratin Smoothing Treatment", description: "*Lasts 3-5 months", price: '$275' },
     { serviceName: "Keratin Smoothing Treatment (Express)", description: "*Lasts 4-6 weeks", price: '$150' },
@@ -41,7 +41,7 @@ const nail_services = [
 const waxing_makeup = [
     { serviceName: "Brow Wax", price: "$15" },
     { serviceName: "Lip Wax", price: "$10" },
-    { serviceName: "Makeup Application", price: "$35" }
+    { serviceName: "Makeup Application", price: "$50" }
 ]
 ---
 
