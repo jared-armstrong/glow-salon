@@ -1,11 +1,40 @@
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Google Analytics (gtag.js) -->
+		<script>
+			if (window.location.hostname !== "localhost") {
+				declare global {
+					interface Window {
+					dataLayer: any[];
+					gtag?: (...args: any[]) => void;
+				}
+			}
+
+			// Initialize Google Tag Manager
+			window.dataLayer = window.dataLayer || [];
+			function gtag(...args: any[]) {
+				window.dataLayer.push(args);
+			}
+			window.gtag = gtag;
+
+			// Load Google Analytics script dynamically
+			const script = document.createElement("script");
+			script.src = "https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET";
+			script.async = true;
+			document.head.appendChild(script);
+
+			script.onload = () => {
+				gtag("js", new Date());
+				gtag("config", "G-YJS85CR3ET");
+			};
+		}
+		</script>
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/Glow Salon & Spa Logo.png" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<meta name="generator" content={Astro.generator} />
 
 		<title>Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa</title>
 
