@@ -2,14 +2,15 @@
 interface Props {
   image?: string;
   serviceName: string;
+  seoAlt: string;
 }
 
-const { image = "/default-image.jpg", serviceName } = Astro.props;
+const { image = "/default-image.jpg", serviceName, seoAlt } = Astro.props;
 ---
 
 <div class="card">
   <div class="image-container">
-    <img src={image} alt={serviceName} />
+    <img src={image} alt={seoAlt} />
     <div class="overlay">
       <p class="service-name">{serviceName}</p>
     </div>

@@ -8,17 +8,20 @@ const services = [
   {
     image: hairServiceImage.src,
     serviceName: 'Hair',
-    sectionId: 'hair'
+    sectionId: 'hair',
+    altText: 'Haircuts, hair styling, and balayage at Glow Salon & Spa in Carmel, Indiana'
   },
   {
     image: nailServiceImage.src,
     serviceName: 'Nails',
-    sectionId: 'nails'
+    sectionId: 'nails',
+    altText: 'Manicures, pedicures, and gel nails at Glow Salon & Spa in Carmel, Indiana'
   },
   {
     image: makeupServiceImage.src,
     serviceName: 'Waxing & Makeup',
-    sectionId: 'waxing'
+    sectionId: 'waxing',
+    altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana'
   }
 ];
 
@@ -31,7 +34,7 @@ import { getPermalink } from '../utils/permalinks.js';
   <div class="cards">
     {services.map((service) => (
       <a href={getPermalink(`/services#${service.sectionId}`)}>
-        <Card image={service.image} serviceName={service.serviceName} />
+        <Card image={service.image} serviceName={service.serviceName} seoAlt={service.altText} />
       </a>
     ))}
   </div>  
