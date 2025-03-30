@@ -2,33 +2,13 @@
 <html lang="en">
 	<head>
 		<!-- Google Analytics (gtag.js) -->
-		<script>
-			if (window.location.hostname !== "localhost") {
-				declare global {
-					interface Window {
-					dataLayer: any[];
-					gtag?: (...args: any[]) => void;
-				}
-			}
-
-			// Initialize Google Tag Manager
-			window.dataLayer = window.dataLayer || [];
-			function gtag(...args: any[]) {
-				window.dataLayer.push(args);
-			}
-			window.gtag = gtag;
-
-			// Load Google Analytics script dynamically
-			const script = document.createElement("script");
-			script.src = "https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET";
-			script.async = true;
-			document.head.appendChild(script);
-
-			script.onload = () => {
-				gtag("js", new Date());
-				gtag("config", "G-YJS85CR3ET");
-			};
-		}
+		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET"></script>
+		<script type="text/partytown">
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-YJS85CR3ET');
 		</script>
 
 		<meta charset="UTF-8" />
