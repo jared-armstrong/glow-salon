@@ -3,6 +3,7 @@ import hairServiceImage from '../assets/services/hair-services.jpg'
 import Card from './Card.astro';
 import nailServiceImage from '../assets/services/nails.jpg'
 import makeupServiceImage from '../assets/services/makeup-artist.png';
+import giftCardImage from '../assets/services/salon-egift.png';
 
 const services = [
   {
@@ -22,6 +23,13 @@ const services = [
     serviceName: 'Waxing & Makeup',
     sectionId: 'waxing',
     altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana'
+  },
+  {
+    image: giftCardImage.src,
+    serviceName: 'E-Gift Cards',
+    sectionId: '',
+    altText: 'Purchase e-gift cards for Glow Salon and Spa in Carmel, Indiana',
+    externalLink: 'https://na0.meevo.com/CustomerPortal/egift/order/gift-type?tenantId=103761&locationId=106841'
   }
 ];
 
@@ -32,12 +40,15 @@ import { getPermalink } from '../utils/permalinks.js';
 <section class="salon-services">
   <h1 class="section-header">Our Services</h1>
   <div class="cards">
-    {services.map((service) => (
-      <a href={getPermalink(`/services#${service.sectionId}`)}>
-        <Card image={service.image} serviceName={service.serviceName} seoAlt={service.altText} />
-      </a>
-    ))}
-  </div>  
+    {services.map((service) => {
+      const href = service.externalLink || getPermalink(`/services#${service.sectionId}`);
+      return (
+        <a href={href} target={service.externalLink ? "_blank" : "_self"} rel={service.externalLink ? "noopener noreferrer" : undefined}>
+          <Card image={service.image} serviceName={service.serviceName} seoAlt={service.altText} />
+        </a>
+      );
+    })}
+  </div>
 </section>
 
 <style>
