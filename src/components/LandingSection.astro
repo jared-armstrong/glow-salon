@@ -1,10 +1,16 @@
 ---
-import image from '../assets/Glow Salon & Spa Landing.png'
+import image from '../assets/glow-salon-landing.png'
 // const bookingUrl = 'https://na0.meevo.com/CustomerPortal/login?tenantId=103761&locationId=106841'
 ---
 
 <section class="hero-container">
-  <img src={image.src} alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana" />
+  <img 
+    src={image.src} 
+    alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+  />
     <a 
       href="tel:+13178463073"
       class="book-now">Call to Book
@@ -41,8 +47,6 @@ import image from '../assets/Glow Salon & Spa Landing.png'
     color: white; /* White text */
     border-radius: 0; /* No rounded corners for a rectangle */
 }
-
-
     @media (max-width: 1400px) {
       .book-now {
           right: 80px;

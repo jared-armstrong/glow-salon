@@ -1,6 +1,53 @@
+---
+import landingImage from '../assets/glow-salon-landing.png';
+import headerLogo from '../assets/glow-salon-header-logo.png';
+import hairServiceImage from '../assets/services/hair-services.jpg';
+import nailServiceImage from '../assets/services/nails.jpg';
+import makeupServiceImage from '../assets/services/makeup-artist.png';
+import giftCardImage from '../assets/services/salon-egift.png';
+
+export interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- DNS Prefetch for external domains -->
+		<link rel="dns-prefetch" href="//www.googletagmanager.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+		<link rel="dns-prefetch" href="//www.facebook.com">
+		<link rel="dns-prefetch" href="//www.instagram.com">
+		<link rel="dns-prefetch" href="//login.meevo.com">
+		<link rel="dns-prefetch" href="//formspree.io">
+
+		<!-- Preconnect to critical external domains -->
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+		<!-- Preload critical fonts -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"></noscript>
+
+		<!-- Preload critical images -->
+		<link rel="preload" href={landingImage.src} as="image" fetchpriority="high">
+		<link rel="preload" href={headerLogo.src} as="image">
+		<link rel="preload" href={hairServiceImage.src} as="image">
+		<link rel="preload" href={nailServiceImage.src} as="image">
+		<link rel="preload" href={makeupServiceImage.src} as="image">
+		<link rel="preload" href={giftCardImage.src} as="image">
+		
+		<!-- Preload critical CSS -->
+		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
 		<!-- Google Analytics (gtag.js) -->
 		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET"></script>
 		<script type="text/partytown">
@@ -14,20 +61,19 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/Glow Salon & Spa Logo.png" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-		<title>Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa</title>
+		<title>{title}</title>
 
-  		<meta name="description" content="Glow Salon & Spa in Carmel, Indiana offers expert haircuts, hair color, balayage, highlights, keratin treatments, manicures, pedicures, waxing, and makeup services. Book your appointment today!">
+  		<meta name="description" content={description}>
 
   		<meta name="keywords" content="Hair Salon Carmel IN, Nail Salon Carmel Indiana, Haircuts Near Me, Women's Haircut Carmel, Balayage Carmel, Hair Color Carmel IN, Manicure Pedicure Carmel, Best Salon in Carmel, Eyebrow Waxing Carmel, Beauty Salon Near Me, Short Haircuts, Hair Styling Carmel Indiana, Luxury Salon in Carmel">
 
 		<meta name="author" content="Glow Salon & Spa">
   		<meta name="robots" content="index, follow">
 
-  		<meta property="og:title" content="Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa">
-  		<meta property="og:description" content="Looking for a top-rated beauty salon in Carmel, Indiana? Glow Salon & Spa offers haircuts, balayage, manicures, pedicures, waxing, and more!">
-  		<meta property="og:image" content="/Glow Salon & Spa Landing.png">
+  		<meta property="og:title" content={title}>
+  		<meta property="og:description" content={description}>
+  		<meta property="og:image" content={landingImage.src}>
   		<meta property="og:url" content="https://www.glowsalonwestclay.com">
 
 	</head>

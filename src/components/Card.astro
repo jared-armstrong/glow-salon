@@ -10,7 +10,7 @@ const { image = "/default-image.jpg", serviceName, seoAlt } = Astro.props;
 
 <div class="card">
   <div class="image-container">
-    <img src={image} alt={seoAlt} />
+    <img src={image} alt={seoAlt} loading="lazy" decoding="async" />
     <div class="overlay">
       <p class="service-name">{serviceName}</p>
     </div>
