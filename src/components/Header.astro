@@ -2,80 +2,68 @@
 import Logo from '../assets/glow-salon-header-logo.png';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glow Salon and Spa</title>
-    <style>
-        header {
-            background-color: #333333;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
+<header>
+    <img src={Logo.src} alt="Glow Salon Logo" class="logo" loading="eager" decoding="async" />
+    <h1>Glow Salon and Spa</h1>
+    <div class="social-icons">
+        <a href="/contact" aria-label="Contact">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</header>
 
-        h1 {
-            color: #ede9e3;
-            font-family: 'Safira March';
-            margin: 0;
-        }
+<style>
+    header {
+        background-color: #333333;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+    }
 
+    h1 {
+        color: #ede9e3;
+        font-family: 'Safira March';
+        margin: 0;
+    }
+
+    .logo {
+        display: none; /* Hide logo by default */
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        width: 120px; /* Adjust size as needed */
+        height: auto;
+    }
+
+    .social-icons {
+        display: none;
+    }
+
+    @media (min-width: 769px) {
         .logo {
-            display: none; /* Hide logo by default */
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            width: 120px; /* Adjust size as needed */
-            height: auto;
+            display: block;
         }
 
         .social-icons {
-            display: none;
+            display: flex;
+            gap: 20px;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
         }
 
-        @media (min-width: 769px) {
-            .logo {
-                display: block;
-            }
-
-            .social-icons {
-                display: flex;
-                gap: 20px;
-                position: absolute;
-                top: 50%;
-                right: 20px;
-                transform: translateY(-50%);
-            }
-
-            .social-icons a {
-                color: #EDE9E3;
-                font-size: 24px;
-                text-decoration: none;
-            }
+        .social-icons a {
+            color: #EDE9E3;
+            font-size: 24px;
+            text-decoration: none;
         }
-
-    </style>
-</head>
-<body>
-
-    <header>
-        <img src={Logo.src} alt="Glow Salon Logo" class="logo" />
-        <h1>Glow Salon and Spa</h1>
-        <div class="social-icons">
-            <a href="/contact" aria-label="Contact">
-              <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-    </header>
-
-</body>
-</html>
+    }
+</style>

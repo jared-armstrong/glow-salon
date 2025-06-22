@@ -1,9 +1,46 @@
 ---
 import landingImage from '../assets/glow-salon-landing.png';
+import headerLogo from '../assets/glow-salon-header-logo.png';
+import hairServiceImage from '../assets/services/hair-services.jpg';
+import nailServiceImage from '../assets/services/nails.jpg';
+import makeupServiceImage from '../assets/services/makeup-artist.png';
+import giftCardImage from '../assets/services/salon-egift.png';
 ---
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- DNS Prefetch for external domains -->
+		<link rel="dns-prefetch" href="//www.googletagmanager.com">
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="dns-prefetch" href="//fonts.googleapis.com">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com">
+		<link rel="dns-prefetch" href="//www.facebook.com">
+		<link rel="dns-prefetch" href="//www.instagram.com">
+		<link rel="dns-prefetch" href="//login.meevo.com">
+		<link rel="dns-prefetch" href="//formspree.io">
+
+		<!-- Preconnect to critical external domains -->
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+		<!-- Preload critical fonts -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"></noscript>
+
+		<!-- Preload critical images -->
+		<link rel="preload" href={landingImage.src} as="image" fetchpriority="high">
+		<link rel="preload" href={headerLogo.src} as="image">
+		<link rel="preload" href={hairServiceImage.src} as="image">
+		<link rel="preload" href={nailServiceImage.src} as="image">
+		<link rel="preload" href={makeupServiceImage.src} as="image">
+		<link rel="preload" href={giftCardImage.src} as="image">
+		
+		<!-- Preload critical CSS -->
+		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
 		<!-- Google Analytics (gtag.js) -->
 		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET"></script>
 		<script type="text/partytown">
@@ -17,8 +54,6 @@ import landingImage from '../assets/glow-salon-landing.png';
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/Glow Salon & Spa Logo.png" />
-		<link rel="preload" href={landingImage.src} as="image">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<title>Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa</title>
 
