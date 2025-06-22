@@ -1,3 +1,6 @@
+---
+import landingImage from '../assets/glow-salon-landing.png';
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -14,6 +17,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/Glow Salon & Spa Logo.png" />
+		<link rel="preload" href={landingImage.src} as="image">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<title>Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa</title>
@@ -27,7 +31,7 @@
 
   		<meta property="og:title" content="Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa">
   		<meta property="og:description" content="Looking for a top-rated beauty salon in Carmel, Indiana? Glow Salon & Spa offers haircuts, balayage, manicures, pedicures, waxing, and more!">
-  		<meta property="og:image" content="/Glow Salon & Spa Landing.png">
+  		<meta property="og:image" content={landingImage.src}>
   		<meta property="og:url" content="https://www.glowsalonwestclay.com">
 
 	</head>
