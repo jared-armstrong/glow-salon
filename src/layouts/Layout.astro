@@ -5,6 +5,13 @@ import hairServiceImage from '../assets/services/hair-services.jpg';
 import nailServiceImage from '../assets/services/nails.jpg';
 import makeupServiceImage from '../assets/services/makeup-artist.png';
 import giftCardImage from '../assets/services/salon-egift.png';
+
+export interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -55,17 +62,17 @@ import giftCardImage from '../assets/services/salon-egift.png';
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/Glow Salon & Spa Logo.png" />
 
-		<title>Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa</title>
+		<title>{title}</title>
 
-  		<meta name="description" content="Glow Salon & Spa in Carmel, Indiana offers expert haircuts, hair color, balayage, highlights, keratin treatments, manicures, pedicures, waxing, and makeup services. Book your appointment today!">
+  		<meta name="description" content={description}>
 
   		<meta name="keywords" content="Hair Salon Carmel IN, Nail Salon Carmel Indiana, Haircuts Near Me, Women's Haircut Carmel, Balayage Carmel, Hair Color Carmel IN, Manicure Pedicure Carmel, Best Salon in Carmel, Eyebrow Waxing Carmel, Beauty Salon Near Me, Short Haircuts, Hair Styling Carmel Indiana, Luxury Salon in Carmel">
 
 		<meta name="author" content="Glow Salon & Spa">
   		<meta name="robots" content="index, follow">
 
-  		<meta property="og:title" content="Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa">
-  		<meta property="og:description" content="Looking for a top-rated beauty salon in Carmel, Indiana? Glow Salon & Spa offers haircuts, balayage, manicures, pedicures, waxing, and more!">
+  		<meta property="og:title" content={title}>
+  		<meta property="og:description" content={description}>
   		<meta property="og:image" content={landingImage.src}>
   		<meta property="og:url" content="https://www.glowsalonwestclay.com">
 

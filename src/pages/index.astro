@@ -7,9 +7,12 @@ import Footer from '../components/Footer.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const title = "Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa";
+const description = "Glow Salon & Spa in Carmel, Indiana offers expert haircuts, hair color, balayage, highlights, keratin treatments, manicures, pedicures, waxing, and makeup services. Book your appointment today!";
 ---
 
-<Layout title="Glow Salon and Spa">
+<Layout title={title} description={description}>
 	<Header />
 	<LandingSection />
 	<SalonServices />

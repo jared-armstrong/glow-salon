@@ -4,9 +4,12 @@ import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import HomeButton from '../components/buttons/HomeButton.astro';
+
+const title = "Contact Us | Glow Salon & Spa | Carmel, IN";
+const description = "Find our address, hours, and phone number. Contact Glow Salon & Spa in Carmel, Indiana to book an appointment or ask a question.";
 ---
 
-<Layout title="Services">
+<Layout title={title} description={description}>
     <Header />
 
     <HomeButton />
