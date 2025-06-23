@@ -9,9 +9,116 @@ import giftCardImage from '../assets/services/salon-egift.webp';
 export interface Props {
 	title: string;
 	description: string;
+	canonicalURL?: string;
+	ogImage?: string;
+	ogType?: string;
+	articlePublishedTime?: string;
+	articleModifiedTime?: string;
+	articleAuthor?: string;
+	articleSection?: string;
+	articleTag?: string;
 }
 
-const { title, description } = Astro.props;
+const { 
+	title, 
+	description, 
+	canonicalURL = Astro.url.href,
+	ogImage = landingImage.src,
+	ogType = "website",
+	articlePublishedTime,
+	articleModifiedTime,
+	articleAuthor,
+	articleSection,
+	articleTag
+} = Astro.props;
+
+// Generate structured data for the page
+const structuredData: any = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"name": title,
+	"description": description,
+	"url": canonicalURL,
+	"mainEntity": {
+		"@type": "BeautySalon",
+		"name": "Glow Salon & Spa",
+		"image": "/glow-salon-logo.webp",
+		"url": "https://www.glowsalonwestclay.com",
+		"telephone": "317-846-3073",
+		"priceRange": "$$",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "1928 Rhettsbury St",
+			"addressLocality": "Carmel",
+			"addressRegion": "IN",
+			"postalCode": "46032",
+			"addressCountry": "US"
+		},
+		"geo": {
+			"@type": "GeoCoordinates",
+			"latitude": 39.924550,
+			"longitude": -86.183260
+		},
+		"openingHoursSpecification": [
+			{
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+				"opens": "09:00",
+				"closes": "18:00"
+			},
+			{
+				"@type": "OpeningHoursSpecification",
+				"dayOfWeek": "Saturday",
+				"opens": "09:00",
+				"closes": "16:00"
+			}
+		],
+		"sameAs": [
+			"https://www.facebook.com/GlowSalonWestClay/",
+			"https://www.instagram.com/glowsalonwestclay/"
+		],
+		"hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "Beauty Services",
+			"itemListElement": [
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Hair Services",
+						"description": "Professional haircuts, coloring, highlights, and treatments"
+					}
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Nail Services",
+						"description": "Manicures, pedicures, gel and dip treatments"
+					}
+				},
+				{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Makeup Services",
+						"description": "Professional makeup application and waxing services"
+					}
+				}
+			]
+		}
+	}
+};
+
+// Add article-specific structured data if provided
+if (articlePublishedTime) {
+	structuredData["@type"] = "Article";
+	structuredData.datePublished = articlePublishedTime;
+	if (articleModifiedTime) structuredData.dateModified = articleModifiedTime;
+	if (articleAuthor) structuredData.author = { "@type": "Person", "name": articleAuthor };
+	if (articleSection) structuredData.articleSection = articleSection;
+	if (articleTag) structuredData.articleTag = articleTag;
+}
 ---
 <!doctype html>
 <html lang="en">
@@ -55,18 +162,34 @@ const { title, description } = Astro.props;
 		  function gtag(){dataLayer.push(arguments);}
 		  gtag('js', new Date());
 		
-		  gtag('config', 'G-YJS85CR3ET');
+		  gtag('config', 'G-YJS85CR3ET', {
+		    page_title: '{title}',
+		    page_location: '{canonicalURL}'
+		  });
 		</script>
 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no">
+		<meta name="theme-color" content="#e7d7c9">
+		<meta name="msapplication-TileColor" content="#e7d7c9">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="default">
+		<meta name="apple-mobile-web-app-title" content="Glow Salon & Spa">
+		
+		<!-- Favicon and App Icons -->
 		<link rel="icon" type="image/webp" href="/glow-salon-logo.webp" />
+		<link rel="apple-touch-icon" href="/glow-salon-logo.webp">
+		<link rel="manifest" href="/site.webmanifest">
 
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
-
-  		<meta name="description" content={description}>
-
-  		<meta name="keywords" content="Hair Salon Near Me,
+		<meta name="title" content={title}>
+		<meta name="description" content={description}>
+		<meta name="keywords" content="Hair Salon Near Me,
 					Hair Salon Carmel IN,
 					Best Hair Salon Carmel,
 					Hair Color Carmel Indiana,
@@ -98,15 +221,163 @@ const { title, description } = Astro.props;
 					Carmel Hair Spa, 
 					Carmel Hair Services, 
 					Carmel Nail Services, 
-					Carmel Makeup Services">
+					Carmel Makeup Services,
+					Salon Carmel Indiana,
+					Beauty Services Carmel,
+					Professional Hair Stylist Carmel,
+					Hair Color Specialist Carmel,
+					Balayage Specialist Carmel,
+					Keratin Treatment Carmel,
+					Hair Extensions Specialist Carmel,
+					Bridal Hair Stylist Carmel,
+					Wedding Makeup Artist Carmel,
+					Professional Nail Technician Carmel,
+					Gel Manicure Carmel,
+					Spa Pedicure Carmel,
+					Waxing Services Carmel,
+					Eyebrow Shaping Carmel,
+					Luxury Beauty Salon Carmel,
+					West Clay Hair Salon,
+					Carmel Beauty Services,
+					Hair Salon West Clay Carmel">
 
 		<meta name="author" content="Glow Salon & Spa">
-  		<meta name="robots" content="index, follow">
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+		<meta name="googlebot" content="index, follow">
+		<meta name="bingbot" content="index, follow">
 
-  		<meta property="og:title" content={title}>
-  		<meta property="og:description" content={description}>
-  		<meta property="og:image" content={landingImage.src}>
-  		<meta property="og:url" content="https://www.glowsalonwestclay.com">
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={ogType}>
+		<meta property="og:url" content={canonicalURL}>
+		<meta property="og:title" content={title}>
+		<meta property="og:description" content={description}>
+		<meta property="og:image" content={ogImage}>
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+		<meta property="og:image:alt" content="Glow Salon & Spa - Professional Beauty Services in Carmel, Indiana">
+		<meta property="og:site_name" content="Glow Salon & Spa">
+		<meta property="og:locale" content="en_US">
+		<meta property="og:phone_number" content="317-846-3073">
+		<meta property="og:street_address" content="1928 Rhettsbury St">
+		<meta property="og:locality" content="Carmel">
+		<meta property="og:region" content="IN">
+		<meta property="og:postal_code" content="46032">
+		<meta property="og:country_name" content="United States">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content={canonicalURL}>
+		<meta property="twitter:title" content={title}>
+		<meta property="twitter:description" content={description}>
+		<meta property="twitter:image" content={ogImage}>
+		<meta property="twitter:image:alt" content="Glow Salon & Spa - Professional Beauty Services in Carmel, Indiana">
+
+		<!-- Additional SEO Meta Tags -->
+		<meta name="geo.region" content="US-IN">
+		<meta name="geo.placename" content="Carmel, Indiana">
+		<meta name="geo.position" content="39.924550;-86.183260">
+		<meta name="ICBM" content="39.924550, -86.183260">
+		<meta name="DC.title" content={title}>
+		<meta name="DC.description" content={description}>
+		<meta name="DC.creator" content="Glow Salon & Spa">
+		<meta name="DC.publisher" content="Glow Salon & Spa">
+		<meta name="DC.language" content="en">
+		<meta name="DC.coverage" content="Carmel, Indiana">
+		<meta name="DC.subject" content="Beauty Salon, Hair Services, Nail Services, Makeup Services">
+
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+		<!-- Additional Structured Data for Local Business -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "LocalBusiness",
+			"name": "Glow Salon & Spa",
+			"image": "/glow-salon-logo.webp",
+			"@id": "https://www.glowsalonwestclay.com",
+			"url": "https://www.glowsalonwestclay.com",
+			"telephone": "317-846-3073",
+			"priceRange": "$$",
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "1928 Rhettsbury St",
+				"addressLocality": "Carmel",
+				"addressRegion": "IN",
+				"postalCode": "46032",
+				"addressCountry": "US"
+			},
+			"geo": {
+				"@type": "GeoCoordinates",
+				"latitude": 39.924550,
+				"longitude": -86.183260
+			},
+			"openingHoursSpecification": [
+				{
+					"@type": "OpeningHoursSpecification",
+					"dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+					"opens": "09:00",
+					"closes": "18:00"
+				},
+				{
+					"@type": "OpeningHoursSpecification",
+					"dayOfWeek": "Saturday",
+					"opens": "09:00",
+					"closes": "16:00"
+				}
+			],
+			"sameAs": [
+				"https://www.facebook.com/GlowSalonWestClay/",
+				"https://www.instagram.com/glowsalonwestclay/"
+			],
+			"hasOfferCatalog": {
+				"@type": "OfferCatalog",
+				"name": "Beauty Services",
+				"itemListElement": [
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Hair Services",
+							"description": "Professional haircuts, coloring, highlights, and treatments"
+						}
+					},
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Nail Services",
+							"description": "Manicures, pedicures, gel and dip treatments"
+						}
+					},
+					{
+						"@type": "Offer",
+						"itemOffered": {
+							"@type": "Service",
+							"name": "Makeup Services",
+							"description": "Professional makeup application and waxing services"
+						}
+					}
+				]
+			}
+		}
+		</script>
+
+		<!-- BreadcrumbList Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "https://www.glowsalonwestclay.com"
+				}
+			]
+		}
+		</script>
 
 	</head>
 	<body>

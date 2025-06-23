@@ -1,3 +1,18 @@
 User-agent: *
 Allow: /
+
+# Disallow admin or private areas (if any exist in the future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow important pages
+Allow: /services/
+Allow: /products/
+Allow: /contact
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://www.glowsalonwestclay.com/sitemap.xml
