@@ -9,15 +9,19 @@ Glow Salon & Spa offers a comprehensive range of beauty services including:
 - **Hair Services**: Haircuts, highlights, balayage, keratin treatments, hair extensions, and more
 - **Nail Services**: Manicures, pedicures, gel and dip services
 - **Additional Services**: Waxing, makeup application, and bridal services
+- **Product Recommendations**: Curated selection of professional beauty products and salon essentials
 
 ## 🚀 Features
 
 - **Responsive Design**: Optimized for all devices and screen sizes
 - **Modern UI/UX**: Clean, professional design with smooth animations
+- **Individual Service Pages**: Dedicated pages for each service category (hair, nails, makeup, bridal)
+- **Product Recommendations**: Amazon affiliate product showcase with professional beauty products
 - **Service Menu**: Comprehensive pricing and service information
 - **Contact Integration**: Phone booking and contact form functionality
 - **SEO Optimized**: Built with search engine optimization in mind
 - **Fast Performance**: Static site generation for optimal loading speeds
+- **Image Optimization**: WebP format for better resource efficiency and loading times
 
 ## 🛠️ Tech Stack
 
@@ -33,14 +37,24 @@ Glow Salon & Spa offers a comprehensive range of beauty services including:
 ```
 glow-salon/
 ├── public/                 # Static assets
+│   └── products/          # Product images (WebP format)
 ├── src/
 │   ├── assets/            # Images and media files
+│   │   └── products/      # Product images (WebP format)
 │   ├── components/        # Reusable UI components
 │   │   ├── buttons/       # Button components
-│   │   └── service-pricing/ # Pricing components
+│   │   ├── service-pricing/ # Pricing components
+│   │   ├── salon-services/ # Service page components
+│   │   └── salon-products/ # Product recommendation components
 │   ├── layouts/           # Page layouts
 │   ├── pages/             # Astro pages
-│   │   └── services/      # Service-specific pages
+│   │   ├── services/      # Individual service pages
+│   │   │   ├── hair.astro
+│   │   │   ├── nails.astro
+│   │   │   ├── makeup.astro
+│   │   │   └── bridal.astro
+│   │   └── products/      # Product recommendations
+│   │       └── recommendations.astro
 │   ├── styles/            # Global styles
 │   └── utils/             # Utility functions
 ├── astro.config.mjs       # Astro configuration
@@ -97,9 +111,17 @@ glow-salon/
 
 ### Adding New Services
 
-1. Edit `src/pages/services.astro` to add new service categories
-2. Update the service arrays with new offerings
-3. The pricing will automatically be displayed using the `PricingSection` component
+1. Create a new service page in `src/pages/services/` (e.g., `waxing.astro`)
+2. Use the `ServicePage` component from `src/components/salon-services/ServicePage.astro`
+3. Define your service array with pricing information
+4. The page will automatically generate with proper SEO and styling
+
+### Adding Product Recommendations
+
+1. Add product images to `src/assets/products/` (use WebP format for optimization)
+2. Edit `src/pages/products/recommendations.astro` to add new products
+3. Include affiliate links and SEO-friendly alt text
+4. Products will be displayed using the `ProductsPage` component
 
 ### Styling
 
@@ -110,7 +132,8 @@ glow-salon/
 ### Content Management
 
 - **Homepage**: Edit `src/pages/index.astro` and its imported components
-- **Services**: Modify the service arrays in `src/pages/services.astro`
+- **Services**: Each service category has its own page in `src/pages/services/`
+- **Products**: Update the products array in `src/pages/products/recommendations.astro`
 - **Contact**: Update contact information in `src/pages/contact.astro`
 
 ## 📱 Responsive Design
@@ -135,6 +158,7 @@ The website is fully responsive with breakpoints for:
 - Meta tags are configured for each page
 - Sitemap is automatically generated
 - Open Graph tags for social media sharing
+- Individual service pages have dedicated SEO optimization
 
 ## 📧 Contact Form
 
@@ -142,6 +166,15 @@ The contact form includes:
 - Name, email, and message fields
 - Email validation
 - Integration with email services (Nodemailer/Resend)
+
+## 🛍️ Product Recommendations
+
+The product recommendations page features:
+- Curated selection of professional beauty products
+- Amazon affiliate links for monetization
+- High-quality product images in WebP format
+- SEO-optimized product descriptions
+- Responsive grid layout
 
 ## 🚀 Deployment
 
