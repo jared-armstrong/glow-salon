@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replaced generic Astro starter documentation
 - Enhanced project structure documentation
 
-## [1.0.0] - 2024-01-15
+## [1.0.0] - 2025-03-29
 
 ### Added
 - Initial website launch

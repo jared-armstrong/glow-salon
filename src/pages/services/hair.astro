@@ -1,0 +1,40 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+
+const title = "Hair Services in Carmel, IN | Glow Salon & Spa";
+const description = "Professional hair services including haircuts, highlights, balayage, keratin treatments, and more. Serving Carmel, Indiana.";
+
+const hair_services = [
+    { serviceName: "Women's Short Haircut & Blow-dry", price: '$55' },
+    { serviceName: "Women's Long Haircut & Blow-dry", price: '$65'},
+    { serviceName: "Men's Haircut", price: '$35' },
+    { serviceName: "Children's Haircut (12 and under)", price: '$30' },
+    { serviceName: "Shampoo & Style, Short Hair", price: '$35' },
+    { serviceName: "Shampoo & Style, Medium Hair", price: '$45' },
+    { serviceName: "Shampoo & Style, Long Hair", price: '$55' },
+    { serviceName: "Updo", price: '$60' },
+    { serviceName: "Bridal Updo", price: 'Priced upon consultation' },
+    { serviceName: "Micro-Link Hair Extensions", price: 'Priced upon consultation' },
+    { serviceName: "Full Highlight w/Blow-dry", price: 'Starting at $140' },
+    { serviceName: "Partial Highlight w/Blow-dry", price: 'Starting at $125' },
+    { serviceName: "Full Highlight w/Haircut", price: 'Starting at $160' },
+    { serviceName: "Partial Highlight w/Haircut", price: 'Starting at $145' },
+    { serviceName: "New Growth Touch-up w/Blow-dry", price: '$100' },
+    { serviceName: "New Growth Touch-up w/Haircut", price: '$130' },
+    { serviceName: "Dimensional Color w/Blow-dry", price: 'Starting at $130' },
+    { serviceName: "Dimensional Color w/Haircut", price: 'Starting at $150' },
+    { serviceName: "Balayage", price: 'Priced upon consultation' },
+    { serviceName: "Keratin Smoothing Treatment", description: "*Lasts 3-5 months", price: '$275' },
+    { serviceName: "Keratin Smoothing Treatment (Express)", description: "*Lasts 4-6 weeks", price: '$150' },
+    { serviceName: "Chemical Straightening & Retexturizing", price: 'Priced upon consultation' },
+    { serviceName: "Permanent Wave", price: '$120' }
+]
+---
+
+<ServicePage 
+    title={title}
+    description={description}
+    pageTitle="Hair Services"
+    introText="Professional hair services tailored to your unique style and needs."
+    services={hair_services}
+/>

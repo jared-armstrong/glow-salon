@@ -1,0 +1,22 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+
+const title = "Nail Services in Carmel, IN | Glow Salon & Spa";
+const description = "Professional nail services including manicures, pedicures, gel and dip treatments. Serving Carmel, Indiana.";
+
+const nail_services = [
+    { serviceName: "Manicure", price: "$27" },
+    { serviceName: "Gel Manicure", price: "$45" },
+    { serviceName: "Dip Manicure", price: "$55" },
+    { serviceName: "Spa Pedicure", price: "$60" },
+    { serviceName: "Classic Pedicure", price: "$50" }
+]
+---
+
+<ServicePage 
+    title={title}
+    description={description}
+    pageTitle="Nail Services"
+    introText="Relaxing and professional nail care services for beautiful, healthy nails."
+    services={nail_services}
+/>
