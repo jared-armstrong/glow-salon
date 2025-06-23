@@ -1,9 +1,8 @@
 ---
-import hairServiceImage from '../assets/services/hair-services.webp'
-import Card from './Card.astro';
-import nailServiceImage from '../assets/services/nails.webp'
-import makeupServiceImage from '../assets/services/makeup-artist.webp';
-import giftCardImage from '../assets/services/salon-egift.webp';
+import hairServiceImage from '../../assets/services/hair-services.webp'
+import Card from '../Card.astro';
+import nailServiceImage from '../../assets/services/nails.webp'
+import makeupServiceImage from '../../assets/services/makeup-artist.webp';
 
 const services = [
   {
@@ -23,13 +22,6 @@ const services = [
     serviceName: 'Waxing & Makeup',
     href: '/services/makeup',
     altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana'
-  },
-  {
-    image: giftCardImage.src,
-    serviceName: 'E-Gift Cards',
-    href: 'https://na0.meevo.com/CustomerPortal/egift/order/gift-type?tenantId=103761&locationId=106841',
-    altText: 'Purchase e-gift cards for Glow Salon and Spa in Carmel, Indiana',
-    externalLink: true
   }
 ];
 
@@ -39,7 +31,7 @@ const services = [
   <h1 class="section-header">Our Services</h1>
   <div class="cards">
     {services.map((service) => (
-      <a href={service.href} target={service.externalLink ? "_blank" : "_self"} rel={service.externalLink ? "noopener noreferrer" : undefined}>
+      <a href={service.href} target="_self">
         <Card image={service.image} serviceName={service.serviceName} seoAlt={service.altText} />
       </a>
     ))}
@@ -64,7 +56,7 @@ const services = [
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     justify-items: center;
     gap: 2rem;
     width: 100%;

@@ -1,0 +1,70 @@
+---
+import giftCardImage from '../../assets/services/salon-egift.webp';
+import amazonProductsImage from '../../assets/products/beauty-products.webp';
+import Card from '../Card.astro';
+
+const products = [
+{
+    image: amazonProductsImage.src,
+    serviceName: 'Beauty Products We Love',
+    href: '/products/amazon-recommendations',
+    altText: 'Shop our recommended beauty products and salon essentials on Amazon',
+    externalLink: false
+  },
+  {
+    image: giftCardImage.src,
+    serviceName: 'E-Gift Cards',
+    href: 'https://na0.meevo.com/CustomerPortal/egift/order/gift-type?tenantId=103761&locationId=106841',
+    altText: 'Purchase e-gift cards for Glow Salon and Spa in Carmel, Indiana',
+    externalLink: true
+  }
+];
+---
+
+<section class="products-list">
+  <h1 class="section-header">Our Products</h1>
+  <div class="cards">
+    {products.map((product) => (
+      <a href={product.href} target={product.externalLink ? "_blank" : "_self"} rel={product.externalLink ? "noopener noreferrer" : undefined}>
+        <Card image={product.image} serviceName={product.serviceName} seoAlt={product.altText} />
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .products-list {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: center;
+    font-family: 'Safira March';
+    color: #333333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 3.5rem;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    justify-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 767px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+    .section-header {
+      font-size: 2.0rem;
+    }
+  }
+</style> 
