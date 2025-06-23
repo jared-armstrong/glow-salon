@@ -1,0 +1,120 @@
+---
+import ProductsPage from '../../components/salon-products/ProductsPage.astro';
+import amikaShineMask from '../../assets/products/amika-shine-mask.webp';
+import amikaFluxusHairspray from '../../assets/products/amika-fluxus-hairspray.webp';
+import amikaDryShampoo from '../../assets/products/amika-dry-shampoo.webp';
+import amikaAntiHumidity from '../../assets/products/amika-anti-humidity.webp';
+import bioIonicLongBarrelStyler from '../../assets/products/bio-ionic-long-barrel-styler.webp';
+import bioIonicHairDryer from '../../assets/products/bio-ionic-hair-dryer.webp';
+import earthTherapeuticsFootSpray from '../../assets/products/earth-therapeutics-foot-spray.webp';
+import keracolorColorConditioner from '../../assets/products/keracolor-color-conditioner.webp';
+import kitschHairTowelWrap from '../../assets/products/kitsch-hair-towel-wrap.webp';
+import kitschSatinPillowcase from '../../assets/products/kitsch-satin-pillowcase.webp';
+import moroccanoilConditioner from '../../assets/products/moroccanoil-conditioner.webp';
+import moroccanoilTreatment from '../../assets/products/moroccanoil-treatment.webp';
+import oribeGoldHairOil from '../../assets/products/oribe-gold-hair-oil.webp';
+import redkenQuickBlowoutHeatProtectionSpray from '../../assets/products/redken-quick-blowout-heat-protection-spray.webp';
+import wetBrushSpeedDryHairBrush from '../../assets/products/wet-brush-speed-dry-hair-brush.webp';
+
+// Product data with affiliate links
+const products = [
+  {
+    name: "Amika Flash Instant Shine Mask",
+    image: amikaShineMask.src,
+    affiliateLink: "https://amzn.to/3Tz5bIj",
+    seoAlt: "Amika Flash Instant Shine Mask - Professional Hair Treatment"
+  },
+  {
+    name: "Amika Fluxus Touchable Hairspray",
+    image: amikaFluxusHairspray.src, 
+    affiliateLink: "https://amzn.to/44qhMns",
+    seoAlt: "Amika Fluxus Touchable Hairspray - Flexible Hold Hair Spray"
+  },
+  {
+    name: "Amika Perk Up Talc-Free Dry Shampoo",
+    image: amikaDryShampoo.src,
+    affiliateLink: "https://amzn.to/3ZHod2O",
+    seoAlt: "Amika Perk Up Talc-Free Dry Shampoo - Volumizing Hair Care"
+  },
+  {
+    name: "Amika The Shield Anti-Humidity Spray",
+    image: amikaAntiHumidity.src,
+    affiliateLink: "https://amzn.to/4efk9N9", 
+    seoAlt: "Amika The Shield Anti-Humidity Spray - Humidity Protection"
+  },
+  {
+    name: "Bio Ionic Long Barrel Styler",
+    image: bioIonicLongBarrelStyler.src,
+    affiliateLink: "https://amzn.to/3G3Vwqk",
+    seoAlt: "Bio Ionic Long Barrel Styler Curling Iron - Professional Hair Tool"
+  },
+  {
+    name: "Bio Ionic Smart-X Hair Dryer",
+    image: bioIonicHairDryer.src,
+    affiliateLink: "https://amzn.to/4jZkzIP",
+    seoAlt: "Bio Ionic Smart-X Hair Dryer - Professional Blow Dryer"
+  },
+  {
+    name: "Earth Therapeutics Tea Tree Foot Peeling Spray",
+    image: earthTherapeuticsFootSpray.src,
+    affiliateLink: "https://amzn.to/4n9JcFL",
+    seoAlt: "Earth Therapeutics Tea Tree Foot Peeling Spray - Callus Remover"
+  },
+  {
+    name: "Keracolor Color + Clenditioner",
+    image: keracolorColorConditioner.src,
+    affiliateLink: "https://amzn.to/4epa3JN",
+    seoAlt: "Keracolor Color + Clenditioner - Color-Depositing Conditioner"
+  },
+  {
+    name: "Kitsch Microfiber Hair Towel Wrap",
+    image: kitschHairTowelWrap.src,
+    affiliateLink: "https://amzn.to/3HTf5C2",
+    seoAlt: "Kitsch Microfiber Hair Towel Wrap - Quick Dry Hair Towel"
+  },
+  {
+    name: "Kitsch Satin Pillowcase",
+    image: kitschSatinPillowcase.src,
+    affiliateLink: "https://amzn.to/40iJMH7",
+    seoAlt: "Kitsch Satin Pillowcase - Hair & Skin Protection"
+  },
+  {
+    name: "Moroccanoil All In One Leave In Conditioner",
+    image: moroccanoilConditioner.src, 
+    affiliateLink: "https://amzn.to/4kTFPkJ",
+    seoAlt: "Moroccanoil All In One Leave In Conditioner - Hair Treatment"
+  },
+  {
+    name: "Moroccanoil Treatment",
+    image: moroccanoilTreatment.src,
+    affiliateLink: "https://amzn.to/4lnqqsO",
+    seoAlt: "Moroccanoil Treatment - Argan Oil Hair Treatment"
+  },
+  {
+    name: "Oribe Gold Lust Nourishing Hair Oil",
+    image: oribeGoldHairOil.src,
+    affiliateLink: "https://amzn.to/3T069NL",
+    seoAlt: "Oribe Gold Lust Nourishing Hair Oil - Luxury Hair Care"
+  },
+  {
+    name: "Redken Quick Blowout Heat Protection Spray",
+    image: redkenQuickBlowoutHeatProtectionSpray.src,
+    affiliateLink: "https://amzn.to/45zzA0D",
+    seoAlt: "Redken Quick Blowout Heat Protection Spray - Blow Dry Spray"
+  },
+  {
+    name: "Wet Brush Speed Dry Hair Brush",
+    image: wetBrushSpeedDryHairBrush.src,
+    affiliateLink: "https://amzn.to/4k4xIR8",
+    seoAlt: "Wet Brush Speed Dry Hair Brush - Vented Hair Brush"
+  }
+];
+---
+
+<ProductsPage 
+  title="Amazon Beauty Products - Glow Salon & Spa"
+  description="Discover our recommended beauty products and salon essentials. Shop professional hair tools, nail care, and makeup products through our trusted affiliate links."
+  pageTitle="Amazon Beauty Products We Love"
+  introText="Discover our curated selection of professional beauty products and salon essentials"
+  products={products}
+/>

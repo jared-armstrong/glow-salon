@@ -1,0 +1,46 @@
+---
+import Header from '../Header.astro';
+import PricingSection from '../service-pricing/PricingSection.astro';
+import Layout from '../../layouts/Layout.astro';
+import BookButtonGroup from '../buttons/BookingButtonGroup.astro';
+import Footer from '../Footer.astro';
+import HomeButton from '../buttons/HomeButton.astro';
+import '../../styles/services.css';
+
+export interface Props {
+    title: string;
+    description: string;
+    pageTitle: string;
+    introText: string;
+    services: Array<{
+        serviceName: string;
+        price: string;
+        description?: string;
+    }>;
+}
+
+const { title, description, pageTitle, introText, services } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <Header />
+    <HomeButton />
+    <main class="service-page">
+        <div class="button-group-top">
+            <BookButtonGroup />
+        </div>
+
+        <h1>{pageTitle}</h1>
+        <p class="service-intro">{introText}</p>
+
+        {services.map((service) => (
+            <PricingSection 
+                serviceName={service.serviceName} 
+                price={service.price} 
+                description={service.description}
+            />
+        ))}
+
+    </main>
+    <Footer />
+</Layout> 
