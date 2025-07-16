@@ -1,9 +1,16 @@
 ---
-import image from '../assets/glow-salon-main-page.webp'
+import image from '../assets/glow-salon-landing.webp'
 // const bookingUrl = 'https://na0.meevo.com/CustomerPortal/login?tenantId=103761&locationId=106841'
 ---
 
 <section class="call-to-action">
+  <div class="left-content">
+    <h1 class="main-heading">Glow With Us Today</h1>
+    <a 
+      href="https://login.meevo.com/glowsalonin/ob?locationId=106841" target="_blank"
+      class="book-now">Book Appointment
+    </a>
+  </div>
   <img 
     src={image.src} 
     alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana"
@@ -11,31 +18,41 @@ import image from '../assets/glow-salon-main-page.webp'
     fetchpriority="high"
     decoding="async"
   />
-    <a 
-      href="https://login.meevo.com/glowsalonin/ob?locationId=106841" target="_blank"
-      class="book-now">Book Appointment
-    </a>
 </section>
 
 <style>
   .call-to-action {
     width: 100%;
     position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .left-content {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .main-heading {
+    font-size: 3.5rem;
+    font-weight: bold;
+    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
   .call-to-action img {
-    width: 50%;
+    width: 40%;
     height: auto;
-    display: block;
-    margin-left: auto;
   }
 
   .book-now {
     text-decoration: none;
-    position: absolute;
-    right: 180px;
-    top: 79%;
-    z-index: 10;
     padding: 20px 40px;
     font-size: 2.0rem;
     font-weight: bold;
@@ -43,52 +60,72 @@ import image from '../assets/glow-salon-main-page.webp'
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid white; /* Solid white border */
+    border: 2px solid #333;
     cursor: pointer;
-    background-color: transparent; /* Clear background */
-    color: white; /* White text */
-    border-radius: 0; /* No rounded corners for a rectangle */
-}
+    background-color: transparent;
+    color: #333;
+    border-radius: 0;
+    transition: all 0.3s ease;
+  }
+
+  .book-now:hover {
+    background-color: #333;
+    color: white;
+  }
     @media (max-width: 1400px) {
+      .main-heading {
+        font-size: 3rem;
+      }
       .book-now {
-          right: 80px;
-          top: 73%;
-          padding: 18px 36px;
+        padding: 18px 36px;
+        font-size: 1.8rem;
       }
     }
 
     @media (max-width: 1200px) {
+      .main-heading {
+        font-size: 2.5rem;
+      }
       .book-now {
-          right: 175px;
-          top: 55%;
-          padding: 16px 32px;
+        padding: 16px 32px;
+        font-size: 1.6rem;
       }
     }
   
     @media (max-width: 1024px) {
-        .book-now {
-            right: 50px;
-            top: 70%;
-            font-size: 1.3rem;
-            padding: 16px 32px;
-        }
+      .left-content {
+        width: 60%;
+        padding: 1rem;
+      }
+      .call-to-action img {
+        width: 40%;
+      }
+      .main-heading {
+        font-size: 2rem;
+      }
+      .book-now {
+        font-size: 1.3rem;
+        padding: 16px 32px;
+      }
     }
   
-      @media (max-width: 768px) {
-        .book-now {
-          right: 60px;
-          top: 75%;
-          font-size: 1.2rem;
-          padding: 7px 16px;
-        }
+    @media (max-width: 768px) {
+      .main-heading {
+        font-size: 1.8rem;
       }
+      .book-now {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+      }
+    }
 
-      @media (max-width: 431px) {
-        .book-now {
-          right: 20px;
-          top: 73%;
-          font-size: 0.6rem;
-          padding: 5px 12px;
-        }
+    @media (max-width: 431px) {
+      .main-heading {
+        font-size: 1.4rem;
       }
+      .book-now {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
 </style>
