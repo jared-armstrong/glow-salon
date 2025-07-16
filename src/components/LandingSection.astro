@@ -110,6 +110,17 @@ import image from '../assets/glow-salon-landing.webp'
     }
   
     @media (max-width: 768px) {
+      .call-to-action {
+        flex-direction: column;
+        text-align: center;
+      }
+      .left-content {
+        width: 100%;
+      }
+      .call-to-action img {
+        width: 100%;
+        margin-top: 2rem;
+      }
       .main-heading {
         font-size: 1.8rem;
       }
@@ -120,6 +131,10 @@ import image from '../assets/glow-salon-landing.webp'
     }
 
     @media (max-width: 431px) {
+      .left-content {
+        padding: 1.5rem 0.5rem;
+      }
+      
       .main-heading {
         font-size: 1.4rem;
       }
