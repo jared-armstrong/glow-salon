@@ -93,23 +93,26 @@ const breadcrumbData = {
     <Header />
     
     <main class="service-page">
-        <div class="button-group-top">
-            <BookButtonGroup />
+        <div class="service-container">
+            <div class="service-content">
+                <h1>{pageTitle}</h1>
+                <p class="service-intro">{introText}</p>
+
+                <div class="services-list">
+                    {services.map((service) => (
+                        <PricingSection 
+                            serviceName={service.serviceName} 
+                            price={service.price} 
+                            description={service.description}
+                        />
+                    ))}
+                </div>
+            </div>
+            
+            <div class="button-group-sidebar">
+                <BookButtonGroup />
+            </div>
         </div>
-
-        <h1>{pageTitle}</h1>
-        <p class="service-intro">{introText}</p>
-
-        <div class="services-list">
-            {services.map((service) => (
-                <PricingSection 
-                    serviceName={service.serviceName} 
-                    price={service.price} 
-                    description={service.description}
-                />
-            ))}
-        </div>
-
     </main>
     <Footer />
 </Layout>
