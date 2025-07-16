@@ -4,7 +4,6 @@ import PricingSection from '../service-pricing/PricingSection.astro';
 import Layout from '../../layouts/Layout.astro';
 import BookButtonGroup from '../buttons/BookingButtonGroup.astro';
 import Footer from '../Footer.astro';
-import HomeButton from '../buttons/HomeButton.astro';
 import '../../styles/services.css';
 
 export interface Props {
@@ -86,13 +85,12 @@ const breadcrumbData = {
 
 <Layout title={title} description={description}>
     <!-- Service-specific structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
     
     <!-- Breadcrumb structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
     
     <Header />
-    <HomeButton />
     
     <main class="service-page">
         <div class="button-group-top">
