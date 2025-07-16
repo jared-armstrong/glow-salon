@@ -2,31 +2,73 @@
 
 ---
 
-<div class="flex justify-center gap-4">
-  <a href="tel:+13178463073" class="bg-secondary text-white px-6 py-3 rounded-md hover:bg-primary transition-colors">Call to Book</a>
-  <a href="https://login.meevo.com/glowsalonin/ob?locationId=106841" target="_blank" class="bg-secondary text-white px-6 py-3 rounded-md hover:bg-primary transition-colors">Book Online</a>
-  <a href="/contact" class="bg-secondary text-white px-6 py-3 rounded-md hover:bg-primary transition-colors">Contact Us</a>
+<div class="booking-button-group">
+  <a href="tel:+13178463073" class="booking-button">Call to Book</a>
+  <a href="https://login.meevo.com/glowsalonin/ob?locationId=106841" target="_blank" class="booking-button">Book Online</a>
+  <a href="/contact" class="booking-button">Contact Us</a>
 </div>
 
 <style>
-    .flex {
+    .booking-button-group {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         gap: 1rem;
-        width: auto;
+        width: 100%;
+        max-width: 200px;
     }
 
-    a {
-        border-radius: 25px;
-        background-color: #333333;
-        color: #e7d7c9;
+    .booking-button {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        background-color: white;
+        color: #333333;
         text-decoration: none;
-        font-size: 1.1rem;
-        font-weight: bold;
-        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-        transition: all 0.3s ease-in-out;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 2px solid #333333;
         cursor: pointer;
-        padding: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
+    .booking-button:hover {
+        background-color: #333333;
+        color: white;
+        border-color: #333333;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .booking-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+        .booking-button-group {
+            flex-direction: row;
+            max-width: none;
+            justify-content: center;
+        }
+        
+        .booking-button {
+            flex: 1;
+            max-width: 150px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .booking-button-group {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .booking-button {
+            max-width: 200px;
+        }
+    }
 </style>

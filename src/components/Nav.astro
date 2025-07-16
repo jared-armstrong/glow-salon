@@ -1,0 +1,35 @@
+---
+// Nav component for the header
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="header-nav">
+    <a href="/contact" class={`nav-link ${currentPath === '/contact' ? 'active' : ''}`}>Contact</a>
+    <a href="/services" class={`nav-link ${currentPath === '/services' ? 'active' : ''}`}>Services</a>
+    <a href="/products" class={`nav-link ${currentPath === '/products' ? 'active' : ''}`}>Products</a>
+</nav>
+
+<style>
+    .header-nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: #333333;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: #D4B2A7; /* Deeper rose/copper color for hover state */
+    }
+
+    .nav-link.active {
+        color: #D4B2A7; /* Deeper rose/copper color for active state */
+    }
+</style> 

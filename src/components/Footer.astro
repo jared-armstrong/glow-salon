@@ -1,3 +1,7 @@
+---
+import FooterLogo from '../assets/glow-salon-footer-logo.webp';
+---
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,46 +52,64 @@
 </script>
 
 <footer class="footer">
-  <div class="footer-left">
-    <p class="contact-info"><a href="tel:3178463073">317-846-3073</a></p>
-    <p class="contact-info">1928 Rhettsbury St Carmel, IN 46032</p>
-  </div>
-  <div class="social-icons">
-    <a href="/contact" aria-label="Contact">
-      <i class="fas fa-envelope"></i>
-    </a>
-    <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
+  <div class="footer-content">
+    <div class="logo-container">
+      <img src={FooterLogo.src} alt="Glow Salon Logo" class="footer-logo" loading="lazy" decoding="async" />
+    </div>
+    
+    <div class="address-info">
+      <p class="contact-info"><a href="tel:3178463073">317-846-3073</a></p>
+      <p class="contact-info">1928 Rhettsbury St Carmel, IN 46032</p>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
     background-color: #333333;
-    font-family: serif;
     padding: 20px;
+    
+  }
+
+  .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 70px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .footer-left {
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-logo {
+    width: 180px;
+    height: auto;
+  }
+
+  .address-info {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .contact-info {
     margin: 0;
     font-size: 16px;
-    max-width: 70%;
     color: #EDE9E3;
     font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-    font-size: 14px;
   }
 
   .contact-info a {
@@ -98,19 +120,45 @@
   .social-icons {
     display: flex;
     gap: 20px;
+    align-items: center;
   }
 
   .social-icons a {
     color: #EDE9E3;
     font-size: 24px;
     text-decoration: none;
+    transition: color 0.3s ease;
   }
 
+  .social-icons a:hover {
+    color: #D4B2A7;
+  }
+
+  /* Mobile responsive */
   @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .logo-container {
+      display: none;
+    }
+    
+    .address-info {
+      order: 1;
+    }
+    
+    .social-icons {
+      gap: 15px;
+    }
+    
+    .social-icons a {
+      font-size: 20px;
+    }
+    
     .contact-info {
-      font-size: 12px;
+      font-size: 14px;
     }
   }
-
-  
 </style>
