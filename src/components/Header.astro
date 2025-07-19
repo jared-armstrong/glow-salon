@@ -1,12 +1,13 @@
 ---
 import Logo from '../assets/glow-salon-alt-header-logo.webp';
 import Nav from './Nav.astro';
+import { Image } from 'astro:assets'
 ---
 
 <header>
     <div class="header-content">
         <a href="/" class="logo-container">
-            <img src={Logo.src} alt="Glow Salon Logo" class="logo" loading="eager" decoding="async" />
+            <Image src={Logo} alt="Glow Salon Logo" class="logo" loading="eager" decoding="async" />
         </a>
         
         <Nav />

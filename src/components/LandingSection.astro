@@ -1,23 +1,25 @@
 ---
-import image from '../assets/glow-salon-landing.webp'
-// const bookingUrl = 'https://na0.meevo.com/CustomerPortal/login?tenantId=103761&locationId=106841'
+import landingImage from '../assets/glow-salon-landing.webp'
+const bookingUrl = 'https://na0.meevo.com/CustomerPortal/login?tenantId=103761&locationId=106841'
+import { Image } from 'astro:assets'
 ---
 
 <section class="call-to-action">
   <div class="left-content">
     <h1 class="main-heading">Glow With Us Today</h1>
     <a 
-      href="https://login.meevo.com/glowsalonin/ob?locationId=106841" target="_blank"
+      href={bookingUrl} target="_blank"
       class="book-now">Book Appointment
     </a>
   </div>
-  <img 
-    src={image.src} 
+  <Image 
+    src={landingImage} 
     alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana"
     loading="eager"
     fetchpriority="high"
     decoding="async"
   />
+
 </section>
 
 <style>

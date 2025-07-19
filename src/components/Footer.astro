@@ -1,5 +1,6 @@
 ---
 import FooterLogo from '../assets/glow-salon-footer-logo.webp';
+import { Image } from 'astro:assets'
 ---
 
 <script type="application/ld+json">
@@ -54,7 +55,7 @@ import FooterLogo from '../assets/glow-salon-footer-logo.webp';
 <footer class="footer">
   <div class="footer-content">
     <div class="logo-container">
-      <img src={FooterLogo.src} alt="Glow Salon Logo" class="footer-logo" loading="lazy" decoding="async" />
+      <Image src={FooterLogo} alt="Glow Salon Logo" class="footer-logo" loading="lazy" decoding="async" />
     </div>
     
     <div class="address-info">
