@@ -115,16 +115,16 @@ This guide provides comprehensive information for maintaining and updating the G
 #### Monthly Dependency Review
 ```bash
 # Check for outdated packages
-npm outdated
+pnpm outdated
 
 # Update packages safely
-npm update
+pnpm update
 
 # Check for security vulnerabilities
-npm audit
+pnpm audit
 
 # Fix security issues
-npm audit fix
+pnpm audit fix
 ```
 
 #### Major Version Updates

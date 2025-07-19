@@ -67,7 +67,7 @@ glow-salon/
 ### Prerequisites
 
 - Node.js (version 18 or higher)
-- npm or yarn package manager
+- pnpm package manager
 
 ### Installation
 
@@ -79,7 +79,7 @@ glow-salon/
 
 2. **Install dependencies**
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. **Set up environment variables**
@@ -93,7 +93,7 @@ glow-salon/
 
 4. **Start the development server**
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
    The site will be available at `http://localhost:4321`
@@ -102,10 +102,10 @@ glow-salon/
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run astro` | Run Astro CLI commands |
+| `pnpm run dev` | Start development server |
+| `pnpm run build` | Build for production |
+| `pnpm run preview` | Preview production build |
+| `pnpm run astro` | Run Astro CLI commands |
 
 ## 🎨 Customization
 
@@ -181,7 +181,7 @@ The product recommendations page features:
 ### Build for Production
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 The built site will be in the `dist/` directory.

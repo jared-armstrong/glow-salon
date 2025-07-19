@@ -137,8 +137,8 @@ This documentation is organized into several sections to help you find the infor
 4. Test all phone links
 
 #### Deploying Changes
-1. Build project: `npm run build`
-2. Test locally: `npm run preview`
+1. Build project: `pnpm run build`
+2. Test locally: `pnpm run preview`
 3. Deploy to hosting platform
 4. Verify changes live
 

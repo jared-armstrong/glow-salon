@@ -15,7 +15,7 @@
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
         install = ''
-          npm ci --prefer-offline --no-audit --no-progress --timing || npm i --no-audit --no-progress --timing
+          pnpm install --frozen-lockfile
           yes | npx astro add tailwind'';
         # Open editors for the following files by default, if they exist:
         default.openFiles = [ "src/pages/index.astro" ];
@@ -28,7 +28,7 @@
       previews = {
         web = {
           command =
-            [ "npm" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0" ];
+            [ "pnpm" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0" ];
           manager = "web";
         };
       };

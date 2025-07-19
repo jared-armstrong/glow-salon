@@ -109,10 +109,10 @@ git clone <repository-url>
 cd glow-salon
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm run dev
 ```
 
 ### 2. Making Changes

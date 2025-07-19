@@ -32,13 +32,13 @@ Before deploying, ensure the following:
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Build for production
-npm run build
+pnpm run build
 
 # Preview the build locally
-npm run preview
+pnpm run preview
 ```
 
 ### Build Output
@@ -57,17 +57,17 @@ The build process creates a `dist/` directory containing:
 #### Automatic Deployment
 1. Connect your GitHub repository to Netlify
 2. Configure build settings:
-   - **Build command**: `npm run build`
+   - **Build command**: `pnpm run build`
    - **Publish directory**: `dist`
    - **Node version**: 18 or higher
 
 #### Manual Deployment
 ```bash
 # Install Netlify CLI
-npm install -g netlify-cli
+pnpm install -g netlify-cli
 
 # Build the project
-npm run build
+pnpm run build
 
 # Deploy to Netlify
 netlify deploy --prod --dir=dist
@@ -91,7 +91,7 @@ EMAIL_PASS=your-email-password
 #### Manual Deployment
 ```bash
 # Install Vercel CLI
-npm install -g vercel
+pnpm install -g vercel
 
 # Deploy
 vercel --prod
@@ -121,10 +121,10 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
         
       - name: Build
-        run: npm run build
+        run: pnpm run build
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -136,7 +136,7 @@ jobs:
 ### 4. Traditional Web Hosting
 
 #### Upload Process
-1. Build the project: `npm run build`
+1. Build the project: `pnpm run build`
 2. Upload contents of `dist/` folder to your web server
 3. Ensure proper file permissions
 4. Configure web server for SPA routing
@@ -279,13 +279,30 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
           
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
         
       - name: Build
-        run: npm run build
+        run: pnpm run build
         
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.0
