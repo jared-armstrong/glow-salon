@@ -4,19 +4,19 @@ import Nav from './Nav.astro';
 import { Image } from 'astro:assets'
 ---
 
-<header>
+<header role="banner">
     <div class="header-content">
         <a href="/" class="logo-container">
             <Image src={Logo} alt="Glow Salon Logo" class="logo" loading="eager" decoding="async" />
         </a>
         
-        <Nav />
+        <Nav role="navigation" aria-label="Main navigation" />
         
         <div class="social-icons">
-            <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook page">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram page">
                 <i class="fab fa-instagram"></i>
             </a>
         </div>
