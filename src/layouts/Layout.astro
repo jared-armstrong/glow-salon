@@ -121,7 +121,7 @@ if (articlePublishedTime) {
 }
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" role="document">
 	<head>
 		<!-- DNS Prefetch for external domains -->
 		<link rel="dns-prefetch" href="//www.googletagmanager.com">
@@ -155,6 +155,8 @@ if (articlePublishedTime) {
 		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
 
+		<!-- ahrefs analytics -->
+		<script src="https://analytics.ahrefs.com/analytics.js" data-key="cLD7yENK+8muOupoEIIYwg" async></script>
 		<!-- Google Analytics (gtag.js) -->
 		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET"></script>
 		<script type="text/partytown">
@@ -189,58 +191,6 @@ if (articlePublishedTime) {
 		<title>{title}</title>
 		<meta name="title" content={title}>
 		<meta name="description" content={description}>
-		<meta name="keywords" content="Hair Salon Near Me,
-					Hair Salon Carmel IN,
-					Best Hair Salon Carmel,
-					Hair Color Carmel Indiana,
-					Women's Haircut Carmel, 
-					Men's Haircut Carmel, 
-					Kids Haircuts Carmel, 
-					Balayage Carmel, 
-					Hair Highlights Carmel,
-					Hair Extensions Carmel,
-					Bridal Hair Carmel, 
-					Wedding Hair Carmel, 
-					Nail Salon Carmel, 
-					Manicure Carmel, 
-					Pedicure Carmel, 
-					Gel Nails Carmel, 
-					Eyebrow Waxing Carmel,
-					Makeup Artist Carmel,
-					Beauty Salon Carmel,
-					Spa Carmel, 
-					Salon Near Me, 
-					Hair Stylist Carmel,
-					Carmel Indiana Salon, 
-					Hair Treatment Carmel, 
-					Salon Gift Cards Carmel, 
-					Salon Specials Carmel,
-					Hair Salon West Clay, 
-					Luxury Salon Carmel, 
-					Affordable Hair Salon Carmel,
-					Carmel Hair Spa, 
-					Carmel Hair Services, 
-					Carmel Nail Services, 
-					Carmel Makeup Services,
-					Salon Carmel Indiana,
-					Beauty Services Carmel,
-					Professional Hair Stylist Carmel,
-					Hair Color Specialist Carmel,
-					Balayage Specialist Carmel,
-					Keratin Treatment Carmel,
-					Hair Extensions Specialist Carmel,
-					Bridal Hair Stylist Carmel,
-					Wedding Makeup Artist Carmel,
-					Professional Nail Technician Carmel,
-					Gel Manicure Carmel,
-					Spa Pedicure Carmel,
-					Waxing Services Carmel,
-					Eyebrow Shaping Carmel,
-					Luxury Beauty Salon Carmel,
-					West Clay Hair Salon,
-					Carmel Beauty Services,
-					Hair Salon West Clay Carmel">
-
 		<meta name="author" content="Glow Salon & Spa">
 		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 		<meta name="googlebot" content="index, follow">
@@ -359,6 +309,11 @@ if (articlePublishedTime) {
 						}
 					}
 				]
+			},
+			"aggregateRating": {
+				"@type": "AggregateRating",
+				"ratingValue": "4.5",
+				"reviewCount": "30"
 			}
 		}
 		</script>
@@ -381,7 +336,16 @@ if (articlePublishedTime) {
 
 	</head>
 	<body>
-		<slot />
+		<a href="#main-content" class="skip-link">Skip to main content</a>
+		<header role="banner">
+			<!-- header content will be slotted in -->
+		</header>
+		<main id="main-content" role="main">
+			<slot />
+		</main>
+		<footer role="contentinfo">
+			<!-- footer content will be slotted in -->
+		</footer>
 	</body>
 </html>
 
@@ -391,5 +355,27 @@ if (articlePublishedTime) {
 		margin: 0;
 		width: 100%;
 		min-height: 100%;
+	}
+	.skip-link {
+		position: absolute;
+		left: -999px;
+		top: auto;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		z-index: 1000;
+		background: #fff;
+		color: #333;
+		padding: 8px 16px;
+		border: 2px solid #333;
+		border-radius: 4px;
+	}
+	.skip-link:focus {
+		left: 16px;
+		top: 16px;
+		width: auto;
+		height: auto;
+		font-size: 1rem;
+		outline: none;
 	}
 </style>
