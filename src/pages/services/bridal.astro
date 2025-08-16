@@ -1,0 +1,33 @@
+---
+import BridalServicePage from '../../components/salon-services/BridalServicePage.astro';
+
+const title = "Bridal Services in Carmel, IN | Glow Salon & Spa";
+const description = "Professional bridal hair and makeup services for your special day. Serving Carmel, Indiana with on-site services available.";
+
+const bridal_services = [
+    // Hair Services
+    { serviceName: "Bridal Hair with Trial", price: '$220' },
+    { serviceName: "Bridal Hair no Trial", price: '$150' },
+    { serviceName: "Bridesmaid Hair", price: '$100' },
+    { serviceName: "Mother of Bride/Groom Hair", price: '$100' },
+    { serviceName: "Flower Girl Hair", price: '$75' },
+    
+    // Makeup Services
+    { serviceName: "Bridal Makeup with Trial", price: '$220' },
+    { serviceName: "Bridal Makeup no Trial", price: '$150' },
+    { serviceName: "Bridesmaid Makeup", price: '$100' },
+    { serviceName: "Mother of Bride/Groom Makeup", price: '$100' },
+    { serviceName: "Flower Girl Makeup", price: '$50' },
+    
+    // Additional Information
+    { serviceName: "On-Site Services", description: "Travel fee: $1.00 per mile to and from venue", price: '' }
+]
+---
+
+<BridalServicePage 
+    title={title}
+    description={description}
+    pageTitle="Bridal Services"
+    introText="Make your special day perfect with our professional bridal hair and makeup services. We offer both in-salon and on-site services to accommodate your needs."
+    services={bridal_services}
+/> 
