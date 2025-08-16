@@ -10,7 +10,7 @@ const { serviceName, description, price } = Astro.props;
 
 <div class="service-container">
   <h3 class="service-name">{serviceName}</h3>
-  {description && <p class="description">{description}</p>}
+  {description && <p class={`description ${description.includes('Travel fee') ? 'travel-fee' : ''}`}>{description}</p>}
   <p class="price">
     {price}
   </p>
@@ -37,6 +37,13 @@ const { serviceName, description, price } = Astro.props;
 
     .description {
         margin-bottom: 0;
+    }
+
+    .travel-fee {
+        font-weight: bold;
+        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+        font-size: 1.1rem;
+        color: #333333;
     }
 
     .price {
