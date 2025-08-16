@@ -84,7 +84,7 @@ const breadcrumbData = {
 // Group services by type
 const hairServices = services.filter(service => service.serviceName.includes('Hair'));
 const makeupServices = services.filter(service => service.serviceName.includes('Makeup'));
-const otherServices = services.filter(service => !service.serviceName.includes('Hair') && !service.serviceName.includes('Makeup'));
+const additionalServices = services.filter(service => service.serviceName.includes('On-Site'));
 ---
 
 <Layout title={title} description={description}>
@@ -131,10 +131,11 @@ const otherServices = services.filter(service => !service.serviceName.includes('
                         </div>
                     )}
 
-                    <!-- Other Services Section -->
-                    {otherServices.length > 0 && (
+                    <!-- Additional Services Section -->
+                    {additionalServices.length > 0 && (
                         <div class="service-section">
-                            {otherServices.map((service) => (
+                            <h2 class="section-header">Additional Services</h2>
+                            {additionalServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
                                     price={service.price} 
@@ -161,15 +162,17 @@ const otherServices = services.filter(service => !service.serviceName.includes('
                         </a>
                     </div>
                     
-                    <div class="bridal-info">
-                        <h3>Bridal Services Information</h3>
-                        <ul>
-                            <li>Trials are recommended for bridal services to ensure your perfect look</li>
-                            <li>On-site services available with travel fee ($1.00 per mile)</li>
-                            <li>Group bookings available for bridal parties</li>
-                            <li>Early booking recommended for wedding dates</li>
-                        </ul>
-                    </div>
+                </div>
+
+                <!-- Bridal Services Information Section -->
+                <div class="service-section">
+                    <h3 class="service-name">Bridal Services Information</h3>
+                    <ul>
+                        <li>Trials are recommended for bridal services to ensure your perfect look</li>
+                        <li>On-site services available with travel fee ($1.00 per mile)</li>
+                        <li>Group bookings available for bridal parties</li>
+                        <li>Early booking recommended for wedding dates</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -201,7 +204,6 @@ const otherServices = services.filter(service => !service.serviceName.includes('
     .bridal-contact-section {
         margin-top: 40px;
         padding-top: 40px;
-        border-top: 1px solid #e7d7c9;
     }
 
     .bridal-contact-section h2 {
@@ -254,42 +256,40 @@ const otherServices = services.filter(service => !service.serviceName.includes('
         font-size: 1.1rem;
     }
 
-    .bridal-info {
-        background-color: #f8f6f4;
-        padding: 25px;
-        border-radius: 8px;
-        border: 1px solid #e7d7c9;
-    }
 
-    .bridal-info h3 {
-        font-family: 'Poppins', sans-serif;
-        color: #D4B2A7;
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-    }
 
-    .bridal-info ul {
+    .service-section ul {
         list-style: none;
-        padding: 0;
+        padding-left: 0;
         margin: 0;
     }
 
-    .bridal-info li {
+    .service-section li {
         font-family: 'Poppins', sans-serif;
         color: #333333;
-        font-size: 0.95rem;
+        font-size: 1rem;
         margin-bottom: 10px;
-        padding-left: 20px;
-        position: relative;
         line-height: 1.4;
+        position: relative;
+        padding-left: 25px;
     }
 
-    .bridal-info li:before {
+    .service-section li::before {
         content: "💍";
         position: absolute;
         left: 0;
         top: 0;
-        font-size: 0.9rem;
+        font-size: 1rem;
+    }
+
+    /* Ensure Bridal Services Information heading matches On-Site Services */
+    .service-section .service-name {
+        color: #D4B2A7;
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        max-width: 85%;
     }
 
     @media (max-width: 768px) {
