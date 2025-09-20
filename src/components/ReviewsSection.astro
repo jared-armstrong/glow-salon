@@ -1,0 +1,522 @@
+---
+// Reviews Section Component with rotating testimonials
+// SEO optimized with structured data
+
+interface Review {
+  id: string;
+  name: string;
+  rating: number;
+  text: string;
+  services?: string[];
+  stylist?: string;
+  priceRange?: string;
+}
+
+const reviews: Review[] = [
+  {
+    id: "ingrid-lohneiss",
+    name: "Ingrid Lohneiss",
+    rating: 5,
+    text: "Julia is very good about considering your hair's texture when applying color and styling. Great experience overall.",
+    services: ["Shampoo & conditioning", "Blowouts", "Hairstyling"],
+    stylist: "Julia",
+    priceRange: "$120-140"
+  },
+  {
+    id: "melanie-brooks",
+    name: "Melanie Brooks", 
+    rating: 5,
+    text: "Laura is fantastic!! She always knows exactly what I want. And she's super nice.",
+    services: ["Shampoo & conditioning", "Haircut", "Hairstyling"],
+    stylist: "Laura",
+    priceRange: "$160-180"
+  },
+  {
+    id: "madeline-pritchett",
+    name: "Madeline Pritchett",
+    rating: 5,
+    text: "Julia just gave me my favorite haircut I've ever had! She is incredible and very technically skilled.",
+    services: ["Shampoo & conditioning", "Blowouts", "Haircut", "Hairstyling"],
+    stylist: "Julia Zeffner",
+  },
+  {
+    id: "kathy-williams",
+    name: "Kathy Williams",
+    rating: 5,
+    text: "Julia Zeffner gave me the best haircut I've had in years. She was very precise, while taking the necessary time to achieve our goal. I will definitely be rescheduling with her!",
+    services: ["Shampoo & conditioning", "Blowouts", "Haircut"],
+    stylist: "Julia Zeffner",
+    priceRange: "$60-80"
+  },
+  {
+    id: "rilee-wilson",
+    name: "Rilee Wilson",
+    rating: 5,
+    text: "I have been going here for years and I have never once had a bad experience! All the ladies here are amazing, but Laura is who I usually work with and I could not recommend her enough! She is amazing at haircuts, blow outs, pedicures, and more! I highly recommend this place to anybody who is looking for a new salon! 😊",
+    services: ["Haircut", "Blowouts", "Pedicure"],
+    stylist: "Laura",
+    priceRange: "$40-60"
+  },
+  {
+    id: "erum-s",
+    name: "Erum S",
+    rating: 5,
+    text: "Glow is the best salon in Indy! Laura is very experienced and always does a great job!",
+    services: ["Haircut"],
+    stylist: "Laura",
+  }
+];
+
+// Generate structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Glow Salon & Spa",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": reviews.length
+  },
+  "review": reviews.map(review => ({
+    "@type": "Review",
+    "author": {
+      "@type": "Person",
+      "name": review.name
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": review.rating
+    },
+    "reviewBody": review.text,
+    "datePublished": new Date().toISOString()
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+<div class="reviews-section">
+  <div class="reviews-container">
+    <div class="reviews-header">
+      <div class="reviews-icon">⭐</div>
+      <h2>What Our Clients Are Saying</h2>
+      <p>Real reviews from our amazing clients</p>
+    </div>
+    
+    <div class="reviews-carousel">
+      <div class="review-card active" data-review="0">
+        <div class="review-content">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <div class="reviewer-avatar">{reviews[0].name.charAt(0)}</div>
+              <div class="reviewer-details">
+                <h4>{reviews[0].name}</h4>
+                <div class="review-meta">
+                  <div class="stars">
+                    {Array.from({length: reviews[0].rating}, (_, i) => '★').join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <blockquote class="review-text">
+            "{reviews[0].text}"
+          </blockquote>
+          
+          {reviews[0].services && (
+            <div class="review-services">
+              <strong>Services:</strong> {reviews[0].services.join(', ')}
+            </div>
+          )}
+          
+          {reviews[0].stylist && (
+            <div class="review-stylist">
+              <strong>Stylist:</strong> {reviews[0].stylist}
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <!-- Additional review cards will be populated by JavaScript -->
+    </div>
+    
+    <div class="reviews-navigation">
+      <button class="nav-btn prev-btn" aria-label="Previous review">‹</button>
+      <div class="review-dots">
+        {reviews.map((_, index) => (
+          <button class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index} aria-label={`Go to review ${index + 1}`}></button>
+        ))}
+      </div>
+      <button class="nav-btn next-btn" aria-label="Next review">›</button>
+    </div>
+
+    <div class="review-spacer"></div>
+  </div>
+</div>
+
+<script>
+  const reviews = [
+    {
+      id: "ingrid-lohneiss",
+      name: "Ingrid Lohneiss",
+      rating: 5,
+      text: "Julia is very good about considering your hair's texture when applying color and styling. Great experience overall.",
+      services: ["Shampoo & conditioning", "Blowouts", "Hairstyling"],
+      stylist: "Julia",
+      priceRange: "$120-140"
+    },
+    {
+      id: "melanie-brooks",
+      name: "Melanie Brooks", 
+      rating: 5,
+      text: "Laura is fantastic!! She always knows exactly what I want. And she's super nice.",
+      services: ["Shampoo & conditioning", "Haircut", "Hairstyling"],
+      stylist: "Laura",
+      priceRange: "$160-180"
+    },
+    {
+      id: "madeline-pritchett",
+      name: "Madeline Pritchett",
+      rating: 5,
+      text: "Julia just gave me my favorite haircut I've ever had! She is incredible and very technically skilled.",
+      services: ["Shampoo & conditioning", "Blowouts", "Haircut", "Hairstyling"],
+      stylist: "Julia Zeffner"
+    },
+    {
+      id: "kathy-williams",
+      name: "Kathy Williams",
+      rating: 5,
+      text: "Julia Zeffner gave me the best haircut I've had in years. She was very precise, while taking the necessary time to achieve our goal. I will definitely be rescheduling with her!",
+      services: ["Shampoo & conditioning", "Blowouts", "Haircut"],
+      stylist: "Julia Zeffner",
+      priceRange: "$60-80"
+    },
+    {
+      id: "rilee-wilson",
+      name: "Rilee Wilson",
+      rating: 5,
+      text: "I have been going here for years and I have never once had a bad experience! All the ladies here are amazing, but Laura is who I usually work with and I could not recommend her enough! She is amazing at haircuts, blow outs, pedicures, and more! I highly recommend this place to anybody who is looking for a new salon! 😊",
+      services: ["Haircut", "Blowouts", "Pedicure"],
+      stylist: "Laura",
+      priceRange: "$40-60"
+    },
+    {
+      id: "erum-s",
+      name: "Erum S",
+      rating: 5,
+      text: "Glow is the best salon in Indy! Laura is very experienced and always does a great job!",
+      services: ["Haircut"],
+      stylist: "Laura",
+    }
+  ];
+
+  let currentReview = 0;
+  const reviewCard = document.querySelector('.review-card');
+  const dots = document.querySelectorAll('.dot');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+
+  function updateReview(index: number) {
+    const review = reviews[index];
+    if (!review || !reviewCard) return;
+
+    // Update review content
+    const reviewerAvatar = reviewCard.querySelector('.reviewer-avatar') as HTMLElement;
+    const reviewerName = reviewCard.querySelector('.reviewer-details h4') as HTMLElement;
+    const stars = reviewCard.querySelector('.stars') as HTMLElement;
+    const reviewText = reviewCard.querySelector('.review-text') as HTMLElement;
+    const reviewServices = reviewCard.querySelector('.review-services') as HTMLElement;
+    const reviewStylist = reviewCard.querySelector('.review-stylist') as HTMLElement;
+
+    if (reviewerAvatar) reviewerAvatar.textContent = review.name.charAt(0);
+    if (reviewerName) reviewerName.textContent = review.name;
+    if (stars) stars.textContent = '★'.repeat(review.rating);
+    if (reviewText) reviewText.textContent = `"${review.text}"`;
+    
+    if (reviewServices) {
+      if (review.services) {
+        reviewServices.innerHTML = `<strong>Services:</strong> ${review.services.join(', ')}`;
+        reviewServices.style.display = 'block';
+      } else {
+        reviewServices.style.display = 'none';
+      }
+    }
+    
+    if (reviewStylist) {
+      if (review.stylist) {
+        reviewStylist.innerHTML = `<strong>Stylist:</strong> ${review.stylist}`;
+        reviewStylist.style.display = 'block';
+      } else {
+        reviewStylist.style.display = 'none';
+      }
+    }
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+
+    currentReview = index;
+  }
+
+  function nextReview() {
+    const nextIndex = (currentReview + 1) % reviews.length;
+    updateReview(nextIndex);
+  }
+
+  function prevReview() {
+    const prevIndex = (currentReview - 1 + reviews.length) % reviews.length;
+    updateReview(prevIndex);
+  }
+
+  // Event listeners
+  if (nextBtn) nextBtn.addEventListener('click', nextReview);
+  if (prevBtn) prevBtn.addEventListener('click', prevReview);
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => updateReview(index));
+  });
+
+  // Auto-rotate every 5 seconds
+  setInterval(nextReview, 5000);
+</script>
+
+<style>
+  .reviews-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 3rem 0 0 0;
+    margin: 0;
+  }
+
+  .reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .reviews-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: sparkle 2s infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  .reviews-header h2 {
+    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+  }
+
+  .reviews-header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .reviews-carousel {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .review-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f8d7da;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    animation: slideIn 0.6s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .reviewer-details h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .review-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .stars {
+    color: #ffd700;
+    font-size: 1.2rem;
+  }
+
+  .review-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 0 1.5rem 0;
+    font-style: italic;
+    border-left: 4px solid #ff6b6b;
+    padding-left: 1rem;
+  }
+
+  .review-services,
+  .review-stylist {
+    margin: 0.5rem 0;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .review-services strong,
+  .review-stylist strong {
+    color: #333;
+  }
+
+  .review-spacer {
+    height: 2.5rem;
+  }
+
+  .reviews-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  }
+
+  .review-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: #ff6b6b;
+    transform: scale(1.2);
+  }
+
+  .dot:hover {
+    background: #ff8e8e;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .reviews-section {
+      padding: 2rem 0;
+    }
+
+    .reviews-container {
+      padding: 0 1rem;
+    }
+
+    .reviews-header h2 {
+      font-size: 2rem;
+    }
+
+    .review-card {
+      padding: 1.5rem;
+    }
+
+    .reviewer-info {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.5rem;
+    }
+
+    .review-meta {
+      justify-content: center;
+    }
+
+    .reviews-navigation {
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      width: 35px;
+      height: 35px;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .reviews-header h2 {
+      font-size: 1.8rem;
+    }
+
+    .review-card {
+      padding: 1rem;
+    }
+
+    .review-text {
+      font-size: 1rem;
+    }
+  }
+</style>
