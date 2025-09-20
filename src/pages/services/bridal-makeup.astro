@@ -1,0 +1,28 @@
+---
+import BridalServicePage from '../../components/salon-services/BridalServicePage.astro';
+
+const title = "Wedding Makeup Artist Near Me in Carmel, IN | Professional Bridal Makeup | Glow Salon & Spa";
+const description = "Best wedding makeup artist near me in Carmel, Indiana. Professional bridal makeup services including airbrush wedding makeup, natural bridal makeup for summer weddings, and mobile wedding makeup services.";
+
+const bridal_makeup_services = [
+    // Bridal Makeup Services
+    { serviceName: "Bridal Makeup with Trial", price: '$220', description: "Complete bridal makeup application with trial session to perfect your wedding day look" },
+    { serviceName: "Bridal Makeup no Trial", price: '$150', description: "Professional bridal makeup application for your special day" },
+    { serviceName: "Airbrush Wedding Makeup", price: '$180', description: "Long-lasting airbrush makeup for a flawless, camera-ready finish" },
+    { serviceName: "Natural Bridal Makeup", price: '$160', description: "Soft, natural bridal makeup perfect for summer weddings and outdoor ceremonies" },
+    { serviceName: "Bridesmaid Makeup", price: '$100', description: "Professional makeup for your bridal party" },
+    { serviceName: "Mother of Bride/Groom Makeup", price: '$100', description: "Elegant makeup for mothers of the bride and groom" },
+    { serviceName: "Flower Girl Makeup", price: '$50', description: "Gentle, age-appropriate makeup for flower girls" },
+    
+    // Additional Information
+    { serviceName: "Mobile Wedding Makeup Services", description: "We travel to your venue - Travel fee: $1.00 per mile to and from venue", price: '' }
+]
+---
+
+<BridalServicePage 
+    title={title}
+    description={description}
+    pageTitle="Wedding Makeup Artist Services"
+    introText="Look flawless on your wedding day with our professional wedding makeup artists in Carmel, Indiana. From natural bridal makeup for summer weddings to long-lasting airbrush techniques, we create timeless elegance that lasts all day. Our mobile wedding makeup services bring the salon to your venue for stress-free bridal prep."
+    services={bridal_makeup_services}
+/> 
