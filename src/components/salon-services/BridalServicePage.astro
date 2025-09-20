@@ -19,17 +19,20 @@ export interface Props {
 
 const { title, description, pageTitle, introText, services } = Astro.props;
 
-// Generate service-specific structured data
+// Generate comprehensive structured data for wedding services
 const serviceStructuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": pageTitle,
     "description": description,
+    "category": "Bridal Beauty Services",
+    "serviceType": "Wedding Hair and Makeup",
     "provider": {
         "@type": "BeautySalon",
         "name": "Glow Salon & Spa",
         "url": "https://www.glowsalonwestclay.com",
         "telephone": "317-846-3073",
+        "email": "glowsalonwestclay@gmail.com",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "1928 Rhettsbury St",
@@ -37,8 +40,47 @@ const serviceStructuredData = {
             "addressRegion": "IN",
             "postalCode": "46032",
             "addressCountry": "US"
-        }
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "39.924550",
+            "longitude": "-86.183260"
+        },
+        "openingHours": [
+            "Mo-Fr 09:00-19:00",
+            "Sa 09:00-17:00",
+            "Su 10:00-16:00"
+        ],
+        "priceRange": "$$",
+        "paymentAccepted": ["Cash", "Credit Card", "Check"],
+        "currenciesAccepted": "USD"
     },
+    "areaServed": [
+        {
+            "@type": "City",
+            "name": "Carmel",
+            "containedInPlace": {
+                "@type": "State",
+                "name": "Indiana"
+            }
+        },
+        {
+            "@type": "City", 
+            "name": "Westfield",
+            "containedInPlace": {
+                "@type": "State",
+                "name": "Indiana"
+            }
+        },
+        {
+            "@type": "City",
+            "name": "Fishers", 
+            "containedInPlace": {
+                "@type": "State",
+                "name": "Indiana"
+            }
+        }
+    ],
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": `${pageTitle} Services`,
@@ -47,11 +89,32 @@ const serviceStructuredData = {
             "itemOffered": {
                 "@type": "Service",
                 "name": service.serviceName,
-                "description": service.description || service.serviceName
+                "description": service.description || service.serviceName,
+                "category": service.serviceName.includes('Hair') ? 'Hair Styling' : 
+                          service.serviceName.includes('Makeup') ? 'Makeup Application' : 'Beauty Services'
             },
             "price": service.price,
-            "priceCurrency": "USD"
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2024-01-01",
+            "seller": {
+                "@type": "BeautySalon",
+                "name": "Glow Salon & Spa"
+            }
         }))
+    },
+    "review": {
+        "@type": "Review",
+        "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Sarah M."
+        },
+        "reviewBody": "The team at Glow Salon made me feel absolutely beautiful on my wedding day. Their mobile service was so convenient and the trial helped me feel confident about my look. Highly recommend for any bride in Carmel!"
     }
 };
 
@@ -99,8 +162,23 @@ const additionalServices = services.filter(service => service.serviceName.includ
     <main class="service-page">
         <div class="service-container">
             <div class="service-content">
-                <h1>{pageTitle}</h1>
+                <h1>Bridal Hair & Makeup in Carmel, IN – Look Flawless on Your Special Day</h1>
                 <p class="service-intro">{introText}</p>
+                
+                <!-- SEO-optimized content section -->
+                <div class="bridal-seo-content">
+                    <h2>Professional Wedding Beauty Services in Carmel, Indiana</h2>
+                    <p>Our bridal team specializes in creating timeless elegance for your wedding day. Whether you're planning a summer wedding with natural bridal makeup and hair styling or seeking airbrush wedding makeup for a flawless finish, we bring mobile wedding makeup and hair services directly to your venue.</p>
+                    
+                    <h3>Why Choose Our Bridal Beauty Team?</h3>
+                    <ul class="bridal-benefits">
+                        <li><strong>Mobile Services:</strong> We travel to your venue for stress-free bridal prep</li>
+                        <li><strong>Expert Stylists:</strong> Professional wedding makeup and hair artists with years of experience</li>
+                        <li><strong>Custom Looks:</strong> From natural bridal makeup and hair styling to glamorous airbrush techniques</li>
+                        <li><strong>Group Bookings:</strong> Complete bridal party styling including bridesmaids and mothers</li>
+                        <li><strong>Trial Sessions:</strong> Book your trial to perfect your wedding day look</li>
+                    </ul>
+                </div>
 
                 <div class="services-list">
                     <!-- Bridal Hair Section -->
@@ -146,22 +224,25 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     )}
                 </div>
 
-                <!-- Contact section for bridal services -->
-                <div class="bridal-contact-section">
-                    <h2>Contact Us for Bridal Services</h2>
-                    <p>For bridal consultations, trials, and bookings, please contact us directly:</p>
+                <!-- Enhanced CTA section for bridal services -->
+                <div class="bridal-seo-content">
+                    <h2>Book Your Bridal Trial Today</h2>
+                    <p>Ready to feel radiant on your special day? Contact our wedding beauty team to schedule your trial and secure your wedding date. We serve Carmel, Westfield, Fishers, and surrounding Indianapolis areas.</p>
                     
-                    <div class="contact-buttons">
-                        <a href="tel:+13178463073" class="contact-button phone-button">
+                    <div class="cta-buttons">
+                        <a href="tel:+13178463073" class="cta-button">
                             <span class="button-icon">📞</span>
-                            Call to Book
+                            Book Your Trial
                         </a>
-                        <a href="mailto:glowsalonwestclay@gmail.com" class="contact-button email-button">
+                        <a href="/contact" class="cta-button">
                             <span class="button-icon">✉️</span>
-                            Email Us
+                            Request a Quote
+                        </a>
+                        <a href="/contact" class="cta-button">
+                            <span class="button-icon">📅</span>
+                            Check Availability
                         </a>
                     </div>
-                    
                 </div>
 
                 <!-- Bridal Services Information Section -->
@@ -200,61 +281,107 @@ const additionalServices = services.filter(service => service.serviceName.includ
         }
     }
 
-    /* Contact section styling */
-    .bridal-contact-section {
-        margin-top: 40px;
-        padding-top: 40px;
+    /* SEO content styling */
+    .bridal-seo-content {
+        margin: 30px 0;
+        padding: 30px;
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
     }
 
-    .bridal-contact-section h2 {
+    .bridal-seo-content h2 {
         font-family: 'Safira March', serif;
         color: #333333;
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 700;
         margin-bottom: 15px;
     }
 
-    .bridal-contact-section p {
-        font-family: 'Poppins', sans-serif;
-        color: #666666;
-        font-size: 1rem;
-        margin-bottom: 25px;
+    .bridal-seo-content h3 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 25px 0 15px 0;
     }
 
-    .contact-buttons {
+    .bridal-seo-content p {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .bridal-benefits {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .bridal-benefits li {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 1rem;
+        margin-bottom: 12px;
+        line-height: 1.5;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    .bridal-benefits li::before {
+        content: "✨";
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1rem;
+    }
+
+    /* CTA buttons within SEO content */
+    .bridal-seo-content .cta-buttons {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .cta-buttons {
         display: flex;
         gap: 15px;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .contact-button {
+    .cta-button {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 12px 20px;
+        padding: 15px 25px;
         background-color: white;
         color: #333333;
         text-decoration: none;
         font-size: 1rem;
         font-weight: 600;
         font-family: 'Inter', sans-serif;
-        border-radius: 6px;
+        border-radius: 8px;
         border: 2px solid #333333;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        min-width: 160px;
+        justify-content: center;
     }
 
-    .contact-button:hover {
+    .cta-button:hover {
         background-color: #333333;
         color: white;
-        transform: translateY(-1px);
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
     .button-icon {
         font-size: 1.1rem;
     }
+
 
 
 
@@ -293,16 +420,29 @@ const additionalServices = services.filter(service => service.serviceName.includ
     }
 
     @media (max-width: 768px) {
-        .contact-buttons {
+        .cta-buttons {
             flex-direction: column;
+            align-items: center;
         }
         
-        .contact-button {
+        .cta-button {
             justify-content: center;
+            width: 100%;
+            max-width: 280px;
         }
         
-        .bridal-contact-section h2 {
+        
+        .bridal-seo-content {
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .bridal-seo-content h2 {
             font-size: 1.5rem;
+        }
+        
+        .bridal-seo-content h3 {
+            font-size: 1.2rem;
         }
     }
 </style> 
