@@ -1,0 +1,200 @@
+name: Check for Astro.js Upgrades
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-upgrades:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Check for Astro.js upgrades
+        id: astro-check
+        run: |
+          echo "Checking for Astro.js upgrades..."
+          
+          # Get current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').dependencies.astro")
+          echo "Current Astro version: $CURRENT_VERSION"
+          
+          # Check for latest version
+          LATEST_VERSION=$(npm view astro version)
+          echo "Latest Astro version: $LATEST_VERSION"
+          
+          # Extract version numbers for comparison
+          CURRENT_MAJOR=$(echo $CURRENT_VERSION | sed 's/[^0-9.]//g' | cut -d. -f1)
+          LATEST_MAJOR=$(echo $LATEST_VERSION | cut -d. -f1)
+          
+          CURRENT_MINOR=$(echo $CURRENT_VERSION | sed 's/[^0-9.]//g' | cut -d. -f2)
+          LATEST_MINOR=$(echo $LATEST_VERSION | cut -d. -f2)
+          
+          CURRENT_PATCH=$(echo $CURRENT_VERSION | sed 's/[^0-9.]//g' | cut -d. -f3)
+          LATEST_PATCH=$(echo $LATEST_VERSION | cut -d. -f3)
+          
+          echo "Current: $CURRENT_MAJOR.$CURRENT_MINOR.$CURRENT_PATCH"
+          echo "Latest: $LATEST_MAJOR.$LATEST_MINOR.$LATEST_PATCH"
+          
+          # Check if upgrade is available
+          if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
+            echo "upgrade_available=true" >> $GITHUB_OUTPUT
+            echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+            
+            # Determine upgrade type
+            if [ "$CURRENT_MAJOR" -lt "$LATEST_MAJOR" ]; then
+              echo "upgrade_type=major" >> $GITHUB_OUTPUT
+            elif [ "$CURRENT_MINOR" -lt "$LATEST_MINOR" ]; then
+              echo "upgrade_type=minor" >> $GITHUB_OUTPUT
+            else
+              echo "upgrade_type=patch" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "upgrade_available=false" >> $GITHUB_OUTPUT
+            echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "latest_version=$LATEST_VERSION" >> $GITHUB_OUTPUT
+            echo "upgrade_type=none" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Create automatic upgrade PR
+        if: steps.astro-check.outputs.upgrade_available == 'true'
+        run: |
+          echo "Creating automatic upgrade pull request..."
+          
+          # Configure git
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Create a new branch for the upgrade
+          BRANCH_NAME="astro-upgrade-${{ steps.astro-check.outputs.latest_version }}"
+          git checkout -b $BRANCH_NAME
+          
+          # Update Astro.js to latest version
+          pnpm update astro@${{ steps.astro-check.outputs.latest_version }}
+          
+          # Update related Astro.js packages
+          pnpm update @astrojs/node @astrojs/react @astrojs/partytown @astrojs/sitemap
+          
+          # Commit the changes
+          git add package.json pnpm-lock.yaml
+          git commit -m "🚀 Upgrade Astro.js to ${{ steps.astro-check.outputs.latest_version }}
+
+          - Updated astro from ${{ steps.astro-check.outputs.current_version }} to ${{ steps.astro-check.outputs.latest_version }}
+          - Updated related @astrojs packages
+          - Automated upgrade via GitHub Actions
+          
+          Closes any existing Astro.js upgrade issues."
+          
+          # Push the branch
+          git push origin $BRANCH_NAME
+          
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          
+      - name: Create Pull Request
+        if: steps.astro-check.outputs.upgrade_available == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { upgrade_type, current_version, latest_version } = process.env;
+            const branchName = process.env.BRANCH_NAME;
+            
+            const title = `🚀 Automated Astro.js ${upgrade_type} upgrade: ${current_version} → ${latest_version}`;
+            
+            const body = `## 🤖 Automated Astro.js Upgrade
+            
+            This PR was automatically created by the weekly Astro.js upgrade check workflow.
+            
+            **Changes:**
+            - **Astro.js:** \`${current_version}\` → \`${latest_version}\`
+            - **Upgrade type:** ${upgrade_type}
+            - **Related packages:** Updated @astrojs/* packages to latest compatible versions
+            
+            ### What's included:
+            - ✅ Updated \`astro\` to \`${latest_version}\`
+            - ✅ Updated related \`@astrojs/*\` packages
+            - ✅ Updated \`pnpm-lock.yaml\`
+            
+            ### Next steps:
+            1. **Review the [Astro.js changelog](https://github.com/withastro/astro/blob/main/packages/astro/CHANGELOG.md)** for breaking changes
+            2. **Test the changes:**
+               \`\`\`bash
+               pnpm install
+               pnpm run build
+               pnpm run preview
+               \`\`\`
+            3. **Merge this PR** when ready
+            4. **Delete the branch** after merging
+            
+            ### Related packages updated:
+            - \`@astrojs/node\`
+            - \`@astrojs/react\` 
+            - \`@astrojs/partytown\`
+            - \`@astrojs/sitemap\`
+            
+            ---
+            *This PR was automatically created by the weekly Astro.js upgrade check workflow.*`;
+            
+            // Check if PR already exists
+            const pulls = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${branchName}`,
+              state: 'open'
+            });
+            
+            if (pulls.data.length === 0) {
+              const pr = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                head: branchName,
+                base: 'main', // Change to your default branch if different
+                labels: ['astro-upgrade', 'dependencies', 'automated', 'ready-to-merge']
+              });
+              
+              console.log(`Created PR #${pr.data.number}: ${pr.data.html_url}`);
+            } else {
+              console.log('PR already exists for this upgrade');
+            }
+        env:
+          upgrade_type: ${{ steps.astro-check.outputs.upgrade_type }}
+          current_version: ${{ steps.astro-check.outputs.current_version }}
+          latest_version: ${{ steps.astro-check.outputs.latest_version }}
+          BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          
+      - name: Summary
+        run: |
+          if [ "${{ steps.astro-check.outputs.upgrade_available }}" == "true" ]; then
+            echo "✅ Upgrade check complete - Astro.js upgrade available!"
+            echo "Current: ${{ steps.astro-check.outputs.current_version }}"
+            echo "Latest: ${{ steps.astro-check.outputs.latest_version }}"
+            echo "Type: ${{ steps.astro-check.outputs.upgrade_type }}"
+          else
+            echo "✅ Upgrade check complete - Astro.js is up to date!"
+            echo "Current version: ${{ steps.astro-check.outputs.current_version }}"
+          fi

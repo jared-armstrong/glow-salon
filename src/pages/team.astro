@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import TeamSection from '../components/TeamSection.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Meet Our Team | Glow Salon & Spa - Carmel, IN";
+const description = "Meet the talented professionals at Glow Salon & Spa in Carmel, Indiana. Our experienced team of stylists, nail technicians, and beauty experts are here to help you look and feel your best.";
+---
+
+<Layout title={title} description={description}>
+	<main>
+		<Header />
+		<TeamSection />
+	</main>
+	<Footer />
+</Layout>
