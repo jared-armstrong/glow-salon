@@ -16,44 +16,45 @@ import juliaImage from '../assets/team/julia_zeffner.webp';
 import emilyImage from '../assets/team/emily_saunders.webp';
 import marcyImage from '../assets/team/marcy.webp';
 import hannahImage from '../assets/team/hannah_d.webp';
+import { Image } from 'astro:assets';
 
 const teamMembers: TeamMember[] = [
   {
     name: "Jared",
     role: "Owner",
-    description: "The new owner focused on expanding service offerings and enhancing our online presence to serve our community better.",
-    image: jaredImage.src,
+    description: "Our new owner focused on expanding service offerings and enhancing our online presence to serve our community better.",
+    image: "jared",
     isOwner: true
   },
   {
     name: "Laura",
     role: "Manager | Hair & Bridal Stylist",
     description: "Previous owner who created Glow Salon in 2013, now serving as our talented manager and expert stylist specializing in hair and bridal services.",
-    image: lauraImage.src
+    image: "laura"
   },
   {
     name: "Julia",
     role: "Hair Stylist | Lead Bridal Hair Stylist, Makeup Artist",
     description: "Our lead bridal specialist with exceptional skills in hair styling and makeup artistry.",
-    image: juliaImage.src
+    image: "julia"
   },
   {
     name: "Emily",
     role: "Nail Technician",
     description: "Emily is an expert nail technician providing beautiful manicures and pedicure services.",
-    image: emilyImage.src
+    image: "emily"
   },
   {
     name: "Marcy",
     role: "Hair Stylist",
     description: "The original owner from 2005, Marcy brings many years of experience, including exceptional skill and passion for creating beautiful, personalized looks for every client.",
-    image: marcyImage.src
+    image: "marcy"
   },
   {
     name: "Hannah",
     role: "Social Media Manager | Salon Content Creator",
     description: "Our creative content creator and social media expert, showcasing our salon's beauty and talent.",
-    image: hannahImage.src
+    image: "hannah"
   }
 ];
 ---
@@ -66,23 +67,38 @@ const teamMembers: TeamMember[] = [
     </div>
     
     <div class="team-grid">
-      {teamMembers.map((member) => (
-        <div class={`team-member ${member.isOwner ? 'owner' : ''}`}>
-          <div class="member-photo">
-            <img 
-              src={member.image} 
-              alt={`${member.name} - ${member.role}`}
-              loading="lazy"
-            />
-            {member.isOwner && <div class="owner-badge">Owner</div>}
+      {teamMembers.map((member) => {
+        const imageSrc = member.image === 'jared' ? jaredImage : 
+                        member.image === 'laura' ? lauraImage :
+                        member.image === 'julia' ? juliaImage :
+                        member.image === 'emily' ? emilyImage :
+                        member.image === 'marcy' ? marcyImage :
+                        hannahImage;
+        
+        return (
+          <div class={`team-member ${member.isOwner ? 'owner' : ''}`}>
+            <div class="member-photo">
+              <Image 
+                src={imageSrc}
+                alt={`${member.name} - ${member.role}`}
+                width={300}
+                height={300}
+                loading="lazy"
+                decoding="async"
+                quality={85}
+                format="webp"
+                class="member-image"
+              />
+              {member.isOwner && <div class="owner-badge">Owner</div>}
+            </div>
+            <div class="member-info">
+              <h3>{member.name}</h3>
+              <h4>{member.role}</h4>
+              <p>{member.description}</p>
+            </div>
           </div>
-          <div class="member-info">
-            <h3>{member.name}</h3>
-            <h4>{member.role}</h4>
-            <p>{member.description}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </div>
@@ -176,7 +192,7 @@ const teamMembers: TeamMember[] = [
     margin-bottom: 1.5rem;
   }
 
-  .member-photo img {
+  .member-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -186,7 +202,7 @@ const teamMembers: TeamMember[] = [
     transition: all 0.3s ease;
   }
 
-  .team-member:hover .member-photo img {
+  .team-member:hover .member-image {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
@@ -250,7 +266,7 @@ const teamMembers: TeamMember[] = [
       padding: 1.2rem;
     }
 
-    .member-photo img {
+    .member-image {
       width: 120px;
       height: 120px;
     }
@@ -269,7 +285,7 @@ const teamMembers: TeamMember[] = [
       padding: 0 1rem;
     }
 
-    .member-photo img {
+    .member-image {
       width: 100px;
       height: 100px;
     }
