@@ -1,0 +1,281 @@
+---
+// Team Section Component
+// Displays all team members with their roles and photos
+
+interface TeamMember {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+  isOwner?: boolean;
+}
+
+import jaredImage from '../assets/team/jared.webp';
+import lauraImage from '../assets/team/laura_brock.webp';
+import juliaImage from '../assets/team/julia_zeffner.webp';
+import emilyImage from '../assets/team/emily_saunders.webp';
+import marcyImage from '../assets/team/marcy.webp';
+import hannahImage from '../assets/team/hannah_d.webp';
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Jared",
+    role: "Owner",
+    description: "The new owner focused on expanding service offerings and enhancing our online presence to serve our community better.",
+    image: jaredImage.src,
+    isOwner: true
+  },
+  {
+    name: "Laura",
+    role: "Manager | Hair & Bridal Stylist",
+    description: "Previous owner who created Glow Salon in 2013, now serving as our talented manager and expert stylist specializing in hair and bridal services.",
+    image: lauraImage.src
+  },
+  {
+    name: "Julia",
+    role: "Hair Stylist | Lead Bridal Hair Stylist, Makeup Artist",
+    description: "Our lead bridal specialist with exceptional skills in hair styling and makeup artistry.",
+    image: juliaImage.src
+  },
+  {
+    name: "Emily",
+    role: "Nail Technician",
+    description: "Expert nail technician providing beautiful manicures, pedicures, and nail art services.",
+    image: emilyImage.src
+  },
+  {
+    name: "Marcy",
+    role: "Hair Stylist",
+    description: "The original owner from 2005 with many years of experience, bringing exceptional skill and passion for creating beautiful, personalized looks for every client.",
+    image: marcyImage.src
+  },
+  {
+    name: "Hannah",
+    role: "Social Media Manager | Salon Content Creator",
+    description: "Our creative content creator and social media expert, showcasing our salon's beauty and talent.",
+    image: hannahImage.src
+  }
+];
+---
+
+<div class="team-section">
+  <div class="team-container">
+    <div class="team-header">
+      <h2>Meet Our Amazing Team</h2>
+      <p>The talented professionals who make Glow Salon & Spa special</p>
+    </div>
+    
+    <div class="team-grid">
+      {teamMembers.map((member) => (
+        <div class={`team-member ${member.isOwner ? 'owner' : ''}`}>
+          <div class="member-photo">
+            <img 
+              src={member.image} 
+              alt={`${member.name} - ${member.role}`}
+              loading="lazy"
+            />
+            {member.isOwner && <div class="owner-badge">Owner</div>}
+          </div>
+          <div class="member-info">
+            <h3>{member.name}</h3>
+            <h4>{member.role}</h4>
+            <p>{member.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .team-section {
+    background: white;
+    padding: 4rem 0;
+    margin: 0;
+  }
+
+  .team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .team-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .team-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .team-header h2 {
+    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+    font-size: 2.5rem;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+  }
+
+  .team-header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .team-member {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: #e91e63;
+  }
+
+  .team-member.owner {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+    border-color: #e91e63;
+  }
+
+  .team-member.owner:hover {
+    border-color: #c2185b;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+  }
+
+  .member-photo {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .member-photo img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .team-member:hover .member-photo img {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .owner-badge {
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .member-info h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+  }
+
+  .member-info h4 {
+    font-size: 1rem;
+    color: #e91e63;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .member-info p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .team-member {
+      padding: 1.2rem;
+    }
+
+    .member-photo img {
+      width: 120px;
+      height: 120px;
+    }
+
+    .team-header h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .team-section {
+      padding: 3rem 0;
+    }
+
+    .team-container {
+      padding: 0 1rem;
+    }
+
+    .member-photo img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .team-header h2 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
