@@ -115,10 +115,12 @@ jobs:
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
           
       - name: Create Pull Request
+        id: create-pr
         if: steps.astro-check.outputs.upgrade_available == 'true'
         uses: actions/github-script@v7
         with:
           script: |
+            const core = require('@actions/core');
             const { upgrade_type, current_version, latest_version } = process.env;
             const branchName = process.env.BRANCH_NAME;
             
@@ -166,6 +168,7 @@ jobs:
               state: 'open'
             });
             
+            let prNumber = null;
             if (pulls.data.length === 0) {
               const pr = await github.rest.pulls.create({
                 owner: context.repo.owner,
@@ -177,15 +180,42 @@ jobs:
                 labels: ['astro-upgrade', 'dependencies', 'automated', 'ready-to-merge']
               });
               
+              prNumber = pr.data.number;
               console.log(`Created PR #${pr.data.number}: ${pr.data.html_url}`);
             } else {
               console.log('PR already exists for this upgrade');
             }
+            
+            // Output PR number for approval step
+            core.setOutput('pr_number', prNumber);
         env:
           upgrade_type: ${{ steps.astro-check.outputs.upgrade_type }}
           current_version: ${{ steps.astro-check.outputs.current_version }}
           latest_version: ${{ steps.astro-check.outputs.latest_version }}
           BRANCH_NAME: ${{ env.BRANCH_NAME }}
+          
+      - name: Approve Pull Request
+        if: steps.astro-check.outputs.upgrade_available == 'true' && steps.create-pr.outputs.pr_number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = parseInt(process.env.PR_NUMBER);
+            
+            if (prNumber && !isNaN(prNumber)) {
+              await github.rest.pulls.createReview({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                event: 'APPROVE',
+                body: '✅ Automatically approved by GitHub Actions - Automated Astro.js upgrade PR'
+              });
+              
+              console.log(`Approved PR #${prNumber}`);
+            } else {
+              console.log('No PR to approve (PR already exists or was not created)');
+            }
+        env:
+          PR_NUMBER: ${{ steps.create-pr.outputs.pr_number }}
           
       - name: Summary
         run: |
