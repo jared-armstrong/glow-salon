@@ -92,3 +92,10 @@ export const AREAS_SERVED = [
   },
 ] as const;
 
+export const NAVIGATION_LINKS = [
+  { href: "/contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/products", label: "Products" },
+  { href: "/team", label: "Our Team" },
+] as const;
+
