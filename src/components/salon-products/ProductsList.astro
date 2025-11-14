@@ -1,7 +1,12 @@
 ---
+/**
+ * ProductsList component
+ * Single Responsibility: Display grid of product cards
+ */
 import giftCardImage from '../../assets/services/salon-egift.webp';
 import amazonProductsImage from '../../assets/products/beauty-products.webp';
 import Card from '../Card.astro';
+import SectionHeader from '../SectionHeader.astro';
 
 const products = [
 {
@@ -22,7 +27,7 @@ const products = [
 ---
 
 <section class="products-list">
-  <h1 class="section-header">Our Products</h1>
+  <SectionHeader text="Our Products" level={1} />
   <div class="cards">
     {products.map((product) => (
       <a href={product.href} target={product.externalLink ? "_blank" : "_self"} rel={product.externalLink ? "noopener noreferrer" : undefined}>
@@ -36,17 +41,6 @@ const products = [
   .products-list {
     width: 100%;
     margin-bottom: 30px;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: center;
-    font-family: 'Safira March';
-    color: #333333;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 3.5rem;
   }
 
   .cards {
@@ -63,9 +57,6 @@ const products = [
     .cards {
       flex-direction: column;
       align-items: center;
-    }
-    .section-header {
-      font-size: 2.0rem;
     }
   }
 </style> 

@@ -1,76 +1,42 @@
 ---
+/**
+ * Footer component
+ * Single Responsibility: Display site footer with logo, contact info, and social icons
+ */
 import FooterLogo from '../assets/glow-salon-footer-logo.webp';
-import { Image } from 'astro:assets'
+import SocialIcons from './SocialIcons.astro';
+import StructuredData from './SEO/StructuredData.astro';
+import { generateBeautySalonSchema } from '../utils/structuredData';
+import { BUSINESS_INFO } from '../config/constants';
+import { Image } from 'astro:assets';
 ---
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BeautySalon",
-  "name": "Glow Salon & Spa",
-  "image": "/glow-salon-logo.webp",
-  "@id": "",
-  "url": "https://www.glowsalonwestclay.com",
-  "telephone": "317-846-3073",
-  "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "1928 Rhettsbury St",
-    "addressLocality": "Carmel",
-    "addressRegion": "IN",
-    "postalCode": "46032",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 39.924550,
-    "longitude": -86.183260
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "opens": "10:00",
-      "closes": "18:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "09:00",
-      "closes": "16:00"
-    }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/GlowSalonWestClay/",
-    "https://www.instagram.com/glowsalonwestclay/"
-  ]
-}
-</script>
+<StructuredData data={generateBeautySalonSchema()} />
 
 <footer class="footer" role="contentinfo">
   <div class="footer-content">
     <div class="logo-container">
-      <Image src={FooterLogo} alt="Glow Salon Logo" class="footer-logo" loading="lazy" decoding="async" />
+      <Image
+        src={FooterLogo}
+        alt="Glow Salon Logo"
+        class="footer-logo"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
-    
+
     <div class="address-info">
-      <p class="contact-info"><a href="tel:3178463073">317-846-3073</a></p>
-      <p class="contact-info">1928 Rhettsbury St Carmel, IN 46032</p>
+      <p class="contact-info">
+        <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>
+          {BUSINESS_INFO.phone}
+        </a>
+      </p>
+      <p class="contact-info">
+        {BUSINESS_INFO.address.street} {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}
+      </p>
     </div>
-    
-    <div class="social-icons">
-      <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook page">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram page">
-        <i class="fab fa-instagram"></i>
-      </a>
-    </div>
+
+    <SocialIcons variant="dark" />
   </div>
 </footer>
 
@@ -118,46 +84,21 @@ import { Image } from 'astro:assets'
     text-decoration: none;
   }
 
-  .social-icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .social-icons a {
-    color: #EDE9E3;
-    font-size: 24px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .social-icons a:hover {
-    color: #D4B2A7;
-  }
-
   /* Mobile responsive */
   @media (max-width: 768px) {
     .footer-content {
       flex-direction: column;
       gap: 4px;
     }
-    
+
     .logo-container {
       display: none;
     }
-    
+
     .address-info {
       order: 1;
     }
-    
-    .social-icons {
-      gap: 15px;
-    }
-    
-    .social-icons a {
-      font-size: 20px;
-    }
-    
+
     .contact-info {
       font-size: 14px;
     }

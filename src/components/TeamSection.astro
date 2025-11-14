@@ -1,15 +1,10 @@
 ---
-// Team Section Component
-// Displays all team members with their roles and photos
-
-interface TeamMember {
-  name: string;
-  role: string;
-  description: string;
-  image: string;
-  isOwner?: boolean;
-}
-
+/**
+ * TeamSection component
+ * Single Responsibility: Display team members with their information
+ */
+import { teamMembers } from '../data/team';
+import SectionHeader from './SectionHeader.astro';
 import jaredImage from '../assets/team/jared.webp';
 import lauraImage from '../assets/team/laura_brock.webp';
 import juliaImage from '../assets/team/julia_zeffner.webp';
@@ -17,63 +12,29 @@ import emilyImage from '../assets/team/emily_saunders.webp';
 import marcyImage from '../assets/team/marcy.webp';
 import hannahImage from '../assets/team/hannah_d.webp';
 import { Image } from 'astro:assets';
+import type { TeamMember } from '../data/team';
 
-const teamMembers: TeamMember[] = [
-  {
-    name: "Jared",
-    role: "Owner",
-    description: "Our new owner focused on expanding service offerings and enhancing our online presence to serve our community better.",
-    image: "jared",
-    isOwner: true
-  },
-  {
-    name: "Laura",
-    role: "Manager | Hair & Bridal Stylist",
-    description: "Previous owner who created Glow Salon in 2013, now serving as our talented manager and expert stylist specializing in hair and bridal services.",
-    image: "laura"
-  },
-  {
-    name: "Julia",
-    role: "Hair Stylist | Lead Bridal Hair Stylist, Makeup Artist",
-    description: "Our lead bridal specialist with exceptional skills in hair styling and makeup artistry.",
-    image: "julia"
-  },
-  {
-    name: "Emily",
-    role: "Nail Technician",
-    description: "Emily is an expert nail technician providing beautiful manicures and pedicure services.",
-    image: "emily"
-  },
-  {
-    name: "Marcy",
-    role: "Hair Stylist",
-    description: "The original owner from 2005, Marcy brings many years of experience, including exceptional skill and passion for creating beautiful, personalized looks for every client.",
-    image: "marcy"
-  },
-  {
-    name: "Hannah",
-    role: "Social Media Manager | Salon Content Creator",
-    description: "Our creative content creator and social media expert, showcasing our salon's beauty and talent.",
-    image: "hannah"
-  }
-];
+// Map image names to actual image imports
+const imageMap: Record<string, ImageMetadata> = {
+  jared: jaredImage,
+  laura: lauraImage,
+  julia: juliaImage,
+  emily: emilyImage,
+  marcy: marcyImage,
+  hannah: hannahImage,
+};
 ---
 
 <div class="team-section">
   <div class="team-container">
     <div class="team-header">
-      <h2>Meet Our Amazing Team</h2>
+      <SectionHeader text="Meet Our Amazing Team" level={2} />
       <p>The talented professionals who make Glow Salon & Spa special</p>
     </div>
     
     <div class="team-grid">
       {teamMembers.map((member) => {
-        const imageSrc = member.image === 'jared' ? jaredImage : 
-                        member.image === 'laura' ? lauraImage :
-                        member.image === 'julia' ? juliaImage :
-                        member.image === 'emily' ? emilyImage :
-                        member.image === 'marcy' ? marcyImage :
-                        hannahImage;
+        const imageSrc = imageMap[member.image] || hannahImage;
         
         return (
           <div class={`team-member ${member.isOwner ? 'owner' : ''}`}>
@@ -139,13 +100,6 @@ const teamMembers: TeamMember[] = [
     }
   }
 
-  .team-header h2 {
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-    font-size: 2.5rem;
-    color: #333;
-    margin: 0 0 0.5rem 0;
-    font-weight: bold;
-  }
 
   .team-header p {
     color: #666;

@@ -1,8 +1,18 @@
 ---
+/**
+ * BridalServicePage component
+ * Single Responsibility: Display bridal service page with enhanced SEO and pricing
+ */
 import Header from '../Header.astro';
 import PricingSection from '../service-pricing/PricingSection.astro';
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../Footer.astro';
+import StructuredData from '../SEO/StructuredData.astro';
+import Breadcrumbs from '../SEO/Breadcrumbs.astro';
+import SectionHeader from '../SectionHeader.astro';
+import { generateBridalServiceSchema } from '../../utils/structuredData';
+import { BUSINESS_INFO } from '../../config/constants';
+import type { Service } from '../../utils/structuredData';
 import '../../styles/services.css';
 
 export interface Props {
@@ -10,139 +20,13 @@ export interface Props {
     description: string;
     pageTitle: string;
     introText: string;
-    services: Array<{
-        serviceName: string;
-        price: string;
-        description?: string;
-    }>;
+    services: Service[];
 }
 
 const { title, description, pageTitle, introText, services } = Astro.props;
 
 // Generate comprehensive structured data for wedding services
-const serviceStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": pageTitle,
-    "description": description,
-    "category": "Bridal Beauty Services",
-    "serviceType": "Wedding Hair and Makeup",
-    "provider": {
-        "@type": "BeautySalon",
-        "name": "Glow Salon & Spa",
-        "url": "https://www.glowsalonwestclay.com",
-        "telephone": "317-846-3073",
-        "email": "glowsalonwestclay@gmail.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1928 Rhettsbury St",
-            "addressLocality": "Carmel",
-            "addressRegion": "IN",
-            "postalCode": "46032",
-            "addressCountry": "US"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "39.924550",
-            "longitude": "-86.183260"
-        },
-        "openingHours": [
-            "Mo-Fr 09:00-19:00",
-            "Sa 09:00-17:00",
-            "Su 10:00-16:00"
-        ],
-        "priceRange": "$$",
-        "paymentAccepted": ["Cash", "Credit Card", "Check"],
-        "currenciesAccepted": "USD"
-    },
-    "areaServed": [
-        {
-            "@type": "City",
-            "name": "Carmel",
-            "containedInPlace": {
-                "@type": "State",
-                "name": "Indiana"
-            }
-        },
-        {
-            "@type": "City", 
-            "name": "Westfield",
-            "containedInPlace": {
-                "@type": "State",
-                "name": "Indiana"
-            }
-        },
-        {
-            "@type": "City",
-            "name": "Fishers", 
-            "containedInPlace": {
-                "@type": "State",
-                "name": "Indiana"
-            }
-        }
-    ],
-    "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": `${pageTitle} Services`,
-        "itemListElement": services.map((service, index) => ({
-            "@type": "Offer",
-            "itemOffered": {
-                "@type": "Service",
-                "name": service.serviceName,
-                "description": service.description || service.serviceName,
-                "category": service.serviceName.includes('Hair') ? 'Hair Styling' : 
-                          service.serviceName.includes('Makeup') ? 'Makeup Application' : 'Beauty Services'
-            },
-            "price": service.price,
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock",
-            "validFrom": "2024-01-01",
-            "seller": {
-                "@type": "BeautySalon",
-                "name": "Glow Salon & Spa"
-            }
-        }))
-    },
-    "review": {
-        "@type": "Review",
-        "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "Sarah M."
-        },
-        "reviewBody": "The team at Glow Salon made me feel absolutely beautiful on my wedding day. Their mobile service was so convenient and the trial helped me feel confident about my look. Highly recommend for any bride in Carmel!"
-    }
-};
-
-// Generate breadcrumb data
-const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.glowsalonwestclay.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "https://www.glowsalonwestclay.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": pageTitle,
-            "item": Astro.url.href
-        }
-    ]
-};
+const serviceStructuredData = generateBridalServiceSchema(pageTitle, description, services);
 
 // Group services by type
 const hairServices = services.filter(service => service.serviceName.includes('Hair'));
@@ -151,12 +35,13 @@ const additionalServices = services.filter(service => service.serviceName.includ
 ---
 
 <Layout title={title} description={description}>
-    <!-- Service-specific structured data -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
-    
-    <!-- Breadcrumb structured data -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
-    
+    <StructuredData data={serviceStructuredData} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Services", url: `${BUSINESS_INFO.website}/services` },
+        { name: pageTitle, url: Astro.url.href },
+    ]} />
+
     <Header />
     
     <main class="service-page">
@@ -184,7 +69,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     <!-- Bridal Hair Section -->
                     {hairServices.length > 0 && (
                         <div class="service-section">
-                            <h2 class="section-header">Hair</h2>
+                            <SectionHeader text="Hair" level={2} className="left-align" />
                             {hairServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -198,7 +83,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     <!-- Bridal Makeup Section -->
                     {makeupServices.length > 0 && (
                         <div class="service-section">
-                            <h2 class="section-header">Makeup</h2>
+                            <SectionHeader text="Makeup" level={2} className="left-align" />
                             {makeupServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -212,7 +97,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     <!-- Additional Services Section -->
                     {additionalServices.length > 0 && (
                         <div class="service-section">
-                            <h2 class="section-header">Additional Services</h2>
+                            <SectionHeader text="Additional Services" level={2} className="left-align" />
                             {additionalServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -266,19 +151,9 @@ const additionalServices = services.filter(service => service.serviceName.includ
         margin-bottom: 40px;
     }
 
-    .section-header {
-        font-family: 'Safira March', serif;
-        color: #333333;
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 20px;
+    .left-align {
+        justify-content: flex-start;
         text-align: left;
-    }
-
-    @media (max-width: 768px) {
-        .section-header {
-            font-size: 1.5rem;
-        }
     }
 
     /* SEO content styling */

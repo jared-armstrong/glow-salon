@@ -1,15 +1,22 @@
 ---
-import landingImage from '../assets/glow-salon-landing.webp'
-const bookingUrl = 'https://glowsalonwestclay.glossgenius.com/services'
-import { Image } from 'astro:assets'
+/**
+ * LandingSection component
+ * Single Responsibility: Display hero section with call-to-action
+ */
+import landingImage from '../assets/glow-salon-landing.webp';
+import { BUSINESS_INFO } from '../config/constants';
+import { Image } from 'astro:assets';
 ---
 
 <section class="call-to-action">
   <div class="left-content">
     <h1 class="main-heading">Glow Salon & Spa</h1>
-    <a 
-      href={bookingUrl} target="_blank"
-      class="book-now">Book Appointment
+    <a
+      href={BUSINESS_INFO.bookingUrl}
+      target="_blank"
+      class="book-now"
+    >
+      Book Appointment
     </a>
     
   </div>

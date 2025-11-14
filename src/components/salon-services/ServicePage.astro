@@ -1,9 +1,18 @@
 ---
+/**
+ * ServicePage component
+ * Single Responsibility: Display a service page with pricing and booking options
+ */
 import Header from '../Header.astro';
 import PricingSection from '../service-pricing/PricingSection.astro';
 import Layout from '../../layouts/Layout.astro';
 import BookButtonGroup from '../buttons/BookingButtonGroup.astro';
 import Footer from '../Footer.astro';
+import StructuredData from '../SEO/StructuredData.astro';
+import Breadcrumbs from '../SEO/Breadcrumbs.astro';
+import { generateServiceSchema } from '../../utils/structuredData';
+import { BUSINESS_INFO } from '../../config/constants';
+import type { Service } from '../../utils/structuredData';
 import '../../styles/services.css';
 
 export interface Props {
@@ -11,85 +20,23 @@ export interface Props {
     description: string;
     pageTitle: string;
     introText: string;
-    services: Array<{
-        serviceName: string;
-        price: string;
-        description?: string;
-    }>;
+    services: Service[];
 }
 
 const { title, description, pageTitle, introText, services } = Astro.props;
 
 // Generate service-specific structured data
-const serviceStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": pageTitle,
-    "description": description,
-    "provider": {
-        "@type": "BeautySalon",
-        "name": "Glow Salon & Spa",
-        "url": "https://www.glowsalonwestclay.com",
-        "telephone": "317-846-3073",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1928 Rhettsbury St",
-            "addressLocality": "Carmel",
-            "addressRegion": "IN",
-            "postalCode": "46032",
-            "addressCountry": "US"
-        }
-    },
-    "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": `${pageTitle} Services`,
-        "itemListElement": services.map((service, index) => ({
-            "@type": "Offer",
-            "itemOffered": {
-                "@type": "Service",
-                "name": service.serviceName,
-                "description": service.description || service.serviceName
-            },
-            "price": service.price,
-            "priceCurrency": "USD"
-        }))
-    }
-};
-
-// Generate breadcrumb data
-const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.glowsalonwestclay.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Services",
-            "item": "https://www.glowsalonwestclay.com"
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": pageTitle,
-            "item": Astro.url.href
-        }
-    ]
-};
+const serviceStructuredData = generateServiceSchema(pageTitle, description, services);
 ---
 
 <Layout title={title} description={description}>
-    <!-- Service-specific structured data -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceStructuredData)} />
-    
-    <!-- Breadcrumb structured data -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
-    
+    <StructuredData data={serviceStructuredData} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Services", url: `${BUSINESS_INFO.website}/services` },
+        { name: pageTitle, url: Astro.url.href },
+    ]} />
+
     <Header />
     
     <main class="service-page">

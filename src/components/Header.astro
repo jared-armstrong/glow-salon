@@ -1,25 +1,29 @@
 ---
+/**
+ * Header component
+ * Single Responsibility: Display site header with logo, navigation, and social icons
+ */
 import Logo from '../assets/glow-salon-alt-header-logo.webp';
 import Nav from './Nav.astro';
-import { Image } from 'astro:assets'
+import SocialIcons from './SocialIcons.astro';
+import { Image } from 'astro:assets';
 ---
 
 <header role="banner">
     <div class="header-content">
         <a href="/" class="logo-container">
-            <Image src={Logo} alt="Glow Salon Logo" class="logo" loading="eager" decoding="async" />
+            <Image
+                src={Logo}
+                alt="Glow Salon Logo"
+                class="logo"
+                loading="eager"
+                decoding="async"
+            />
         </a>
-        
+
         <Nav role="navigation" aria-label="Main navigation" />
-        
-        <div class="social-icons">
-            <a href="https://www.facebook.com/GlowSalonWestClay/" target="_blank" rel="noopener noreferrer" aria-label="Facebook page">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/glowsalonwestclay/" target="_blank" rel="noopener noreferrer" aria-label="Instagram page">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
+
+        <SocialIcons variant="light" />
     </div>
 </header>
 
@@ -49,40 +53,15 @@ import { Image } from 'astro:assets'
         height: auto;
     }
 
-    .social-icons {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    .social-icons a {
-        color: #333333;
-        font-size: 24px;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .social-icons a:hover {
-        color: #e7d7c9;
-    }
-
     /* Mobile responsive */
     @media (max-width: 768px) {
         .header-content {
             flex-direction: column;
             gap: 20px;
         }
-        
+
         .logo {
             width: 140px;
-        }
-        
-        .social-icons {
-            gap: 15px;
-        }
-        
-        .social-icons a {
-            font-size: 20px;
         }
     }
 </style>

@@ -1,13 +1,22 @@
 ---
-// Nav component for the header
+/**
+ * Nav component
+ * Single Responsibility: Display main navigation menu
+ */
+import { NAVIGATION_LINKS } from '../config/constants';
+
 const currentPath = Astro.url.pathname;
 ---
 
 <nav class="header-nav">
-    <a href="/contact" class={`nav-link ${currentPath === '/contact' ? 'active' : ''}`}>Contact</a>
-    <a href="/services" class={`nav-link ${currentPath === '/services' ? 'active' : ''}`}>Services</a>
-    <a href="/products" class={`nav-link ${currentPath === '/products' ? 'active' : ''}`}>Products</a>
-    <a href="/team" class={`nav-link ${currentPath === '/team' ? 'active' : ''}`}>Our Team</a>
+    {NAVIGATION_LINKS.map((link) => (
+        <a
+            href={link.href}
+            class={`nav-link ${currentPath === link.href ? 'active' : ''}`}
+        >
+            {link.label}
+        </a>
+    ))}
 </nav>
 
 <style>

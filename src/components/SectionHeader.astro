@@ -1,0 +1,55 @@
+---
+/**
+ * Reusable SectionHeader component
+ * Single Responsibility: Display consistent section headers
+ */
+interface Props {
+  text: string;
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  className?: string;
+}
+
+const { text, level = 1, className = "" } = Astro.props;
+const Tag = `h${level}` as keyof HTMLElementTagNameMap;
+---
+
+<Tag class={`section-header ${className}`}>{text}</Tag>
+
+<style>
+  .section-header {
+    display: flex;
+    justify-content: center;
+    font-family: "Safira March", serif;
+    color: #333333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  h1.section-header {
+    font-size: 3.5rem;
+  }
+
+  h2.section-header {
+    font-size: 2rem;
+  }
+
+  h3.section-header {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    h1.section-header {
+      font-size: 2rem;
+    }
+
+    h2.section-header {
+      font-size: 1.5rem;
+    }
+
+    h3.section-header {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+

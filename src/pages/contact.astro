@@ -1,9 +1,14 @@
 ---
+/**
+ * Contact page
+ * Single Responsibility: Display contact form and business information
+ */
 import Header from '../components/Header.astro';
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import BridalBanner from '../components/BridalBanner.astro';
+import { BUSINESS_INFO } from '../config/constants';
 
 const title = "Contact Us | Glow Salon & Spa | Carmel, IN";
 const description = "Find our address, hours, and phone number. Contact Glow Salon & Spa in Carmel, Indiana to book an appointment or ask a question.";
@@ -15,15 +20,18 @@ const description = "Find our address, hours, and phone number. Contact Glow Sal
         <BridalBanner />
         <div class="contact-container">
             <ContactForm />
-    
+
             <div class="contact-info">
-    
                 <div class="info-section">
                     <h2>Address & Contact Info</h2>
-                    <p>1928 Rhettsbury Street</p>
-                    <p>Carmel, Indiana 46032, United States</p>
-                    <p><a href="tel:3178463073">317-846-3073</a></p>
-    
+                    <p>{BUSINESS_INFO.address.street}</p>
+                    <p>{BUSINESS_INFO.address.full}</p>
+                    <p>
+                        <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>
+                            {BUSINESS_INFO.phone}
+                        </a>
+                    </p>
+
                     <h2>Business Hours</h2>
                     <p><strong>Sunday:</strong> Closed</p>
                     <p><strong>Monday:</strong> Closed</p>
@@ -33,7 +41,6 @@ const description = "Find our address, hours, and phone number. Contact Glow Sal
                     <p><strong>Friday:</strong> 10am - 6pm</p>
                     <p><strong>Saturday:</strong> 10am - 4pm</p>
                 </div>
-    
             </div>
         </div>
     </main>

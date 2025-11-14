@@ -1,9 +1,14 @@
 ---
-import hairServiceImage from '../../assets/services/hair-services.webp'
+/**
+ * SalonServices component
+ * Single Responsibility: Display grid of service cards
+ */
+import hairServiceImage from '../../assets/services/hair-services.webp';
 import Card from '../Card.astro';
-import nailServiceImage from '../../assets/services/nails.webp'
-import makeupServiceImage from '../../assets/services/makeup-artist.webp'
+import nailServiceImage from '../../assets/services/nails.webp';
+import makeupServiceImage from '../../assets/services/makeup-artist.webp';
 import bridalServiceImage from '../../assets/services/bridal-services.webp';
+import SectionHeader from '../SectionHeader.astro';
 
 const services = [
   {
@@ -31,11 +36,10 @@ const services = [
     altText: 'Professional bridal hair and makeup services at Glow Salon & Spa in Carmel, Indiana'
   }
 ];
-
 ---
 
 <section class="salon-services">
-  <h1 class="section-header">Our Services</h1>
+  <SectionHeader text="Our Services" level={1} />
   <div class="cards">
     {services.map((service) => (
       <a href={service.href} target="_self">
@@ -49,17 +53,6 @@ const services = [
   .salon-services {
     width: 100%;
     margin-bottom: 30px;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: center;
-    font-family: 'Safira March';
-    color: #333333;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 3.5rem;
   }
 
   .cards {
@@ -76,9 +69,6 @@ const services = [
     .cards {
       flex-direction: column;
       align-items: center;
-    }
-    .section-header {
-      font-size: 2.0rem;
     }
 
     .salon-services {

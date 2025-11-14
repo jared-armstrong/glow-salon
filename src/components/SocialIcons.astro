@@ -1,0 +1,70 @@
+---
+/**
+ * Reusable SocialIcons component
+ * Single Responsibility: Display social media icons
+ */
+import { BUSINESS_INFO } from "../config/constants";
+
+interface Props {
+  variant?: "light" | "dark";
+}
+
+const { variant = "light" } = Astro.props;
+---
+
+<div class={`social-icons ${variant === "dark" ? "dark" : "light"}`}>
+  <a
+    href={BUSINESS_INFO.socialLinks.facebook}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook page"
+  >
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a
+    href={BUSINESS_INFO.socialLinks.instagram}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram page"
+  >
+    <i class="fab fa-instagram"></i>
+  </a>
+</div>
+
+<style>
+  .social-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .social-icons.light a {
+    color: #333333;
+  }
+
+  .social-icons.dark a {
+    color: #EDE9E3;
+  }
+
+  .social-icons a {
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .social-icons a:hover {
+    color: #D4B2A7;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .social-icons {
+      gap: 15px;
+    }
+
+    .social-icons a {
+      font-size: 20px;
+    }
+  }
+</style>
+
