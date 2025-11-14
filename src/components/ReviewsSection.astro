@@ -1,99 +1,40 @@
 ---
-// Reviews Section Component with rotating testimonials
-// SEO optimized with structured data
-
-interface Review {
-  id: string;
-  name: string;
-  rating: number;
-  text: string;
-  services?: string[];
-  stylist?: string;
-  priceRange?: string;
-}
-
-const reviews: Review[] = [
-  {
-    id: "ingrid-lohneiss",
-    name: "Ingrid Lohneiss",
-    rating: 5,
-    text: "Julia is very good about considering your hair's texture when applying color and styling. Great experience overall.",
-    services: ["Shampoo & conditioning", "Blowouts", "Hairstyling"],
-    stylist: "Julia",
-    priceRange: "$120-140"
-  },
-  {
-    id: "melanie-brooks",
-    name: "Melanie Brooks", 
-    rating: 5,
-    text: "Laura is fantastic!! She always knows exactly what I want. And she's super nice.",
-    services: ["Shampoo & conditioning", "Haircut", "Hairstyling"],
-    stylist: "Laura",
-    priceRange: "$160-180"
-  },
-  {
-    id: "madeline-pritchett",
-    name: "Madeline Pritchett",
-    rating: 5,
-    text: "Julia just gave me my favorite haircut I've ever had! She is incredible and very technically skilled.",
-    services: ["Shampoo & conditioning", "Blowouts", "Haircut", "Hairstyling"],
-    stylist: "Julia Zeffner",
-  },
-  {
-    id: "kathy-williams",
-    name: "Kathy Williams",
-    rating: 5,
-    text: "Julia Zeffner gave me the best haircut I've had in years. She was very precise, while taking the necessary time to achieve our goal. I will definitely be rescheduling with her!",
-    services: ["Shampoo & conditioning", "Blowouts", "Haircut"],
-    stylist: "Julia Zeffner",
-    priceRange: "$60-80"
-  },
-  {
-    id: "rilee-wilson",
-    name: "Rilee Wilson",
-    rating: 5,
-    text: "I have been going here for years and I have never once had a bad experience! All the ladies here are amazing, but Laura is who I usually work with and I could not recommend her enough! She is amazing at haircuts, blow outs, pedicures, and more! I highly recommend this place to anybody who is looking for a new salon! 😊",
-    services: ["Haircut", "Blowouts", "Pedicure"],
-    stylist: "Laura",
-    priceRange: "$40-60"
-  },
-  {
-    id: "erum-s",
-    name: "Erum S",
-    rating: 5,
-    text: "Glow is the best salon in Indy! Laura is very experienced and always does a great job!",
-    services: ["Haircut"],
-    stylist: "Laura",
-  }
-];
+/**
+ * ReviewsSection component
+ * Single Responsibility: Display customer reviews with carousel
+ */
+import { reviews } from '../data/reviews';
+import { BUSINESS_INFO } from '../config/constants';
+import StructuredData from './SEO/StructuredData.astro';
+import type { Review } from '../data/reviews';
 
 // Generate structured data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
-  "name": "Glow Salon & Spa",
-  "aggregateRating": {
+  name: BUSINESS_INFO.name,
+  aggregateRating: {
     "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": reviews.length
+    ratingValue: "5.0",
+    reviewCount: reviews.length.toString(),
   },
-  "review": reviews.map(review => ({
+  review: reviews.map((review) => ({
     "@type": "Review",
-    "author": {
+    author: {
       "@type": "Person",
-      "name": review.name
+      name: review.name,
     },
-    "reviewRating": {
+    reviewRating: {
       "@type": "Rating",
-      "ratingValue": review.rating
+      ratingValue: review.rating.toString(),
     },
-    "reviewBody": review.text,
-    "datePublished": new Date().toISOString()
-  }))
+    reviewBody: review.text,
+    datePublished: new Date().toISOString(),
+  })),
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<StructuredData data={structuredData} />
 
 <div class="reviews-section">
   <div class="reviews-container">
@@ -155,131 +96,82 @@ const structuredData = {
   </div>
 </div>
 
-<script>
-  const reviews = [
-    {
-      id: "ingrid-lohneiss",
-      name: "Ingrid Lohneiss",
-      rating: 5,
-      text: "Julia is very good about considering your hair's texture when applying color and styling. Great experience overall.",
-      services: ["Shampoo & conditioning", "Blowouts", "Hairstyling"],
-      stylist: "Julia",
-      priceRange: "$120-140"
-    },
-    {
-      id: "melanie-brooks",
-      name: "Melanie Brooks", 
-      rating: 5,
-      text: "Laura is fantastic!! She always knows exactly what I want. And she's super nice.",
-      services: ["Shampoo & conditioning", "Haircut", "Hairstyling"],
-      stylist: "Laura",
-      priceRange: "$160-180"
-    },
-    {
-      id: "madeline-pritchett",
-      name: "Madeline Pritchett",
-      rating: 5,
-      text: "Julia just gave me my favorite haircut I've ever had! She is incredible and very technically skilled.",
-      services: ["Shampoo & conditioning", "Blowouts", "Haircut", "Hairstyling"],
-      stylist: "Julia Zeffner"
-    },
-    {
-      id: "kathy-williams",
-      name: "Kathy Williams",
-      rating: 5,
-      text: "Julia Zeffner gave me the best haircut I've had in years. She was very precise, while taking the necessary time to achieve our goal. I will definitely be rescheduling with her!",
-      services: ["Shampoo & conditioning", "Blowouts", "Haircut"],
-      stylist: "Julia Zeffner",
-      priceRange: "$60-80"
-    },
-    {
-      id: "rilee-wilson",
-      name: "Rilee Wilson",
-      rating: 5,
-      text: "I have been going here for years and I have never once had a bad experience! All the ladies here are amazing, but Laura is who I usually work with and I could not recommend her enough! She is amazing at haircuts, blow outs, pedicures, and more! I highly recommend this place to anybody who is looking for a new salon! 😊",
-      services: ["Haircut", "Blowouts", "Pedicure"],
-      stylist: "Laura",
-      priceRange: "$40-60"
-    },
-    {
-      id: "erum-s",
-      name: "Erum S",
-      rating: 5,
-      text: "Glow is the best salon in Indy! Laura is very experienced and always does a great job!",
-      services: ["Haircut"],
-      stylist: "Laura",
-    }
-  ];
-
-  let currentReview = 0;
-  const reviewCard = document.querySelector('.review-card');
-  const dots = document.querySelectorAll('.dot');
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
-
-  function updateReview(index: number) {
-    const review = reviews[index];
-    if (!review || !reviewCard) return;
-
-    // Update review content
-    const reviewerAvatar = reviewCard.querySelector('.reviewer-avatar') as HTMLElement;
-    const reviewerName = reviewCard.querySelector('.reviewer-details h4') as HTMLElement;
-    const stars = reviewCard.querySelector('.stars') as HTMLElement;
-    const reviewText = reviewCard.querySelector('.review-text') as HTMLElement;
-    const reviewServices = reviewCard.querySelector('.review-services') as HTMLElement;
-    const reviewStylist = reviewCard.querySelector('.review-stylist') as HTMLElement;
-
-    if (reviewerAvatar) reviewerAvatar.textContent = review.name.charAt(0);
-    if (reviewerName) reviewerName.textContent = review.name;
-    if (stars) stars.textContent = '★'.repeat(review.rating);
-    if (reviewText) reviewText.textContent = `"${review.text}"`;
+<script define:vars={{ reviews: JSON.stringify(reviews) }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reviewsData = JSON.parse(reviews);
     
-    if (reviewServices) {
-      if (review.services) {
-        reviewServices.innerHTML = `<strong>Services:</strong> ${review.services.join(', ')}`;
-        reviewServices.style.display = 'block';
-      } else {
-        reviewServices.style.display = 'none';
+    let currentReview = 0;
+    const reviewCard = document.querySelector('.review-card');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (!reviewCard || !dots.length) return;
+
+    function updateReview(index) {
+      const review = reviewsData[index];
+      if (!review || !reviewCard) return;
+
+      // Update review content
+      const reviewerAvatar = reviewCard.querySelector('.reviewer-avatar');
+      const reviewerName = reviewCard.querySelector('.reviewer-details h4');
+      const stars = reviewCard.querySelector('.stars');
+      const reviewText = reviewCard.querySelector('.review-text');
+      const reviewServices = reviewCard.querySelector('.review-services');
+      const reviewStylist = reviewCard.querySelector('.review-stylist');
+
+      if (reviewerAvatar) reviewerAvatar.textContent = review.name.charAt(0);
+      if (reviewerName) reviewerName.textContent = review.name;
+      if (stars) stars.textContent = '★'.repeat(review.rating);
+      if (reviewText) reviewText.textContent = `"${review.text}"`;
+      
+      if (reviewServices) {
+        if (review.services) {
+          reviewServices.innerHTML = `<strong>Services:</strong> ${review.services.join(', ')}`;
+          reviewServices.style.display = 'block';
+        } else {
+          reviewServices.style.display = 'none';
+        }
       }
-    }
-    
-    if (reviewStylist) {
-      if (review.stylist) {
-        reviewStylist.innerHTML = `<strong>Stylist:</strong> ${review.stylist}`;
-        reviewStylist.style.display = 'block';
-      } else {
-        reviewStylist.style.display = 'none';
+      
+      if (reviewStylist) {
+        if (review.stylist) {
+          reviewStylist.innerHTML = `<strong>Stylist:</strong> ${review.stylist}`;
+          reviewStylist.style.display = 'block';
+        } else {
+          reviewStylist.style.display = 'none';
+        }
       }
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      currentReview = index;
     }
 
-    // Update dots
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
+    function nextReview() {
+      const nextIndex = (currentReview + 1) % reviewsData.length;
+      updateReview(nextIndex);
+    }
+
+    function prevReview() {
+      const prevIndex = (currentReview - 1 + reviewsData.length) % reviewsData.length;
+      updateReview(prevIndex);
+    }
+
+    // Event listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextReview);
+    if (prevBtn) prevBtn.addEventListener('click', prevReview);
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => updateReview(index));
     });
 
-    currentReview = index;
-  }
-
-  function nextReview() {
-    const nextIndex = (currentReview + 1) % reviews.length;
-    updateReview(nextIndex);
-  }
-
-  function prevReview() {
-    const prevIndex = (currentReview - 1 + reviews.length) % reviews.length;
-    updateReview(prevIndex);
-  }
-
-  // Event listeners
-  if (nextBtn) nextBtn.addEventListener('click', nextReview);
-  if (prevBtn) prevBtn.addEventListener('click', prevReview);
-  
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => updateReview(index));
+    // Auto-rotate every 5 seconds
+    setInterval(nextReview, 5000);
   });
-
-  // Auto-rotate every 5 seconds
-  setInterval(nextReview, 5000);
 </script>
 
 <style>
