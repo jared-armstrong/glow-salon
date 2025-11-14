@@ -1,0 +1,22 @@
+---
+/**
+ * Reusable Breadcrumbs component for SEO
+ * Single Responsibility: Generate breadcrumb structured data
+ */
+import { generateBreadcrumbSchema } from "../../utils/structuredData";
+import type { BreadcrumbItem } from "../../utils/structuredData";
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const breadcrumbData = generateBreadcrumbSchema(items);
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbData)}
+></script>
+

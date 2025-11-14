@@ -1,10 +1,14 @@
 ---
-
+/**
+ * BookingButtonGroup component
+ * Single Responsibility: Display booking action buttons
+ */
+import { BUSINESS_INFO } from '../../config/constants';
 ---
 
 <div class="booking-button-group">
-  <a href="tel:+13178463073" class="booking-button">Call to Book</a>
-  <a href="https://glowsalonwestclay.glossgenius.com/services" target="_blank" class="booking-button">Book Online</a>
+  <a href={`tel:+1${BUSINESS_INFO.phone.replace(/-/g, '')}`} class="booking-button">Call to Book</a>
+  <a href={BUSINESS_INFO.bookingUrl} target="_blank" class="booking-button">Book Online</a>
   <a href="/contact" class="booking-button">Contact Us</a>
 </div>
 

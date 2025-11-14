@@ -1,0 +1,20 @@
+---
+/**
+ * Reusable StructuredData component for SEO
+ * Single Responsibility: Render structured data JSON-LD scripts
+ */
+interface Props {
+  data: Record<string, any> | Record<string, any>[];
+}
+
+const { data } = Astro.props;
+const structuredDataArray = Array.isArray(data) ? data : [data];
+---
+
+{structuredDataArray.map((schema) => (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+  />
+))}
+
