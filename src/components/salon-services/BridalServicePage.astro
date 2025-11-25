@@ -47,7 +47,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
     <main class="service-page">
         <div class="service-container">
             <div class="service-content">
-                <h1>Bridal Hair & Makeup in Carmel, IN – Look Flawless on Your Special Day</h1>
+                <h1>Bridal Hair & Makeup in Carmel, IN - Look Flawless on Your Special Day</h1>
                 <p class="service-intro">{introText}</p>
                 
                 <!-- SEO-optimized content section -->
@@ -65,11 +65,95 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     </ul>
                 </div>
 
+                <!-- Bridal Packages Section -->
+                <div class="bridal-packages-section">
+                    <SectionHeader text="Hair & Makeup Packages" level={2} className="left-align" />
+                    <p class="packages-intro">Save when you bundle hair and makeup services together!</p>
+                    
+                    <div class="packages-grid">
+                        <!-- Classic Bridal Package -->
+                        <div class="package-card featured">
+                            <div class="package-header">
+                                <h3 class="package-name">Classic Bridal Package</h3>
+                                <div class="package-price">$370</div>
+                            </div>
+                            <div class="package-content">
+                                <p class="package-includes">Includes:</p>
+                                <ul class="package-services">
+                                    <li>Bridal Hair with Trial ($220)</li>
+                                    <li>Bridal Makeup with Trial ($220)</li>
+                                </ul>
+                                <div class="package-savings">
+                                    <span class="bundle-value">Bundle value $440</span>
+                                    <span class="save-amount">→ Save $70</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Essential Bridal Package -->
+                        <div class="package-card">
+                            <div class="package-header">
+                                <h3 class="package-name">Essential Bridal Package</h3>
+                                <div class="package-price">$270</div>
+                            </div>
+                            <div class="package-content">
+                                <p class="package-includes">Includes:</p>
+                                <ul class="package-services">
+                                    <li>Bridal Hair no Trial ($150)</li>
+                                    <li>Bridal Makeup no Trial ($150)</li>
+                                </ul>
+                                <div class="package-savings">
+                                    <span class="bundle-value">Bundle value $300</span>
+                                    <span class="save-amount">→ Save $30</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bridesmaid Bundle -->
+                        <div class="package-card">
+                            <div class="package-header">
+                                <h3 class="package-name">Bridesmaid Bundle</h3>
+                                <div class="package-price">$180<span class="per-person">/person</span></div>
+                            </div>
+                            <div class="package-content">
+                                <p class="package-includes">Includes:</p>
+                                <ul class="package-services">
+                                    <li>Bridesmaid Hair ($100)</li>
+                                    <li>Bridesmaid Makeup ($100)</li>
+                                </ul>
+                                <div class="package-savings">
+                                    <span class="bundle-value">Bundle value $200</span>
+                                    <span class="save-amount">→ Save $20</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Moms Bundle -->
+                        <div class="package-card">
+                            <div class="package-header">
+                                <h3 class="package-name">Moms Bundle</h3>
+                                <div class="package-price">$180<span class="per-person">/person</span></div>
+                            </div>
+                            <div class="package-content">
+                                <p class="package-includes">Includes:</p>
+                                <ul class="package-services">
+                                    <li>Mother Hair ($100)</li>
+                                    <li>Mother Makeup ($100)</li>
+                                </ul>
+                                <div class="package-savings">
+                                    <span class="bundle-value">Bundle value $200</span>
+                                    <span class="save-amount">→ Save $20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="services-list">
                     <!-- Bridal Hair Section -->
                     {hairServices.length > 0 && (
                         <div class="service-section">
-                            <SectionHeader text="Hair" level={2} className="left-align" />
+                            <SectionHeader text="Individual Hair Services" level={2} className="left-align" />
                             {hairServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -83,7 +167,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     <!-- Bridal Makeup Section -->
                     {makeupServices.length > 0 && (
                         <div class="service-section">
-                            <SectionHeader text="Makeup" level={2} className="left-align" />
+                            <SectionHeader text="Individual Makeup Services" level={2} className="left-align" />
                             {makeupServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -213,6 +297,149 @@ const additionalServices = services.filter(service => service.serviceName.includ
         font-size: 1rem;
     }
 
+    /* Bridal Packages Section */
+    .bridal-packages-section {
+        margin: 40px 0;
+        padding: 30px;
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
+    }
+
+    .packages-intro {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 25px;
+    }
+
+    .package-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #e8e8e8;
+    }
+
+    .package-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .package-card.featured {
+        border: 2px solid #D4B2A7;
+        background: linear-gradient(135deg, #fff 0%, #fef7f0 100%);
+    }
+
+    .package-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .package-name {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+        flex: 1;
+    }
+
+    .package-card.featured .package-name {
+        color: #D4B2A7;
+    }
+
+    .package-price {
+        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333333;
+        white-space: nowrap;
+        margin-left: 15px;
+    }
+
+    .per-person {
+        font-size: 1rem;
+        font-weight: normal;
+    }
+
+    .package-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .package-includes {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .package-services {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .package-services li {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        line-height: 1.5;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .package-services li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #D4B2A7;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .package-savings {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .bundle-value {
+        font-family: 'Poppins', sans-serif;
+        color: #666666;
+        font-size: 0.9rem;
+        text-decoration: line-through;
+    }
+
+    .save-amount {
+        font-family: 'Poppins', sans-serif;
+        color: #D4B2A7;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
     /* CTA buttons within SEO content */
     .bridal-seo-content .cta-buttons {
         margin-top: 30px;
@@ -318,6 +545,28 @@ const additionalServices = services.filter(service => service.serviceName.includ
         
         .bridal-seo-content h3 {
             font-size: 1.2rem;
+        }
+
+        .bridal-packages-section {
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .packages-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .package-card {
+            padding: 20px;
+        }
+
+        .package-name {
+            font-size: 1.1rem;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
         }
     }
 </style> 
