@@ -10,6 +10,7 @@ import Footer from '../Footer.astro';
 import StructuredData from '../SEO/StructuredData.astro';
 import Breadcrumbs from '../SEO/Breadcrumbs.astro';
 import SectionHeader from '../SectionHeader.astro';
+import BridalPackageCard from './BridalPackageCard.astro';
 import { generateBridalServiceSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
 import type { Service } from '../../utils/structuredData';
@@ -32,6 +33,52 @@ const serviceStructuredData = generateBridalServiceSchema(pageTitle, description
 const hairServices = services.filter(service => service.serviceName.includes('Hair'));
 const makeupServices = services.filter(service => service.serviceName.includes('Makeup'));
 const additionalServices = services.filter(service => service.serviceName.includes('On-Site'));
+
+const bridalPackages = [
+    {
+        name: "Classic Bridal Package",
+        price: "$370",
+        services: [
+            "Bridal Hair with Trial ($220)",
+            "Bridal Makeup with Trial ($220)",
+        ],
+        bundleValue: "Bundle value $440",
+        savings: "→ Save $70",
+        featured: true
+    },
+    {
+        name: "Essential Bridal Package",
+        price: "$270",
+        services: [
+            "Bridal Hair no Trial ($150)",
+            "Bridal Makeup no Trial ($150)",
+        ],
+        bundleValue: "Bundle value $300",
+        savings: "→ Save $30",
+    },
+    {
+        name: "Bridesmaid Bundle",
+        price: "$180",
+        priceSuffix: "/person",
+        services: [
+            "Bridesmaid Hair ($100)",
+            "Bridesmaid Makeup ($100)",
+        ],
+        bundleValue: "Bundle value $200",
+        savings: "→ Save $20",
+    },
+    {
+        name: "Moms Bundle",
+        price: "$180",
+        priceSuffix: "/person",
+        services: [
+            "Mother Hair ($100)",
+            "Mother Makeup ($100)",
+        ],
+        bundleValue: "Bundle value $200",
+        savings: "→ Save $20",
+    },
+];
 ---
 
 <Layout title={title} description={description}>
@@ -47,29 +94,26 @@ const additionalServices = services.filter(service => service.serviceName.includ
     <main class="service-page">
         <div class="service-container">
             <div class="service-content">
-                <h1>Bridal Hair & Makeup in Carmel, IN – Look Flawless on Your Special Day</h1>
+                <h1>Bridal Hair & Makeup in Carmel, IN - Look Flawless on Your Special Day</h1>
                 <p class="service-intro">{introText}</p>
                 
-                <!-- SEO-optimized content section -->
-                <div class="bridal-seo-content">
-                    <h2>Professional Wedding Beauty Services in Carmel, Indiana</h2>
-                    <p>Our bridal team specializes in creating timeless elegance for your wedding day. Whether you're planning a summer wedding with natural bridal makeup and hair styling or seeking airbrush wedding makeup for a flawless finish, we bring mobile wedding makeup and hair services directly to your venue.</p>
+                <!-- Bridal Packages Section -->
+                <div class="bridal-packages-section">
+                    <SectionHeader text="Hair & Makeup Packages" level={2} className="left-align" />
+                    <p class="packages-intro">Save when you bundle hair and makeup services together!</p>
                     
-                    <h3>Why Choose Our Bridal Beauty Team?</h3>
-                    <ul class="bridal-benefits">
-                        <li><strong>Mobile Services:</strong> We travel to your venue for stress-free bridal prep</li>
-                        <li><strong>Expert Stylists:</strong> Professional wedding makeup and hair artists with years of experience</li>
-                        <li><strong>Custom Looks:</strong> From natural bridal makeup and hair styling to glamorous airbrush techniques</li>
-                        <li><strong>Group Bookings:</strong> Complete bridal party styling including bridesmaids and mothers</li>
-                        <li><strong>Trial Sessions:</strong> Book your trial to perfect your wedding day look</li>
-                    </ul>
+                    <div class="packages-grid">
+                        {bridalPackages.map((pkg) => (
+                            <BridalPackageCard {...pkg} />
+                        ))}
+                    </div>
                 </div>
 
                 <div class="services-list">
                     <!-- Bridal Hair Section -->
                     {hairServices.length > 0 && (
                         <div class="service-section">
-                            <SectionHeader text="Hair" level={2} className="left-align" />
+                            <SectionHeader text="Individual Hair Services" level={2} className="left-align" />
                             {hairServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -83,7 +127,7 @@ const additionalServices = services.filter(service => service.serviceName.includ
                     <!-- Bridal Makeup Section -->
                     {makeupServices.length > 0 && (
                         <div class="service-section">
-                            <SectionHeader text="Makeup" level={2} className="left-align" />
+                            <SectionHeader text="Individual Makeup Services" level={2} className="left-align" />
                             {makeupServices.map((service) => (
                                 <PricingSection 
                                     serviceName={service.serviceName} 
@@ -173,14 +217,6 @@ const additionalServices = services.filter(service => service.serviceName.includ
         margin-bottom: 15px;
     }
 
-    .bridal-seo-content h3 {
-        font-family: 'Safira March', serif;
-        color: #333333;
-        font-size: 1.4rem;
-        font-weight: 600;
-        margin: 25px 0 15px 0;
-    }
-
     .bridal-seo-content p {
         font-family: 'Poppins', sans-serif;
         color: #555555;
@@ -189,29 +225,31 @@ const additionalServices = services.filter(service => service.serviceName.includ
         margin-bottom: 20px;
     }
 
-    .bridal-benefits {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    /* Bridal Packages Section */
+    .bridal-packages-section {
+        margin: 40px 0;
+        padding: 30px;
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
     }
 
-    .bridal-benefits li {
+    .packages-intro {
         font-family: 'Poppins', sans-serif;
-        color: #333333;
+        color: #555555;
         font-size: 1rem;
-        margin-bottom: 12px;
-        line-height: 1.5;
-        position: relative;
-        padding-left: 25px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        text-align: center;
     }
 
-    .bridal-benefits li::before {
-        content: "✨";
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: 1rem;
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 25px;
     }
+
 
     /* CTA buttons within SEO content */
     .bridal-seo-content .cta-buttons {
@@ -256,9 +294,6 @@ const additionalServices = services.filter(service => service.serviceName.includ
     .button-icon {
         font-size: 1.1rem;
     }
-
-
-
 
     .service-section ul {
         list-style: none;
@@ -316,8 +351,14 @@ const additionalServices = services.filter(service => service.serviceName.includ
             font-size: 1.5rem;
         }
         
-        .bridal-seo-content h3 {
-            font-size: 1.2rem;
+        .bridal-packages-section {
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .packages-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
     }
 </style> 
