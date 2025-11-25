@@ -1,0 +1,185 @@
+---
+/**
+ * BridalPackageCard component
+ * Single Responsibility: Present a consistent layout for bundled bridal packages
+ */
+interface Props {
+    name: string;
+    price: string;
+    services: string[];
+    bundleValue: string;
+    savings: string;
+    priceSuffix?: string;
+    featured?: boolean;
+}
+
+const {
+    name,
+    price,
+    services,
+    bundleValue,
+    savings,
+    priceSuffix,
+    featured = false,
+} = Astro.props;
+---
+
+<div class={`package-card ${featured ? 'featured' : ''}`}>
+    <div class="package-header">
+        <h3 class="package-name">{name}</h3>
+        <div class="package-price">
+            {price}
+            {priceSuffix && <span class="per-person">{priceSuffix}</span>}
+        </div>
+    </div>
+
+    <div class="package-content">
+        <p class="package-includes">Includes:</p>
+        <ul class="package-services">
+            {services.map((service) => (
+                <li>{service}</li>
+            ))}
+        </ul>
+
+        <div class="package-savings">
+            <span class="bundle-value">{bundleValue}</span>
+            <span class="save-amount">{savings}</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .package-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid #e8e8e8;
+    }
+
+    .package-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .package-card.featured {
+        border: 2px solid #D4B2A7;
+        background: linear-gradient(135deg, #fff 0%, #fef7f0 100%);
+    }
+
+    .package-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+        gap: 15px;
+    }
+
+    .package-name {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+        flex: 1;
+    }
+
+    .package-card.featured .package-name {
+        color: #D4B2A7;
+    }
+
+    .package-price {
+        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333333;
+        white-space: nowrap;
+    }
+
+    .per-person {
+        font-size: 1rem;
+        font-weight: normal;
+        margin-left: 4px;
+    }
+
+    .package-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .package-includes {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .package-services {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .package-services li {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        line-height: 1.5;
+        position: relative;
+        padding-left: 20px;
+    }
+
+    .package-services li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #D4B2A7;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .package-savings {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .bundle-value {
+        font-family: 'Poppins', sans-serif;
+        color: #666666;
+        font-size: 0.9rem;
+        text-decoration: line-through;
+    }
+
+    .save-amount {
+        font-family: 'Poppins', sans-serif;
+        color: #D4B2A7;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 480px) {
+        .package-card {
+            padding: 20px;
+        }
+
+        .package-name {
+            font-size: 1.1rem;
+        }
+
+        .package-price {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
