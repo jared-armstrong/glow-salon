@@ -1,13 +1,14 @@
 ---
 /**
  * Homepage
- * Single Responsibility: Display main landing page with hero, reviews, and team sections
+ * Single Responsibility: Display main landing page with hero, reviews, team, and about sections
  */
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import LandingSection from '../components/LandingSection.astro';
 import ReviewsSection from '../components/ReviewsSection.astro';
 import TeamSection from '../components/TeamSection.astro';
+import AboutSection from '../components/AboutSection.astro';
 import Footer from '../components/Footer.astro';
 import BridalBanner from '../components/BridalBanner.astro';
 
@@ -22,6 +23,7 @@ const description = "Glow Salon & Spa in Carmel, Indiana offers expert haircuts,
 		<LandingSection />
 		<ReviewsSection />
 		<TeamSection />
+		<AboutSection />
 	</main>
 	<Footer />
 </Layout>

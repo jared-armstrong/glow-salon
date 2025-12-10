@@ -1,0 +1,328 @@
+---
+/**
+ * AboutSection component
+ * Single Responsibility: Display about section with salon story and highlights
+ */
+import SectionHeader from './SectionHeader.astro';
+import StructuredData from './SEO/StructuredData.astro';
+import { BUSINESS_INFO } from '../config/constants';
+import { generateBeautySalonSchema } from '../utils/structuredData';
+
+// Generate structured data for SEO
+const aboutStructuredData = generateBeautySalonSchema();
+---
+
+<StructuredData data={aboutStructuredData} />
+
+<section class="about-section" id="about">
+  <div class="about-container">
+    <div class="about-header">
+      <SectionHeader text="Our Story" level={2} />
+      <p class="about-subtitle">Where beauty meets passion, and every client leaves glowing</p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-story">
+        <div class="story-card">
+          <div class="story-icon">💇‍♀️</div>
+          <h3>Founded with Love</h3>
+          <p>
+            Glow Salon & Spa was born in 2013 with a simple mission: to help every client look and feel their absolute best. 
+            What started as a dream has grown into one of Carmel's premier destination for hair, nails, and beauty services.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <div class="story-icon">🌟</div>
+          <h3>Growing & Evolving</h3>
+          <p>
+            Under new ownership, we're expanding our services and enhancing our online presence to serve our community even better. 
+            While we're growing, our commitment to excellence and personalized care remains unchanged.
+          </p>
+        </div>
+
+        <div class="story-card">
+          <div class="story-icon">💖</div>
+          <h3>Your Beauty Journey</h3>
+          <p>
+            From everyday haircuts to your special wedding day, we're here to make every moment beautiful. 
+            Our talented team combines years of experience with the latest techniques to bring your vision to life.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <span class="highlight-number">2013</span>
+          <span class="highlight-label">Year Founded</span>
+        </div>
+        <div class="highlight-divider"></div>
+        <div class="highlight-item">
+          <span class="highlight-number">6+</span>
+          <span class="highlight-label">Expert Team Members</span>
+        </div>
+        <div class="highlight-divider"></div>
+        <div class="highlight-item">
+          <span class="highlight-number">4.6/5</span>
+          <span class="highlight-label">Google Review Rating</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 0;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .about-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: sparkle 3s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    25% {
+      transform: scale(1.1) rotate(-5deg);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.15) rotate(5deg);
+      opacity: 1;
+    }
+    75% {
+      transform: scale(1.1) rotate(-3deg);
+      opacity: 0.9;
+    }
+  }
+
+  .about-subtitle {
+    color: #666;
+    font-size: 1.2rem;
+    margin: 1rem 0 0 0;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .about-story {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .story-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #D4B2A7, #e91e63, #D4B2A7);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .story-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(233, 30, 99, 0.15);
+    border-color: #e91e63;
+  }
+
+  .story-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .story-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .story-card:nth-child(2) .story-icon {
+    animation-delay: 0.5s;
+  }
+
+  .story-card:nth-child(3) .story-icon {
+    animation-delay: 1s;
+  }
+
+  .story-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+  }
+
+  .story-card p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .about-highlights {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f8d7da;
+  }
+
+  .highlight-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .highlight-number {
+    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e91e63;
+    line-height: 1;
+  }
+
+  .highlight-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .highlight-divider {
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, #D4B2A7, transparent);
+    flex-shrink: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-section {
+      padding: 3rem 0;
+    }
+
+    .about-container {
+      padding: 0 1rem;
+    }
+
+    .about-icon {
+      font-size: 3rem;
+    }
+
+    .about-subtitle {
+      font-size: 1rem;
+    }
+
+    .about-story {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .story-card {
+      padding: 1.5rem;
+    }
+
+    .about-highlights {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2rem 1.5rem;
+    }
+
+    .highlight-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #D4B2A7, transparent);
+    }
+
+    .highlight-number {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-section {
+      padding: 2.5rem 0;
+    }
+
+    .story-card {
+      padding: 1.2rem;
+    }
+
+    .story-icon {
+      font-size: 2.5rem;
+    }
+
+    .story-card h3 {
+      font-size: 1.3rem;
+    }
+
+    .highlight-number {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
