@@ -39,6 +39,7 @@ export const BUSINESS_INFO = {
     instagram: "https://www.instagram.com/glowsalonwestclay/",
   },
   bookingUrl: "https://glowsalonwestclay.glossgenius.com/services",
+  bridalConsultationUrl: "https://calendly.com/glowsalonwestclay/30min",
   formspreeId: "mkgjnwqo",
   aggregateRating: {
     ratingValue: "4.5",

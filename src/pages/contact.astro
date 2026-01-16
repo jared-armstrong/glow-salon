@@ -8,6 +8,7 @@ import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import BridalBanner from '../components/BridalBanner.astro';
+import BridalConsultationCard from '../components/BridalConsultationCard.astro';
 import { BUSINESS_INFO } from '../config/constants';
 
 const title = "Contact Us | Glow Salon & Spa | Carmel, IN";
@@ -43,6 +44,11 @@ const description = "Find our address, hours, and phone number. Contact Glow Sal
                 </div>
             </div>
         </div>
+
+        <!-- Bridal Consultation Section -->
+        <section class="bridal-consultation-section">
+            <BridalConsultationCard variant="full" />
+        </section>
     </main>
     <Footer />
 </Layout>
@@ -116,6 +122,13 @@ const description = "Find our address, hours, and phone number. Contact Glow Sal
           align-items: center;
           gap: 30px;
       }
+  }
+
+  /* Bridal Consultation Section */
+  .bridal-consultation-section {
+      max-width: 600px;
+      margin: 0 auto 50px auto;
+      padding: 0 20px;
   }
 
 </style>

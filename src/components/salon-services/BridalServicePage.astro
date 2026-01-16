@@ -11,6 +11,7 @@ import StructuredData from '../SEO/StructuredData.astro';
 import Breadcrumbs from '../SEO/Breadcrumbs.astro';
 import SectionHeader from '../SectionHeader.astro';
 import BridalPackageCard from './BridalPackageCard.astro';
+import CalendlyButton from '../buttons/CalendlyButton.astro';
 import { generateBridalServiceSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
 import type { Service } from '../../utils/structuredData';
@@ -167,10 +168,13 @@ const bridalPackages = [
                             <span class="button-icon">✉️</span>
                             Request a Quote
                         </a>
-                        <a href="/contact" class="cta-button">
-                            <span class="button-icon">📅</span>
-                            Check Availability
-                        </a>
+                        <CalendlyButton 
+                            href={BUSINESS_INFO.bridalConsultationUrl}
+                            label="Schedule Consultation"
+                            icon="📅"
+                            variant="secondary"
+                            className="cta-button-calendly"
+                        />
                     </div>
                 </div>
 
@@ -293,6 +297,12 @@ const bridalPackages = [
 
     .button-icon {
         font-size: 1.1rem;
+    }
+
+    /* Override CalendlyButton styles to match CTA buttons */
+    .cta-button-calendly {
+        padding: 15px 25px;
+        min-width: 160px;
     }
 
     .service-section ul {
