@@ -1,0 +1,99 @@
+---
+/**
+ * BridalConsultationCard component
+ * Single Responsibility: Display a promotional card for bridal consultation scheduling
+ */
+import CalendlyButton from './buttons/CalendlyButton.astro';
+import { BUSINESS_INFO } from '../config/constants';
+
+export interface Props {
+    variant?: 'compact' | 'full';
+}
+
+const { variant = 'full' } = Astro.props;
+---
+
+<div class:list={["consultation-card", `consultation-card--${variant}`]}>
+    <h2 class="consultation-card__title">
+        {variant === 'compact' ? 'Bridal Consultation' : 'Schedule Your Bridal Consultation'}
+    </h2>
+    <p class="consultation-card__description">
+        {variant === 'compact' 
+            ? 'Discuss your wedding day vision with our bridal specialists.'
+            : 'Planning your dream wedding? Book a free 30-minute consultation call to discuss your bridal party\'s hair and makeup needs, get a personalized quote, and secure your wedding date.'}
+    </p>
+    <div class="consultation-card__action">
+        <CalendlyButton 
+            href={BUSINESS_INFO.bridalConsultationUrl}
+            label="Book Free Consultation"
+            icon="📅"
+            variant="secondary"
+        />
+    </div>
+</div>
+
+<style>
+    .consultation-card {
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
+        padding: 30px;
+    }
+
+    .consultation-card--full {
+        text-align: left;
+    }
+
+    .consultation-card--compact {
+        text-align: left;
+    }
+
+    .consultation-card__title {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0 0 15px 0;
+    }
+
+    .consultation-card--compact .consultation-card__title {
+        font-size: 1.4rem;
+    }
+
+    .consultation-card__description {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 20px 0;
+    }
+
+    .consultation-card--compact .consultation-card__description {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .consultation-card__action {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    @media (max-width: 768px) {
+        .consultation-card {
+            padding: 20px;
+        }
+
+        .consultation-card__title {
+            font-size: 1.5rem;
+        }
+
+        .consultation-card--compact .consultation-card__title {
+            font-size: 1.2rem;
+        }
+
+        .consultation-card__action {
+            justify-content: center;
+        }
+    }
+</style>
+
