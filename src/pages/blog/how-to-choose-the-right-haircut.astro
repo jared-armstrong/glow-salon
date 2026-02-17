@@ -1,0 +1,79 @@
+---
+/**
+ * Blog post: How to choose the right haircut
+ * Single Responsibility: Display haircut guide content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'how-to-choose-the-right-haircut')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>Walking into a salon and saying "I want something different" is exciting — but it can also feel overwhelming when you are not sure what will actually work. The truth is, a great haircut is not just about what looks good on a screen. It is about what works with your specific face shape, hair texture, and the amount of time you realistically spend styling in the morning.</p>
+
+    <p>Here is how our stylists at Glow Salon & Spa help clients figure out the right cut.</p>
+
+    <h2>Start With Your Face Shape</h2>
+    <p>Your face shape is the foundation of finding a flattering haircut. You do not need to know the exact category — your stylist can help with that during a consultation — but here is a general guide:</p>
+
+    <ul>
+        <li><strong>Oval:</strong> Most styles work well. You have the flexibility to go short or long, layered or blunt.</li>
+        <li><strong>Round:</strong> Layers and angles help elongate the face. A side part or face-framing layers add dimension.</li>
+        <li><strong>Square:</strong> Soft layers and textured ends balance a strong jawline. Longer styles with movement work especially well.</li>
+        <li><strong>Heart:</strong> Chin-length bobs or styles with volume below the ears help balance a wider forehead with a narrower chin.</li>
+        <li><strong>Long:</strong> Adding width with layers, waves, or a side-swept bang can create a more balanced look.</li>
+    </ul>
+
+    <p>That said, these are starting points, not rules. A good stylist considers your full picture — not just a shape chart.</p>
+
+    <h2>Think About Your Hair Texture</h2>
+    <p>The same haircut looks completely different on fine, straight hair versus thick, wavy hair. Your stylist will factor in your natural texture when recommending a cut, but it helps to think about these things ahead of time:</p>
+
+    <ul>
+        <li><strong>Fine hair:</strong> Blunt cuts can create the appearance of more density. Too many layers can make fine hair look thinner.</li>
+        <li><strong>Thick hair:</strong> Layers are your friend. They remove weight and make styling easier. Without layers, thick hair can feel heavy and shapeless.</li>
+        <li><strong>Wavy or curly hair:</strong> Curly hair shrinks when it dries, so your stylist will cut it longer than the final length you want. Layers help curls fall naturally instead of forming a triangle shape.</li>
+        <li><strong>Straight hair:</strong> Straight hair shows precision cuts clearly. If you like a polished look, a clean bob or long layers will look sharp. If you prefer movement, ask for texture or soft layering.</li>
+    </ul>
+
+    <h2>Be Honest About Your Styling Routine</h2>
+    <p>This is the part most people skip, and it is the most important question your stylist will ask: How much time do you spend on your hair in the morning?</p>
+
+    <ul>
+        <li><strong>5 minutes or less:</strong> You need a cut that looks good air-dried or with minimal effort. Think wash-and-go bobs, textured cuts, or low-maintenance layers.</li>
+        <li><strong>10 to 15 minutes:</strong> You have room for a blow-dry or quick curl. Styles with some layering and movement work well here.</li>
+        <li><strong>20 minutes or more:</strong> You can support styles that require heat tools and product. Precision bobs, curtain bangs, and blowout-friendly layers are all great options.</li>
+    </ul>
+
+    <p>There is no shame in being a five-minute person. The best haircut is one that makes you feel great without fighting your routine.</p>
+
+    <h2>Bring Inspiration Photos — With a Caveat</h2>
+    <p>We always encourage clients to bring photos. They help your stylist understand the vibe you are going for. But keep a few things in mind:</p>
+
+    <ol>
+        <li>Bring 3 to 5 photos rather than just one — this helps your stylist see the pattern in what you are drawn to</li>
+        <li>Pay attention to whether the person in the photo has similar hair texture and density to yours</li>
+        <li>Be open to your stylist's feedback — they may suggest a version of the look that works better with your specific hair</li>
+    </ol>
+
+    <blockquote>
+        "Julia just gave me my favorite haircut I've ever had! She is incredible and very technically skilled." — Madeline P., Glow Salon & Spa client
+    </blockquote>
+
+    <h2>When in Doubt, Start With a Consultation</h2>
+    <p>If you are unsure, just book a regular appointment and let your stylist know you are open to their recommendations. A good consultation at the start of your appointment is where the best haircuts begin. Our stylists will look at your face shape, feel your texture, ask about your lifestyle, and talk through options before picking up the scissors.</p>
+
+    <p>At Glow Salon & Spa, women's short haircuts start at $55 and long haircuts start at $65, both including a blow-dry. Men's haircuts are $35 and children's cuts are $30.</p>
+
+    <h2>Book Your Haircut</h2>
+    <p>Ready for a new look? Book your appointment at Glow Salon & Spa online or call us at <a href="tel:+13178463073">(317) 846-3073</a>. We are located at 1928 Rhettsbury St in the Village of WestClay, Carmel, IN 46032. View our full <a href="/services/hair">hair services and pricing</a>.</p>
+</BlogPostLayout>
