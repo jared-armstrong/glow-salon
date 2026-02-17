@@ -1,0 +1,297 @@
+---
+/**
+ * BlogPostLayout component
+ * Single Responsibility: Provide consistent layout for blog posts with SEO metadata
+ */
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import StructuredData from '../SEO/StructuredData.astro';
+import Breadcrumbs from '../SEO/Breadcrumbs.astro';
+import { generateArticleSchema } from '../../utils/structuredData';
+import { BUSINESS_INFO } from '../../config/constants';
+
+export interface Props {
+    title: string;
+    description: string;
+    publishedDate: string;
+    modifiedDate?: string;
+    author: string;
+    category: string;
+    tags: string[];
+    readTime: string;
+}
+
+const { title, description, publishedDate, modifiedDate, author, category, tags, readTime } = Astro.props;
+
+const articleSchema = generateArticleSchema(
+    title,
+    description,
+    Astro.url.href,
+    publishedDate,
+    modifiedDate || publishedDate,
+    author,
+    category,
+    tags.join(", ")
+);
+---
+
+<Layout
+    title={`${title} | Glow Salon & Spa Blog`}
+    description={description}
+    ogType="article"
+    articlePublishedTime={publishedDate}
+    articleModifiedTime={modifiedDate || publishedDate}
+    articleAuthor={author}
+    articleSection={category}
+    articleTag={tags.join(", ")}
+>
+    <StructuredData data={articleSchema} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Blog", url: `${BUSINESS_INFO.website}/blog` },
+        { name: title, url: Astro.url.href },
+    ]} />
+
+    <Header />
+
+    <main class="blog-post-page">
+        <article class="blog-post-container">
+            <header class="blog-post-header">
+                <div class="blog-post-meta">
+                    <span class="blog-category">{category}</span>
+                    <span class="blog-date">{new Date(publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span class="blog-read-time">{readTime}</span>
+                </div>
+                <h1>{title}</h1>
+                <p class="blog-post-description">{description}</p>
+            </header>
+
+            <div class="blog-post-content">
+                <slot />
+            </div>
+
+            <footer class="blog-post-footer">
+                <div class="blog-cta">
+                    <h3>Ready to Book Your Appointment?</h3>
+                    <p>Visit Glow Salon & Spa in Carmel, IN or call us at <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>{BUSINESS_INFO.phoneFormatted}</a> to schedule.</p>
+                    <a href={BUSINESS_INFO.bookingUrl} target="_blank" class="blog-book-btn">Book Now</a>
+                </div>
+                <a href="/blog" class="back-to-blog">&larr; Back to Blog</a>
+            </footer>
+        </article>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .blog-post-page {
+        padding: 2rem 0;
+        min-height: 80vh;
+    }
+
+    .blog-post-container {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .blog-post-header {
+        margin-bottom: 40px;
+    }
+
+    .blog-post-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .blog-category {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #D4B2A7;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .blog-date,
+    .blog-read-time {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.85rem;
+        color: #999999;
+    }
+
+    .blog-date::before,
+    .blog-read-time::before {
+        content: "·";
+        margin-right: 16px;
+        color: #cccccc;
+    }
+
+    .blog-post-header h1 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin: 0 0 15px 0;
+    }
+
+    .blog-post-description {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .blog-post-content {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+
+    .blog-post-content :global(h2) {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 40px 0 15px 0;
+    }
+
+    .blog-post-content :global(h3) {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 30px 0 10px 0;
+    }
+
+    .blog-post-content :global(p) {
+        margin: 0 0 20px 0;
+    }
+
+    .blog-post-content :global(ul),
+    .blog-post-content :global(ol) {
+        margin: 0 0 20px 0;
+        padding-left: 24px;
+    }
+
+    .blog-post-content :global(li) {
+        margin-bottom: 8px;
+        line-height: 1.7;
+    }
+
+    .blog-post-content :global(blockquote) {
+        border-left: 4px solid #D4B2A7;
+        padding: 15px 20px;
+        margin: 25px 0;
+        background-color: #f8f6f4;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: #555555;
+    }
+
+    .blog-post-content :global(strong) {
+        color: #333333;
+        font-weight: 600;
+    }
+
+    .blog-post-footer {
+        margin-top: 50px;
+        padding-top: 30px;
+        border-top: 1px solid #e7d7c9;
+    }
+
+    .blog-cta {
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .blog-cta h3 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    .blog-cta p {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 20px 0;
+    }
+
+    .blog-cta a:not(.blog-book-btn) {
+        color: #D4B2A7;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .blog-book-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: white;
+        color: #333333;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        border-radius: 8px;
+        border: 2px solid #333333;
+        transition: all 0.3s ease;
+    }
+
+    .blog-book-btn:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .back-to-blog {
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        color: #D4B2A7;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .back-to-blog:hover {
+        color: #333333;
+    }
+
+    @media (max-width: 768px) {
+        .blog-post-header h1 {
+            font-size: 2rem;
+        }
+
+        .blog-post-description {
+            font-size: 1rem;
+        }
+
+        .blog-post-container {
+            padding: 0 15px;
+        }
+
+        .blog-cta {
+            padding: 20px;
+        }
+
+        .blog-cta h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>

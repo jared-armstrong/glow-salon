@@ -1,5 +1,6 @@
 ---
 import BridalServicePage from '../../components/salon-services/BridalServicePage.astro';
+import { bridalFAQs } from '../../data/faqs';
 
 const title = "Bridal Hair & Makeup in Carmel, IN – Look Flawless on Your Special Day | Glow Salon & Spa";
 const description = "Professional bridal hair and makeup artist near me in Carmel, Indiana. Mobile wedding makeup services, airbrush bridal makeup, and natural bridal looks. Book your trial today!";
@@ -30,4 +31,5 @@ const bridal_services = [
     pageTitle="Bridal Services"
     introText="Glow Salon & Spa delivers on-site bridal hair and makeup in Carmel, Westfield, Fishers, and greater Indianapolis. Our licensed artists specialize in long-wear updos, traditional makeup, and detailed timelines so you can relax from trial to wedding morning."
     services={bridal_services}
+    faqs={bridalFAQs}
 /> 

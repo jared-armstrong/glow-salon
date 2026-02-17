@@ -28,6 +28,7 @@ export function generateLocalBusinessSchema() {
     "@id": BUSINESS_INFO.website,
     url: BUSINESS_INFO.website,
     telephone: BUSINESS_INFO.phone,
+    email: BUSINESS_INFO.email,
     priceRange: BUSINESS_INFO.priceRange,
     address: {
       "@type": "PostalAddress",
@@ -42,6 +43,7 @@ export function generateLocalBusinessSchema() {
       latitude: BUSINESS_INFO.geo.latitude,
       longitude: BUSINESS_INFO.geo.longitude,
     },
+    hasMap: `https://www.google.com/maps?q=${BUSINESS_INFO.geo.latitude},${BUSINESS_INFO.geo.longitude}`,
     openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: hours.dayOfWeek,
@@ -52,6 +54,9 @@ export function generateLocalBusinessSchema() {
       BUSINESS_INFO.socialLinks.facebook,
       BUSINESS_INFO.socialLinks.instagram,
     ],
+    areaServed: AREAS_SERVED,
+    paymentAccepted: ["Cash", "Credit Card", "Check"],
+    currenciesAccepted: "USD",
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
@@ -71,7 +76,9 @@ export function generateBeautySalonSchema() {
     image: "/glow-salon-logo.webp",
     url: BUSINESS_INFO.website,
     telephone: BUSINESS_INFO.phone,
+    email: BUSINESS_INFO.email,
     priceRange: BUSINESS_INFO.priceRange,
+    description: "Glow Salon & Spa offers professional hair, nail, makeup, and bridal services in Carmel, Indiana. Serving Carmel, Westfield, Fishers, and the greater Indianapolis area.",
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS_INFO.address.street,
@@ -85,6 +92,7 @@ export function generateBeautySalonSchema() {
       latitude: BUSINESS_INFO.geo.latitude,
       longitude: BUSINESS_INFO.geo.longitude,
     },
+    hasMap: `https://www.google.com/maps?q=${BUSINESS_INFO.geo.latitude},${BUSINESS_INFO.geo.longitude}`,
     openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: hours.dayOfWeek,
@@ -95,6 +103,9 @@ export function generateBeautySalonSchema() {
       BUSINESS_INFO.socialLinks.facebook,
       BUSINESS_INFO.socialLinks.instagram,
     ],
+    areaServed: AREAS_SERVED,
+    paymentAccepted: ["Cash", "Credit Card", "Check"],
+    currenciesAccepted: "USD",
   };
 }
 
@@ -221,6 +232,29 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       position: index + 1,
       name: item.name,
       item: item.url,
+    })),
+  };
+}
+
+/**
+ * Generate FAQPage structured data
+ */
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function generateFAQSchema(faqs: FAQItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
     })),
   };
 }

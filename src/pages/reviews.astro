@@ -1,0 +1,347 @@
+---
+/**
+ * Reviews page
+ * Single Responsibility: Display all customer reviews with full structured data markup
+ */
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/SEO/Breadcrumbs.astro';
+import StructuredData from '../components/SEO/StructuredData.astro';
+import { reviews } from '../data/reviews';
+import { BUSINESS_INFO } from '../config/constants';
+
+const title = "Client Reviews | Glow Salon & Spa | Carmel, IN";
+const description = "Read real reviews from Glow Salon & Spa clients in Carmel, Indiana. See why our customers love our hair, nail, and bridal services.";
+
+const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    name: BUSINESS_INFO.name,
+    url: BUSINESS_INFO.website,
+    telephone: BUSINESS_INFO.phone,
+    address: {
+        "@type": "PostalAddress",
+        streetAddress: BUSINESS_INFO.address.street,
+        addressLocality: BUSINESS_INFO.address.city,
+        addressRegion: BUSINESS_INFO.address.state,
+        postalCode: BUSINESS_INFO.address.zip,
+        addressCountry: BUSINESS_INFO.address.country,
+    },
+    aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "5.0",
+        bestRating: "5",
+        worstRating: "1",
+        reviewCount: reviews.length.toString(),
+        ratingCount: reviews.length.toString(),
+    },
+    review: reviews.map((review) => ({
+        "@type": "Review",
+        author: {
+            "@type": "Person",
+            name: review.name,
+        },
+        reviewRating: {
+            "@type": "Rating",
+            ratingValue: review.rating.toString(),
+            bestRating: "5",
+            worstRating: "1",
+        },
+        reviewBody: review.text,
+    })),
+};
+---
+
+<Layout title={title} description={description}>
+    <StructuredData data={reviewSchema} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Reviews", url: Astro.url.href },
+    ]} />
+
+    <Header />
+
+    <main class="reviews-page">
+        <div class="reviews-page-container">
+            <div class="reviews-page-header">
+                <h1>Client Reviews</h1>
+                <p>Real feedback from real clients</p>
+                <div class="aggregate-rating">
+                    <div class="stars-large">★★★★★</div>
+                    <p class="rating-summary">5.0 out of 5 based on {reviews.length} reviews</p>
+                </div>
+            </div>
+
+            <div class="reviews-grid">
+                {reviews.map((review) => (
+                    <div class="review-card-full">
+                        <div class="review-card-header">
+                            <div class="reviewer-avatar">{review.name.charAt(0)}</div>
+                            <div class="reviewer-info">
+                                <h3>{review.name}</h3>
+                                <div class="stars">
+                                    {Array.from({length: review.rating}, () => '★').join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <blockquote class="review-text-full">
+                            "{review.text}"
+                        </blockquote>
+
+                        <div class="review-details">
+                            {review.services && (
+                                <div class="review-detail">
+                                    <strong>Services:</strong> {review.services.join(', ')}
+                                </div>
+                            )}
+                            {review.stylist && (
+                                <div class="review-detail">
+                                    <strong>Stylist:</strong> {review.stylist}
+                                </div>
+                            )}
+                            {review.priceRange && (
+                                <div class="review-detail">
+                                    <strong>Price range:</strong> {review.priceRange}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="reviews-cta">
+                <h2>Love Your Experience?</h2>
+                <p>We would love to hear from you! Leave us a review on Google or share your experience on social media.</p>
+                <div class="cta-buttons">
+                    <a href={BUSINESS_INFO.bookingUrl} target="_blank" class="cta-button">Book Your Appointment</a>
+                    <a href="/contact" class="cta-button">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .reviews-page {
+        padding: 2rem 0;
+        min-height: 80vh;
+    }
+
+    .reviews-page-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .reviews-page-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .reviews-page-header h1 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin: 0 0 10px 0;
+    }
+
+    .reviews-page-header > p {
+        font-family: 'Poppins', sans-serif;
+        color: #656565;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0 0 25px 0;
+    }
+
+    .aggregate-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .stars-large {
+        color: #ffd700;
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+
+    .rating-summary {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    .reviews-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    .review-card-full {
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f0ebe6;
+        transition: all 0.3s ease;
+    }
+
+    .review-card-full:hover {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .review-card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    .reviewer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .reviewer-info h3 {
+        font-family: 'Poppins', sans-serif;
+        color: #333333;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+    }
+
+    .stars {
+        color: #ffd700;
+        font-size: 1.1rem;
+    }
+
+    .review-text-full {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #333333;
+        margin: 0 0 15px 0;
+        font-style: italic;
+        border-left: 4px solid #D4B2A7;
+        padding-left: 15px;
+    }
+
+    .review-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .review-detail {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.85rem;
+        color: #666666;
+    }
+
+    .review-detail strong {
+        color: #333333;
+    }
+
+    .reviews-cta {
+        background-color: #f8f6f4;
+        border-radius: 8px;
+        border-left: 4px solid #D4B2A7;
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .reviews-cta h2 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    .reviews-cta > p {
+        font-family: 'Poppins', sans-serif;
+        color: #555555;
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 0 0 20px 0;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cta-button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: white;
+        color: #333333;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        border-radius: 8px;
+        border: 2px solid #333333;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-button:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+        .reviews-page-header h1 {
+            font-size: 2rem;
+        }
+
+        .reviews-page-container {
+            padding: 0 15px;
+        }
+
+        .review-card-full {
+            padding: 20px;
+        }
+
+        .review-card-header {
+            gap: 10px;
+        }
+
+        .reviews-cta {
+            padding: 20px;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cta-button {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+        }
+    }
+</style>

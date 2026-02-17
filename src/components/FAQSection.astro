@@ -1,0 +1,142 @@
+---
+/**
+ * FAQSection component
+ * Single Responsibility: Display FAQ accordion with structured data for SEO
+ */
+import StructuredData from './SEO/StructuredData.astro';
+import { generateFAQSchema } from '../utils/structuredData';
+import type { FAQItem } from '../utils/structuredData';
+
+interface Props {
+  faqs: FAQItem[];
+  heading?: string;
+}
+
+const { faqs, heading = "Frequently Asked Questions" } = Astro.props;
+
+const faqSchema = generateFAQSchema(faqs);
+---
+
+<StructuredData data={faqSchema} />
+
+<section class="faq-section">
+  <h2 class="faq-heading">{heading}</h2>
+  <div class="faq-list">
+    {faqs.map((faq, index) => (
+      <details class="faq-item" data-faq={index}>
+        <summary class="faq-question">
+          <span class="faq-question-text">{faq.question}</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">
+          <p>{faq.answer}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    margin: 40px 0;
+    padding: 30px;
+    background-color: #f8f6f4;
+    border-radius: 8px;
+    border-left: 4px solid #D4B2A7;
+  }
+
+  .faq-heading {
+    font-family: 'Safira March', serif;
+    color: #333333;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 25px 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e7d7c9;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333333;
+    line-height: 1.4;
+    padding-right: 1rem;
+  }
+
+  .faq-icon {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    color: #D4B2A7;
+    font-weight: 300;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    width: 24px;
+    text-align: center;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 0 18px 0;
+  }
+
+  .faq-answer p {
+    font-family: 'Poppins', sans-serif;
+    color: #555555;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .faq-question:hover .faq-question-text {
+    color: #D4B2A7;
+  }
+
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .faq-heading {
+      font-size: 1.5rem;
+    }
+
+    .faq-question-text {
+      font-size: 0.95rem;
+    }
+
+    .faq-answer p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

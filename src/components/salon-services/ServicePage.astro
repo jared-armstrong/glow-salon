@@ -10,9 +10,10 @@ import BookButtonGroup from '../buttons/BookingButtonGroup.astro';
 import Footer from '../Footer.astro';
 import StructuredData from '../SEO/StructuredData.astro';
 import Breadcrumbs from '../SEO/Breadcrumbs.astro';
+import FAQSection from '../FAQSection.astro';
 import { generateServiceSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
-import type { Service } from '../../utils/structuredData';
+import type { Service, FAQItem } from '../../utils/structuredData';
 import '../../styles/services.css';
 
 export interface Props {
@@ -21,9 +22,10 @@ export interface Props {
     pageTitle: string;
     introText: string;
     services: Service[];
+    faqs?: FAQItem[];
 }
 
-const { title, description, pageTitle, introText, services } = Astro.props;
+const { title, description, pageTitle, introText, services, faqs } = Astro.props;
 
 // Generate service-specific structured data
 const serviceStructuredData = generateServiceSchema(pageTitle, description, services);
@@ -54,6 +56,10 @@ const serviceStructuredData = generateServiceSchema(pageTitle, description, serv
                         />
                     ))}
                 </div>
+
+                {faqs && faqs.length > 0 && (
+                    <FAQSection faqs={faqs} />
+                )}
             </div>
             
             <div class="button-group-sidebar">

@@ -1,0 +1,74 @@
+---
+/**
+ * Blog post: Bridal hair tips for Indiana brides
+ * Single Responsibility: Display bridal tips content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'bridal-hair-tips-indiana-brides')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>Your wedding day hair should make you feel like the best version of yourself. After styling hundreds of brides in Carmel, Westfield, Fishers, and across central Indiana, our team at Glow Salon & Spa has learned what works and what to avoid. Here are five essential tips to help you get flawless bridal hair.</p>
+
+    <h2>1. Book Your Trial 3 to 6 Months in Advance</h2>
+    <p>A bridal hair trial is not optional — it is essential. Your trial gives you and your stylist time to perfect every detail, from the style to the pin placement to the volume level. It also gives you peace of mind heading into your wedding day.</p>
+
+    <p>At Glow Salon & Spa, bridal hair with a trial is $220. We recommend booking 3 to 6 months before your date, especially if you are getting married during peak wedding season (May through October in Indiana). This gives you time for a second trial if needed.</p>
+
+    <h2>2. Bring Inspiration Photos — But Stay Open</h2>
+    <p>Pinterest boards and Instagram saves are a great starting point. Bring 3 to 5 photos that represent the look you are going for. But keep in mind that your stylist may recommend adjustments based on your:</p>
+
+    <ul>
+        <li><strong>Hair type and texture:</strong> Fine hair, thick hair, and curly hair all behave differently in updos and half-up styles.</li>
+        <li><strong>Veil and accessories:</strong> Your headpiece, veil, or hair jewelry affects where and how the style is built.</li>
+        <li><strong>Venue and weather:</strong> An outdoor ceremony in July at an Indiana winery calls for a different approach than an indoor winter wedding.</li>
+    </ul>
+
+    <p>Your stylist will help you find a look that matches your vision while working with your hair's natural strengths.</p>
+
+    <h2>3. Prepare Your Hair Before the Big Day</h2>
+    <p>Great bridal hair starts weeks before the wedding. Here is what we recommend:</p>
+
+    <ul>
+        <li><strong>Get your last haircut 2 to 3 weeks before:</strong> This gives your hair time to settle while keeping it fresh.</li>
+        <li><strong>Avoid drastic color changes:</strong> If you want to color your hair for the wedding, do it at least 2 weeks before so the tone can be fine-tuned at a follow-up appointment.</li>
+        <li><strong>Do not wash your hair the morning of:</strong> Day-old hair actually holds styles better. If you must wash, skip conditioner on the lengths.</li>
+        <li><strong>Skip heavy products:</strong> Avoid heavy oils or serums the night before. Clean, lightly textured hair is ideal for styling.</li>
+    </ul>
+
+    <h2>4. Create a Realistic Timeline</h2>
+    <p>One of the biggest stressors on a wedding day is running behind schedule. Here is a rough timeline guide:</p>
+
+    <ul>
+        <li><strong>Bride:</strong> 60 to 90 minutes for hair</li>
+        <li><strong>Each bridesmaid:</strong> 45 to 60 minutes</li>
+        <li><strong>Mother of the bride or groom:</strong> 45 to 60 minutes</li>
+        <li><strong>Flower girl:</strong> 20 to 30 minutes</li>
+    </ul>
+
+    <p>Work backward from your ceremony time, add a buffer for photos, and make sure everyone knows their slot. During your consultation at Glow Salon & Spa, we will create a detailed schedule so everyone is ready on time.</p>
+
+    <h2>5. Consider On-Site Services</h2>
+    <p>Getting ready at your venue or hotel is one of the most relaxing choices a bride can make. No rushing to the salon, no worrying about traffic — just you and your bridal party enjoying the morning together.</p>
+
+    <p>Glow Salon & Spa offers on-site bridal services with a travel fee of $1.00 per mile. We serve weddings across Carmel, Westfield, Fishers, Noblesville, Zionsville, and the greater Indianapolis area. Our stylists arrive with everything needed to create a full salon experience wherever you are getting ready.</p>
+
+    <blockquote>
+        "The team at Glow Salon made me feel absolutely beautiful on my wedding day. Their mobile service was so convenient and the trial helped me feel confident about my look." — Sarah M., Glow Salon bride
+    </blockquote>
+
+    <h2>Start Planning Your Wedding Day Hair</h2>
+    <p>Ready to secure your wedding date? Schedule a free 30-minute bridal consultation to discuss your vision, review your timeline, and get a personalized quote. Call us at <a href="tel:+13178463073">(317) 846-3073</a>, <a href="/contact">fill out our contact form</a>, or <a href="https://calendly.com/glowsalonwestclay/30min" target="_blank">book a consultation on Calendly</a>.</p>
+
+    <p>View our full <a href="/services/bridal">bridal services and pricing</a> to explore packages for your entire bridal party.</p>
+</BlogPostLayout>

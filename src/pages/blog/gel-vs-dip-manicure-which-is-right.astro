@@ -1,0 +1,80 @@
+---
+/**
+ * Blog post: Gel vs. Dip Manicure comparison guide
+ * Single Responsibility: Display nail comparison content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'gel-vs-dip-manicure-which-is-right')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>Choosing between a gel manicure and a dip manicure is one of the most common questions we hear at Glow Salon & Spa. Both options give you a long-lasting, chip-resistant finish — but they work differently and each has its own advantages. Here is everything you need to know to make the right choice.</p>
+
+    <h2>Gel Manicure: The Versatile Classic</h2>
+    <p>A gel manicure ($50 at Glow Salon & Spa) uses a gel-based polish that is cured under a UV or LED lamp. Each coat is painted on like traditional polish and then hardened under the light.</p>
+
+    <h3>Pros of Gel</h3>
+    <ul>
+        <li><strong>Natural look and feel:</strong> Gel polish is thinner and more flexible than dip, giving your nails a lightweight feel that is closer to regular polish.</li>
+        <li><strong>Wide color selection:</strong> Gel polishes come in an enormous range of colors, finishes, and effects.</li>
+        <li><strong>Great for nail art:</strong> The thin layers make gel ideal for detailed designs and creative nail art.</li>
+        <li><strong>Easy removal:</strong> Gel can be soaked off with acetone in about 10 to 15 minutes without excessive filing.</li>
+    </ul>
+
+    <h3>Things to Keep in Mind</h3>
+    <ul>
+        <li>Typically lasts 2 to 3 weeks before chipping or lifting</li>
+        <li>May not be as durable for people who are hard on their hands</li>
+    </ul>
+
+    <h2>Dip Manicure: The Durable Powerhouse</h2>
+    <p>A dip manicure ($60 at Glow Salon & Spa) uses a powder-based system. Your nails are coated with a bonding liquid and then dipped into finely milled colored powder, building up layers for a strong, even finish.</p>
+
+    <h3>Pros of Dip</h3>
+    <ul>
+        <li><strong>Exceptional durability:</strong> Dip nails are harder and more resistant to chipping, making them ideal if you work with your hands frequently.</li>
+        <li><strong>Longer lasting:</strong> Dip manicures typically last 3 to 4 weeks, about a week longer than gel.</li>
+        <li><strong>No UV light needed:</strong> The powder system air-dries, so there is no UV or LED lamp exposure during application.</li>
+        <li><strong>Added strength:</strong> The powder layers add thickness and strength, which can be helpful for brittle or weak nails.</li>
+    </ul>
+
+    <h3>Things to Keep in Mind</h3>
+    <ul>
+        <li>Slightly thicker feel than gel polish</li>
+        <li>Removal requires more filing to break through the hard layers</li>
+        <li>Fewer color options compared to gel, though the selection is growing</li>
+    </ul>
+
+    <h2>Side-by-Side Comparison</h2>
+    <ul>
+        <li><strong>Price:</strong> Gel $50 vs. Dip $60</li>
+        <li><strong>Lasts:</strong> Gel 2-3 weeks vs. Dip 3-4 weeks</li>
+        <li><strong>Feel:</strong> Gel is thinner and lighter, Dip is thicker and stronger</li>
+        <li><strong>Best for:</strong> Gel for a natural look and nail art; Dip for durability and longevity</li>
+        <li><strong>Removal:</strong> Gel is easier to soak off; Dip requires more filing</li>
+    </ul>
+
+    <h2>Which Should You Choose?</h2>
+    <p><strong>Choose gel if you</strong> want a natural feel, love experimenting with colors and designs, or prefer easier removal between appointments.</p>
+
+    <p><strong>Choose dip if you</strong> need maximum durability, want your manicure to last a full month, or have weak nails that benefit from the added strength.</p>
+
+    <p>Still not sure? Our nail technician Emily can help you decide based on your lifestyle, nail condition, and preferences. There is no wrong answer — both options look beautiful and are a great upgrade from regular polish.</p>
+
+    <blockquote>
+        "I have been going here for years and I have never once had a bad experience! All the ladies here are amazing!" — Rilee W., Glow Salon & Spa client
+    </blockquote>
+
+    <h2>Book Your Manicure</h2>
+    <p>Ready to try gel or dip? Book your appointment at Glow Salon & Spa online or call us at <a href="tel:+13178463073">(317) 846-3073</a>. We are located at 1928 Rhettsbury St in the Village of WestClay, Carmel, IN 46032. View our full <a href="/services/nails">nail services and pricing</a>.</p>
+</BlogPostLayout>
