@@ -1,8 +1,9 @@
 ---
 /**
  * BridalGallery component
- * Single Responsibility: Link to the dedicated bridal photo gallery page
+ * Links to the dedicated bridal photo gallery page
  */
+import GalleryLink from './GalleryLink.astro';
 import StructuredData from './SEO/StructuredData.astro';
 import { BUSINESS_INFO } from '../config/constants';
 
@@ -21,79 +22,8 @@ const imageGallerySchema = {
 
 <StructuredData data={imageGallerySchema} />
 
-<section class="bridal-gallery" aria-label="Bridal hair and makeup gallery">
-    <h2 class="gallery-heading">Our Bridal Work</h2>
-    <p class="gallery-subtext">Real brides styled by the Glow Salon & Spa team</p>
-
-    <a href="/services/bridal-gallery" class="view-gallery-link">
-        View Full Gallery
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-    </a>
-</section>
-
-<style>
-    .bridal-gallery {
-        margin: 50px 0 40px 0;
-    }
-
-    .gallery-heading {
-        font-family: 'Safira March', serif;
-        color: #333333;
-        font-size: 1.8rem;
-        font-weight: 700;
-        margin: 0 0 8px 0;
-    }
-
-    .gallery-subtext {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #8a8a8a;
-        font-size: 0.95rem;
-        font-weight: 300;
-        margin: 0 0 20px 0;
-    }
-
-    .view-gallery-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: #333333;
-        text-decoration: none;
-        padding: 12px 24px;
-        border: 1.5px solid #333333;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-    }
-
-    .view-gallery-link svg {
-        width: 18px;
-        height: 18px;
-        transition: transform 0.3s ease;
-    }
-
-    .view-gallery-link:hover {
-        background-color: #333333;
-        color: white;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .view-gallery-link:hover svg {
-        transform: translateX(3px);
-    }
-
-    @media (max-width: 768px) {
-        .gallery-heading {
-            font-size: 1.5rem;
-        }
-
-        .bridal-gallery {
-            margin: 30px 0;
-        }
-    }
-</style>
+<GalleryLink
+    heading="Our Bridal Work"
+    subtext="Real brides styled by the Glow Salon & Spa team"
+    href="/services/bridal-gallery"
+/>

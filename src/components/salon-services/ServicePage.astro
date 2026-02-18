@@ -11,6 +11,7 @@ import Footer from '../Footer.astro';
 import StructuredData from '../SEO/StructuredData.astro';
 import Breadcrumbs from '../SEO/Breadcrumbs.astro';
 import FAQSection from '../FAQSection.astro';
+import GalleryLink from '../GalleryLink.astro';
 import { generateServiceSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
 import type { Service, FAQItem } from '../../utils/structuredData';
@@ -23,9 +24,12 @@ export interface Props {
     introText: string;
     services: Service[];
     faqs?: FAQItem[];
+    galleryHeading?: string;
+    gallerySubtext?: string;
+    galleryUrl?: string;
 }
 
-const { title, description, pageTitle, introText, services, faqs } = Astro.props;
+const { title, description, pageTitle, introText, services, faqs, galleryHeading, gallerySubtext, galleryUrl } = Astro.props;
 
 // Generate service-specific structured data
 const serviceStructuredData = generateServiceSchema(pageTitle, description, services);
@@ -46,6 +50,14 @@ const serviceStructuredData = generateServiceSchema(pageTitle, description, serv
             <div class="service-content">
                 <h1>{pageTitle}</h1>
                 <p class="service-intro">{introText}</p>
+
+                {galleryUrl && galleryHeading && gallerySubtext && (
+                    <GalleryLink
+                        heading={galleryHeading}
+                        subtext={gallerySubtext}
+                        href={galleryUrl}
+                    />
+                )}
 
                 <div class="services-list">
                     {services.map((service) => (

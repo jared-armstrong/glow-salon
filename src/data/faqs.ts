@@ -28,7 +28,7 @@ export const hairFAQs: FAQItem[] = [
   },
   {
     question: "Where is Glow Salon & Spa located?",
-    answer: "Glow Salon & Spa is located at 1928 Rhettsbury St in the Village of WestClay, Carmel, IN 46032. We serve clients from Carmel, Westfield, Fishers, and the greater Indianapolis area.",
+    answer: "Glow Salon & Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032. We serve clients from Carmel, Westfield, Fishers, and the greater Indianapolis area.",
   },
 ];
 

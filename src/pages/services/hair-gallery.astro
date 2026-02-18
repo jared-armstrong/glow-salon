@@ -1,0 +1,282 @@
+---
+/**
+ * Hair Gallery Page
+ * Dedicated page for browsing hair service photos
+ */
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumbs from '../../components/SEO/Breadcrumbs.astro';
+import StructuredData from '../../components/SEO/StructuredData.astro';
+import { Image } from 'astro:assets';
+import { BUSINESS_INFO } from '../../config/constants';
+
+import img1 from '../../assets/hair/IMG_5164.jpeg';
+import img2 from '../../assets/hair/IMG_5380.jpeg';
+import img3 from '../../assets/hair/IMG_2558.png';
+import img4 from '../../assets/hair/IMG_5466.jpeg';
+import img5 from '../../assets/hair/IMG_5502.jpeg';
+import img6 from '../../assets/hair/IMG_2127.jpeg';
+import img7 from '../../assets/hair/IMG_2130.jpeg';
+import img8 from '../../assets/hair/IMG_3721.jpeg';
+
+const title = "Hair Gallery – Cuts, Color & Styling Photos | Glow Salon & Spa";
+const description = "Browse our hair gallery featuring haircuts, balayage, highlights, and styling by Glow Salon & Spa in Carmel, Indiana.";
+
+const galleryImages = [
+    { src: img1, alt: "Professional haircut and styling by Glow Salon & Spa in Carmel, Indiana" },
+    { src: img2, alt: "Balayage hair color by Glow Salon stylists in Carmel, IN" },
+    { src: img3, alt: "Hair color transformation at Glow Salon & Spa, serving Carmel, Westfield, and Fishers" },
+    { src: img4, alt: "Highlights and blowout styling by Glow Salon & Spa" },
+    { src: img5, alt: "Professional hair styling at Glow Salon & Spa in Carmel, Indiana" },
+    { src: img6, alt: "Hair coloring services by Glow Salon & Spa, Carmel, IN" },
+    { src: img7, alt: "Haircut and style by Glow Salon & Spa stylists" },
+    { src: img8, alt: "Hair services at Glow Salon & Spa in Carmel, Indiana" },
+];
+
+const imageGallerySchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "Hair Services Gallery - Glow Salon & Spa",
+    description: description,
+    url: `${BUSINESS_INFO.website}/services/hair-gallery`,
+    creator: {
+        "@type": "BeautySalon",
+        name: BUSINESS_INFO.name,
+    },
+};
+---
+
+<Layout title={title} description={description}>
+    <StructuredData data={imageGallerySchema} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Services", url: `${BUSINESS_INFO.website}/services` },
+        { name: "Hair", url: `${BUSINESS_INFO.website}/services/hair` },
+        { name: "Gallery", url: `${BUSINESS_INFO.website}/services/hair-gallery` },
+    ]} />
+
+    <Header />
+
+    <main class="gallery-page">
+        <div class="gallery-container">
+            <!-- Page header -->
+            <div class="gallery-header">
+                <a href="/services/hair" class="back-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back to Hair Services
+                </a>
+                <h1>Hair Gallery</h1>
+                <p class="gallery-subtitle">Cuts, colors &amp; styles by the Glow Salon &amp; Spa team</p>
+            </div>
+
+            <!-- Gallery grid -->
+            <div class="gallery-grid">
+                {galleryImages.map((image, index) => (
+                    <div class="gallery-card">
+                        <Image
+                            src={image.src}
+                            alt={image.alt}
+                            class="gallery-card-image"
+                            loading={index < 3 ? "eager" : "lazy"}
+                            decoding="async"
+                            widths={[400, 600, 900]}
+                            sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <!-- CTA -->
+            <div class="gallery-cta">
+                <p>Love what you see? Book your next appointment with us.</p>
+                <a href="/services/hair" class="cta-link">
+                    View Pricing &amp; Book
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    /* ===== Page layout ===== */
+    .gallery-page {
+        padding: 2rem 0 0;
+        min-height: 80vh;
+    }
+
+    .gallery-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* ===== Header ===== */
+    .gallery-header {
+        margin-bottom: 40px;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: #888;
+        text-decoration: none;
+        margin-bottom: 16px;
+        transition: color 0.2s ease;
+    }
+
+    .back-link svg {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: #333;
+    }
+
+    .back-link:hover svg {
+        transform: translateX(-3px);
+    }
+
+    .gallery-header h1 {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin: 0 0 10px;
+        line-height: 1.1;
+    }
+
+    .gallery-subtitle {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #8a8a8a;
+        font-size: 1rem;
+        font-weight: 300;
+        margin: 0;
+        letter-spacing: 0.01em;
+    }
+
+    /* ===== Gallery grid ===== */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+
+    .gallery-card {
+        position: relative;
+        overflow: hidden;
+        background: #f5f0ec;
+        aspect-ratio: 3 / 4;
+        border-radius: 4px;
+    }
+
+    .gallery-card:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .gallery-card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .gallery-card:hover .gallery-card-image {
+        transform: scale(1.03);
+    }
+
+    /* ===== CTA ===== */
+    .gallery-cta {
+        text-align: center;
+        margin: 50px 0 60px;
+    }
+
+    .gallery-cta p {
+        font-family: 'Inter', sans-serif;
+        color: #666;
+        font-size: 1rem;
+        margin: 0 0 16px;
+    }
+
+    .cta-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #333333;
+        background: transparent;
+        text-decoration: none;
+        padding: 12px 24px;
+        border: 1.5px solid #333333;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .cta-link svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .cta-link:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-link:hover svg {
+        transform: translateX(3px);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+        .gallery-header h1 {
+            font-size: 2.2rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+        }
+
+        .gallery-card:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 1;
+            aspect-ratio: 4 / 3;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .gallery-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .gallery-grid {
+            gap: 4px;
+        }
+
+        .gallery-cta {
+            margin: 35px 0 50px;
+        }
+    }
+</style>
