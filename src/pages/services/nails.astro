@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../../components/salon-services/ServicePage.astro';
+import { nailFAQs } from '../../data/faqs';
 
 const title = "Nail Services in Carmel, IN | Glow Salon & Spa";
 const description = "Professional nail services including manicures, pedicures, gel and dip treatments. Serving Carmel, Indiana.";
@@ -19,4 +20,5 @@ const nail_services = [
     pageTitle="Nail Services"
     introText="Relaxing and professional nail care services for beautiful, healthy nails."
     services={nail_services}
+    faqs={nailFAQs}
 />

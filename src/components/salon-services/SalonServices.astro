@@ -3,34 +3,34 @@
  * SalonServices component
  * Single Responsibility: Display grid of service cards
  */
-import hairServiceImage from '../../assets/services/hair-services.webp';
+import hairServiceImage from '../../assets/services/hair.webp';
 import Card from '../Card.astro';
 import nailServiceImage from '../../assets/services/nails.webp';
-import makeupServiceImage from '../../assets/services/makeup-artist.webp';
-import bridalServiceImage from '../../assets/services/bridal-services.webp';
+import makeupServiceImage from '../../assets/bridal/20250709_215524_272BE9.webp';
+import bridalServiceImage from '../../assets/bridal/IMG_3583.webp';
 import SectionHeader from '../SectionHeader.astro';
 
 const services = [
   {
-    image: hairServiceImage.src,
+    image: hairServiceImage,
     serviceName: 'Hair',
     href: '/services/hair',
     altText: 'Haircuts, hair styling, and balayage at Glow Salon & Spa in Carmel, Indiana'
   },
   {
-    image: nailServiceImage.src,
+    image: nailServiceImage,
     serviceName: 'Nails',
     href: '/services/nails',
     altText: 'Manicures, pedicures, and gel nails at Glow Salon & Spa in Carmel, Indiana'
   },
   {
-    image: makeupServiceImage.src,
+    image: makeupServiceImage,
     serviceName: 'Waxing & Makeup',
     href: '/services/makeup',
     altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana'
   },
   {
-    image: bridalServiceImage.src,
+    image: bridalServiceImage,
     serviceName: 'Bridal',
     href: '/services/bridal',
     altText: 'Professional bridal hair and makeup services at Glow Salon & Spa in Carmel, Indiana'

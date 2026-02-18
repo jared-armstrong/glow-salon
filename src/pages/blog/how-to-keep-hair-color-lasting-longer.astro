@@ -1,0 +1,75 @@
+---
+/**
+ * Blog post: How to make hair color last longer
+ * Single Responsibility: Display hair color care content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'how-to-keep-hair-color-lasting-longer')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>Whether you just got highlights, an all-over color, or a glaze, you want that fresh-from-the-salon look to last as long as possible. The good news is that a few simple habits can make a real difference. Here is what our stylists at Glow Salon & Spa actually recommend to clients after every color appointment.</p>
+
+    <h2>Wait Before You Wash</h2>
+    <p>This is the single most important thing you can do. After a color service, your hair cuticle needs time to close and lock the color in. We recommend waiting at least 48 hours before your first shampoo. If you can push it to 72 hours, even better.</p>
+
+    <p>When you do wash, use lukewarm water instead of hot. Hot water opens the cuticle and lets color molecules escape faster. A cool rinse at the end of your shower helps seal everything in.</p>
+
+    <h2>Switch to Color-Safe Products</h2>
+    <p>Regular shampoos, especially clarifying or volumizing formulas, can contain sulfates that strip color. Switching to a sulfate-free, color-safe shampoo and conditioner is one of the easiest upgrades you can make. You do not need to spend a fortune — just look for "sulfate-free" and "color-safe" on the label.</p>
+
+    <p>A few things to avoid:</p>
+    <ul>
+        <li><strong>Sulfate shampoos:</strong> They clean aggressively and fade color quickly</li>
+        <li><strong>Dandruff shampoos:</strong> The active ingredients can alter your tone</li>
+        <li><strong>Excessive dry shampoo:</strong> It is fine in moderation, but buildup can dull your color over time</li>
+    </ul>
+
+    <p>Ask your stylist at your next appointment if you want product recommendations tailored to your specific color and hair type.</p>
+
+    <h2>Wash Less Often</h2>
+    <p>This is the advice nobody wants to hear, but it makes the biggest difference. Every wash fades your color a little. If you are washing daily, try moving to every other day, or even every three days.</p>
+
+    <p>If your roots get oily, a light dry shampoo at the roots can stretch the time between washes without dulling your color. Focus your actual shampoo on the scalp area and let the suds run through the ends rather than scrubbing your entire head.</p>
+
+    <h2>Protect Your Hair From Heat</h2>
+    <p>Heat styling and color are not enemies, but heat without protection is. High temperatures open the cuticle the same way hot water does, allowing color to fade faster.</p>
+
+    <ul>
+        <li><strong>Always use a heat protectant spray</strong> before blow-drying, flat ironing, or curling</li>
+        <li><strong>Use the lowest effective heat setting</strong> on your tools — you rarely need 450 degrees</li>
+        <li><strong>Let your hair air-dry partially</strong> before blow-drying to reduce total heat exposure</li>
+    </ul>
+
+    <h2>Watch Out for Sun and Chlorine</h2>
+    <p>Indiana summers mean pool days and outdoor time, both of which can be tough on color. UV rays break down color molecules over time, and chlorine can shift your tone, especially if you have highlights or lighter shades.</p>
+
+    <ul>
+        <li>Wear a hat when you are in direct sun for extended periods</li>
+        <li>Rinse your hair with clean water before swimming so it absorbs less chlorine</li>
+        <li>Use a UV-protection spray or leave-in conditioner if you spend a lot of time outdoors</li>
+    </ul>
+
+    <h2>Refresh With a Glaze Between Appointments</h2>
+    <p>A color glaze is a quick, low-commitment service that refreshes your tone and adds shine without changing your base color. At Glow Salon & Spa, a glaze with blow-dry starts at $70. It is a great way to extend the life of your color if you are between full appointments and things are starting to look a little flat.</p>
+
+    <p>Glazes work especially well for:</p>
+    <ul>
+        <li>Neutralizing brassiness in highlights</li>
+        <li>Reviving the richness of all-over color</li>
+        <li>Adding shine to hair that looks dull after a few weeks</li>
+    </ul>
+
+    <h2>Book Your Next Color Appointment</h2>
+    <p>Whether you need a touch-up, a glaze refresh, or a completely new look, our stylists are here to help. Call us at <a href="tel:+13178463073">(317) 846-3073</a> or <a href="/contact">contact us online</a> to book. View our full <a href="/services/hair">hair services and pricing</a>.</p>
+</BlogPostLayout>

@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../../components/salon-services/ServicePage.astro';
+import { hairFAQs } from '../../data/faqs';
 
 const title = "Hair Services in Carmel, IN | Glow Salon & Spa";
 const description = "Professional hair services including haircuts, highlights, balayage, keratin treatments, and more. Serving Carmel, Indiana.";
@@ -41,4 +42,8 @@ const hair_services = [
     pageTitle="Hair Services"
     introText="Professional hair services tailored to your unique style and needs."
     services={hair_services}
+    faqs={hairFAQs}
+    galleryHeading="Our Hair Work"
+    gallerySubtext="Cuts, colors, and styles by the Glow Salon & Spa team"
+    galleryUrl="/services/hair-gallery"
 />

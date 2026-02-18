@@ -11,6 +11,7 @@ Allow: /services/
 Allow: /products/
 Allow: /contact
 Allow: /team
+Allow: /blog/
 
 # Crawl delay for respectful crawling
 Crawl-delay: 1

@@ -1,0 +1,407 @@
+---
+/**
+ * BlogPostLayout component
+ * Single Responsibility: Provide consistent layout for blog posts with SEO metadata
+ */
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import StructuredData from '../SEO/StructuredData.astro';
+import Breadcrumbs from '../SEO/Breadcrumbs.astro';
+import { generateArticleSchema } from '../../utils/structuredData';
+import { BUSINESS_INFO } from '../../config/constants';
+
+export interface Props {
+    title: string;
+    description: string;
+    publishedDate: string;
+    modifiedDate?: string;
+    author: string;
+    category: string;
+    tags: string[];
+    readTime: string;
+}
+
+const { title, description, publishedDate, modifiedDate, author, category, tags, readTime } = Astro.props;
+
+const articleSchema = generateArticleSchema(
+    title,
+    description,
+    Astro.url.href,
+    publishedDate,
+    modifiedDate || publishedDate,
+    author,
+    category,
+    tags.join(", ")
+);
+---
+
+<Layout
+    title={`${title} | Glow Salon & Spa Blog`}
+    description={description}
+    ogType="article"
+    articlePublishedTime={publishedDate}
+    articleModifiedTime={modifiedDate || publishedDate}
+    articleAuthor={author}
+    articleSection={category}
+    articleTag={tags.join(", ")}
+>
+    <StructuredData data={articleSchema} />
+    <Breadcrumbs items={[
+        { name: "Home", url: BUSINESS_INFO.website },
+        { name: "Blog", url: `${BUSINESS_INFO.website}/blog` },
+        { name: title, url: Astro.url.href },
+    ]} />
+
+    <Header />
+
+    <main class="blog-post-page">
+        <article class="blog-post-container">
+            <header class="blog-post-header">
+                <div class="blog-post-meta">
+                    <span class="blog-category">{category}</span>
+                    <span class="blog-date">{new Date(publishedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span class="blog-read-time">{readTime}</span>
+                </div>
+                <h1>{title}</h1>
+                <p class="blog-post-description">{description}</p>
+            </header>
+
+            <div class="blog-post-content">
+                <slot />
+            </div>
+
+            <footer class="blog-post-footer">
+                <div class="blog-cta">
+                    <h3>Ready to Book Your Appointment?</h3>
+                    <p>Visit Glow Salon & Spa in Carmel, IN or call us at <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>{BUSINESS_INFO.phoneFormatted}</a> to schedule.</p>
+                    <a href={BUSINESS_INFO.bookingUrl} target="_blank" class="blog-book-btn">Book Now</a>
+                </div>
+                <a href="/blog" class="back-to-blog">&larr; Back to Blog</a>
+            </footer>
+        </article>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .blog-post-page {
+        padding: 2rem 0 4rem 0;
+        min-height: 80vh;
+        background-color: #fdfcfb;
+    }
+
+    .blog-post-container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* ── Header ── */
+    .blog-post-header {
+        margin-bottom: 45px;
+        padding-bottom: 35px;
+        border-bottom: 1px solid #e7d7c9;
+    }
+
+    .blog-post-meta {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+    }
+
+    .blog-category {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background-color: #D4B2A7;
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+
+    .blog-date,
+    .blog-read-time {
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.83rem;
+        color: #999999;
+        margin-left: 14px;
+    }
+
+    .blog-date::before,
+    .blog-read-time::before {
+        content: "·";
+        margin-right: 14px;
+        color: #cccccc;
+    }
+
+    .blog-post-header h1 {
+        font-family: 'Safira March', serif;
+        color: #2e2e2e;
+        font-weight: 400;
+        font-size: 2.2rem;
+        line-height: 1.3;
+        margin: 0 0 18px 0;
+    }
+
+    .blog-post-description {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #8a8a8a;
+        font-size: 1.05rem;
+        font-weight: 300;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* ── Article body ── */
+    .blog-post-content {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #5c5c5c;
+        font-size: 0.97rem;
+        font-weight: 300;
+        line-height: 1.9;
+        letter-spacing: 0.01em;
+    }
+
+    /* Links — on-brand, never blue/purple */
+    .blog-post-content :global(a) {
+        color: #c9a091;
+        text-decoration: none;
+        font-weight: 400;
+        border-bottom: 1px solid #e0cec7;
+        transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .blog-post-content :global(a:hover) {
+        color: #b08a7c;
+        border-bottom-color: #b08a7c;
+    }
+
+    .blog-post-content :global(a:visited) {
+        color: #c9a091;
+    }
+
+    /* Section headings */
+    .blog-post-content :global(h2) {
+        font-family: 'Safira March', serif;
+        color: #2e2e2e;
+        font-size: 1.45rem;
+        font-weight: 400;
+        margin: 50px 0 12px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ede7e2;
+    }
+
+    .blog-post-content :global(h3) {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #c9a091;
+        font-size: 0.88rem;
+        font-weight: 500;
+        margin: 32px 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    /* Paragraphs */
+    .blog-post-content :global(p) {
+        margin: 0 0 24px 0;
+    }
+
+    /* Unordered lists */
+    .blog-post-content :global(ul) {
+        margin: 0 0 28px 0;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .blog-post-content :global(ul > li) {
+        position: relative;
+        padding-left: 22px;
+        margin-bottom: 14px;
+        line-height: 1.8;
+    }
+
+    .blog-post-content :global(ul > li::before) {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        background-color: #D4B2A7;
+        border-radius: 50%;
+    }
+
+    /* Ordered lists */
+    .blog-post-content :global(ol) {
+        margin: 0 0 28px 0;
+        padding-left: 0;
+        list-style: none;
+        counter-reset: blog-counter;
+    }
+
+    .blog-post-content :global(ol > li) {
+        position: relative;
+        padding-left: 38px;
+        margin-bottom: 18px;
+        line-height: 1.8;
+        counter-increment: blog-counter;
+    }
+
+    .blog-post-content :global(ol > li::before) {
+        content: counter(blog-counter);
+        position: absolute;
+        left: 0;
+        top: 1px;
+        width: 26px;
+        height: 26px;
+        background-color: #D4B2A7;
+        color: white;
+        font-family: 'Inter', 'Poppins', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Bold text */
+    .blog-post-content :global(strong) {
+        color: #444444;
+        font-weight: 500;
+    }
+
+    /* Blockquotes */
+    .blog-post-content :global(blockquote) {
+        border-left: 3px solid #D4B2A7;
+        padding: 22px 26px;
+        margin: 36px 0;
+        background-color: #faf8f6;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: #7a7a7a;
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.8;
+    }
+
+    /* ── Footer CTA ── */
+    .blog-post-footer {
+        margin-top: 55px;
+        padding-top: 35px;
+        border-top: 2px solid #f0ebe6;
+    }
+
+    .blog-cta {
+        background-color: #f8f6f4;
+        border-radius: 12px;
+        border-left: 4px solid #D4B2A7;
+        padding: 35px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .blog-cta h3 {
+        font-family: 'Safira March', serif;
+        color: #2e2e2e;
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin: 0 0 10px 0;
+    }
+
+    .blog-cta p {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #777777;
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.7;
+        margin: 0 0 22px 0;
+    }
+
+    .blog-cta a:not(.blog-book-btn) {
+        color: #c9a091;
+        text-decoration: none;
+        font-weight: 400;
+    }
+
+    .blog-cta a:not(.blog-book-btn):hover {
+        color: #b08a7c;
+    }
+
+    .blog-book-btn {
+        display: inline-block;
+        padding: 14px 34px;
+        background-color: white;
+        color: #333333;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        border-radius: 8px;
+        border: 2px solid #333333;
+        transition: all 0.3s ease;
+    }
+
+    .blog-book-btn:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .back-to-blog {
+        display: inline-block;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.95rem;
+        color: #D4B2A7;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .back-to-blog:hover {
+        color: #333333;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+        .blog-post-page {
+            padding: 1.5rem 0 3rem 0;
+        }
+
+        .blog-post-header h1 {
+            font-size: 1.85rem;
+        }
+
+        .blog-post-description {
+            font-size: 1rem;
+        }
+
+        .blog-post-container {
+            padding: 0 16px;
+        }
+
+        .blog-post-content :global(h2) {
+            font-size: 1.35rem;
+            margin-top: 36px;
+        }
+
+        .blog-post-content :global(ol > li) {
+            padding-left: 36px;
+        }
+
+        .blog-cta {
+            padding: 24px 20px;
+            border-radius: 8px;
+        }
+
+        .blog-cta h3 {
+            font-size: 1.3rem;
+        }
+    }
+</style>

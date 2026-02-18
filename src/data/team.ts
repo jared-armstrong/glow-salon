@@ -42,13 +42,6 @@ export const teamMembers: TeamMember[] = [
     image: "emily",
   },
   {
-    name: "Marcy",
-    role: "Hair Stylist",
-    description:
-      "The original owner from 2005, Marcy brings many years of experience, including exceptional skill and passion for creating beautiful, personalized looks for every client.",
-    image: "marcy",
-  },
-  {
     name: "Hannah",
     role: "Social Media Manager | Salon Content Creator",
     description:

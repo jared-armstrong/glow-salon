@@ -1,0 +1,91 @@
+---
+/**
+ * GalleryLink component
+ * Reusable section that links to a dedicated gallery page
+ */
+export interface Props {
+    heading: string;
+    subtext: string;
+    href: string;
+    label?: string;
+}
+
+const { heading, subtext, href, label = "View Full Gallery" } = Astro.props;
+---
+
+<section class="gallery-link-section">
+    <h2 class="gallery-heading">{heading}</h2>
+    <p class="gallery-subtext">{subtext}</p>
+
+    <a href={href} class="view-gallery-link">
+        {label}
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </a>
+</section>
+
+<style>
+    .gallery-link-section {
+        margin: 50px 0 40px 0;
+    }
+
+    .gallery-heading {
+        font-family: 'Safira March', serif;
+        color: #333333;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+    }
+
+    .gallery-subtext {
+        font-family: 'Inter', 'Poppins', sans-serif;
+        color: #8a8a8a;
+        font-size: 0.95rem;
+        font-weight: 300;
+        margin: 0 0 20px 0;
+    }
+
+    .view-gallery-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #333333;
+        text-decoration: none;
+        padding: 12px 24px;
+        border: 1.5px solid #333333;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    .view-gallery-link svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .view-gallery-link:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .view-gallery-link:hover svg {
+        transform: translateX(3px);
+    }
+
+    @media (max-width: 768px) {
+        .gallery-heading {
+            font-size: 1.5rem;
+        }
+
+        .gallery-link-section {
+            margin: 30px 0;
+        }
+    }
+</style>
