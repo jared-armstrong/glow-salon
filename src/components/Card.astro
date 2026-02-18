@@ -3,24 +3,26 @@
  * Card component
  * Single Responsibility: Display service card with image and name
  */
+import { Image } from 'astro:assets';
+
 interface Props {
-  image?: string;
+  image: ImageMetadata;
   serviceName: string;
   seoAlt: string;
 }
 
-const { image = "/default-image.webp", serviceName, seoAlt } = Astro.props;
+const { image, serviceName, seoAlt } = Astro.props;
 ---
 
 <div class="card">
   <div class="image-container">
-    <img 
-      src={image} 
-      alt={seoAlt} 
-      loading="lazy" 
+    <Image
+      src={image}
+      alt={seoAlt}
+      loading="lazy"
       decoding="async"
-      width="320"
-      height="200"
+      width={640}
+      quality={85}
     />
     <div class="overlay">
       <p class="service-name">{serviceName}</p>

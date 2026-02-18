@@ -13,6 +13,7 @@ import SectionHeader from '../SectionHeader.astro';
 import BridalPackageCard from './BridalPackageCard.astro';
 import CalendlyButton from '../buttons/CalendlyButton.astro';
 import FAQSection from '../FAQSection.astro';
+import BridalGallery from '../BridalGallery.astro';
 import { generateBridalServiceSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
 import type { Service, FAQItem } from '../../utils/structuredData';
@@ -99,6 +100,9 @@ const bridalPackages = [
             <div class="service-content">
                 <h1>Bridal Hair & Makeup in Carmel, IN - Look Flawless on Your Special Day</h1>
                 <p class="service-intro">{introText}</p>
+
+                <!-- Bridal Photo Gallery -->
+                <BridalGallery />
                 
                 <!-- Bridal Packages Section -->
                 <div class="bridal-packages-section">
