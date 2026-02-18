@@ -1,34 +1,17 @@
 ---
 /**
  * BridalGallery component
- * Single Responsibility: Display elegant bridal photo gallery with SEO-optimized images
+ * Single Responsibility: Link to the dedicated bridal photo gallery page
  */
-import { Image } from 'astro:assets';
 import StructuredData from './SEO/StructuredData.astro';
 import { BUSINESS_INFO } from '../config/constants';
-
-import img1 from '../assets/bridal/20250709_215524_272BE9.webp';
-import img2 from '../assets/bridal/IMG_0951_18rs.webp';
-import img3 from '../assets/bridal/IMG_1747rs.webp';
-import img4 from '../assets/bridal/IMG_3583.webp';
-import img5 from '../assets/bridal/IMG_3704rs.webp';
-import img6 from '../assets/bridal/KAD_7303rs.webp';
-
-const galleryImages = [
-    { src: img1, alt: "Bridal hair styling by Glow Salon & Spa in Carmel, Indiana" },
-    { src: img2, alt: "Wedding day updo and bridal makeup by Glow Salon stylists" },
-    { src: img3, alt: "Bride getting ready with professional hair and makeup in Carmel, IN" },
-    { src: img4, alt: "Bridal party hair styling at Glow Salon & Spa, serving Carmel, Westfield, and Fishers" },
-    { src: img5, alt: "Professional bridal hairstyle for Indiana wedding by Glow Salon & Spa" },
-    { src: img6, alt: "Wedding hair and makeup services in Carmel, Indiana by Glow Salon & Spa" },
-];
 
 const imageGallerySchema = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
     name: "Bridal Hair & Makeup Gallery - Glow Salon & Spa",
     description: "Photos of bridal hair and makeup services by Glow Salon & Spa in Carmel, Indiana. Serving brides in Carmel, Westfield, Fishers, and the greater Indianapolis area.",
-    url: `${BUSINESS_INFO.website}/services/bridal`,
+    url: `${BUSINESS_INFO.website}/services/bridal-gallery`,
     creator: {
         "@type": "BeautySalon",
         name: BUSINESS_INFO.name,
@@ -42,21 +25,13 @@ const imageGallerySchema = {
     <h2 class="gallery-heading">Our Bridal Work</h2>
     <p class="gallery-subtext">Real brides styled by the Glow Salon & Spa team</p>
 
-    <div class="gallery-grid">
-        {galleryImages.map((image, index) => (
-            <div class="gallery-item">
-                <Image
-                    src={image.src}
-                    alt={image.alt}
-                    class="gallery-image"
-                    loading="lazy"
-                    decoding="async"
-                    widths={[400, 600, 800]}
-                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw"
-                />
-            </div>
-        ))}
-    </div>
+    <a href="/services/bridal-gallery" class="view-gallery-link">
+        View Full Gallery
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+    </a>
 </section>
 
 <style>
@@ -77,69 +52,48 @@ const imageGallerySchema = {
         color: #8a8a8a;
         font-size: 0.95rem;
         font-weight: 300;
-        margin: 0 0 30px 0;
+        margin: 0 0 20px 0;
     }
 
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
+    .view-gallery-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #333333;
+        text-decoration: none;
+        padding: 12px 24px;
+        border: 1.5px solid #333333;
+        border-radius: 6px;
+        transition: all 0.3s ease;
     }
 
-    .gallery-item {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 3 / 4;
-        background-color: #f5f0ec;
+    .view-gallery-link svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
     }
 
-    .gallery-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.5s ease, filter 0.5s ease;
+    .view-gallery-link:hover {
+        background-color: #333333;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .gallery-item:hover .gallery-image {
-        transform: scale(1.04);
-        filter: brightness(1.03);
-    }
-
-    /* First image spans 2 rows for visual interest */
-    .gallery-item:first-child {
-        grid-row: span 2;
+    .view-gallery-link:hover svg {
+        transform: translateX(3px);
     }
 
     @media (max-width: 768px) {
-        .gallery-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4px;
-        }
-
-        .gallery-item:first-child {
-            grid-row: span 2;
-        }
-
         .gallery-heading {
             font-size: 1.5rem;
         }
 
         .bridal-gallery {
             margin: 30px 0;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .gallery-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3px;
-        }
-
-        .gallery-item:first-child {
-            grid-row: span 1;
-            grid-column: span 2;
-            aspect-ratio: 4 / 3;
         }
     }
 </style>
