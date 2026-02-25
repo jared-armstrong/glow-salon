@@ -11,8 +11,8 @@ import makeupServiceImage from '../assets/services/makeup-artist.webp';
 import giftCardImage from '../assets/services/salon-egift.webp';
 import StructuredData from '../components/SEO/StructuredData.astro';
 import {
-	generateWebPageSchema,
-	generateLocalBusinessSchema,
+	generateHairSalonSchema,
+	generatePersonSchemas,
 	generateArticleSchema,
 } from '../utils/structuredData';
 import { BUSINESS_INFO, SERVICES } from '../config/constants';
@@ -43,10 +43,12 @@ const {
 	articleTag,
 } = Astro.props;
 
-// Generate structured data based on page type
-let structuredData;
+const hairSalonSchema = generateHairSalonSchema();
+const personSchemas = generatePersonSchemas();
+
+let articleSchema: ReturnType<typeof generateArticleSchema> | null = null;
 if (articlePublishedTime) {
-	structuredData = generateArticleSchema(
+	articleSchema = generateArticleSchema(
 		title,
 		description,
 		canonicalURL,
@@ -56,11 +58,7 @@ if (articlePublishedTime) {
 		articleSection,
 		articleTag
 	);
-} else {
-	structuredData = generateWebPageSchema(title, description, canonicalURL);
 }
-
-const localBusinessSchema = generateLocalBusinessSchema();
 ---
 <!doctype html>
 <html lang="en" role="document">
@@ -175,7 +173,7 @@ const localBusinessSchema = generateLocalBusinessSchema();
 		<meta name="DC.subject" content="Beauty Salon, Hair Services, Nail Services, Makeup Services">
 
 		<!-- Structured Data -->
-		<StructuredData data={[structuredData, localBusinessSchema]} />
+		<StructuredData data={[hairSalonSchema, ...personSchemas, ...(articleSchema ? [articleSchema] : [])]} />
 
 	</head>
 	<body>

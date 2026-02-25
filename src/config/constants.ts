@@ -24,7 +24,17 @@ export const BUSINESS_INFO = {
   },
   openingHours: [
     {
-      dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"],
+      dayOfWeek: "Tuesday",
+      opens: "10:00",
+      closes: "18:00",
+    },
+    {
+      dayOfWeek: ["Wednesday", "Thursday"],
+      opens: "10:00",
+      closes: "18:00",
+    },
+    {
+      dayOfWeek: "Friday",
       opens: "10:00",
       closes: "18:00",
     },
@@ -43,8 +53,10 @@ export const BUSINESS_INFO = {
   bridalConsultationUrl: "https://calendly.com/glowsalonwestclay/30min",
   formspreeId: "mkgjnwqo",
   aggregateRating: {
-    ratingValue: "4.5",
-    reviewCount: "30",
+    ratingValue: "4.6",
+    reviewCount: "51",
+    bestRating: "5",
+    worstRating: "1",
   },
 } as const;
 
@@ -87,6 +99,14 @@ export const AREAS_SERVED = [
   {
     "@type": "City",
     name: "Fishers",
+    containedInPlace: {
+      "@type": "State",
+      name: "Indiana",
+    },
+  },
+  {
+    "@type": "City",
+    name: "Zionsville",
     containedInPlace: {
       "@type": "State",
       name: "Indiana",

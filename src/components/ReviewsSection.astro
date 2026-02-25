@@ -4,37 +4,8 @@
  * Single Responsibility: Display customer reviews with carousel
  */
 import { reviews } from '../data/reviews';
-import { BUSINESS_INFO } from '../config/constants';
-import StructuredData from './SEO/StructuredData.astro';
 import type { Review } from '../data/reviews';
-
-// Generate structured data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BeautySalon",
-  name: BUSINESS_INFO.name,
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: reviews.length.toString(),
-  },
-  review: reviews.map((review) => ({
-    "@type": "Review",
-    author: {
-      "@type": "Person",
-      name: review.name,
-    },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: review.rating.toString(),
-    },
-    reviewBody: review.text,
-    datePublished: new Date().toISOString(),
-  })),
-};
 ---
-
-<StructuredData data={structuredData} />
 
 <div class="reviews-section">
   <div class="reviews-container">

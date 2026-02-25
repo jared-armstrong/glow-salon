@@ -4,15 +4,8 @@
  * Single Responsibility: Display about section with salon story and highlights
  */
 import SectionHeader from './SectionHeader.astro';
-import StructuredData from './SEO/StructuredData.astro';
 import { BUSINESS_INFO } from '../config/constants';
-import { generateBeautySalonSchema } from '../utils/structuredData';
-
-// Generate structured data for SEO
-const aboutStructuredData = generateBeautySalonSchema();
 ---
-
-<StructuredData data={aboutStructuredData} />
 
 <section class="about-section" id="about">
   <div class="about-container">
