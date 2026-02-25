@@ -5,13 +5,9 @@
  */
 import FooterLogo from '../assets/glow-salon-footer-logo.webp';
 import SocialIcons from './SocialIcons.astro';
-import StructuredData from './SEO/StructuredData.astro';
-import { generateBeautySalonSchema } from '../utils/structuredData';
 import { BUSINESS_INFO } from '../config/constants';
 import { Image } from 'astro:assets';
 ---
-
-<StructuredData data={generateBeautySalonSchema()} />
 
 <footer class="footer" role="contentinfo">
   <div class="footer-content">

@@ -1,8 +1,3 @@
-/**
- * Utility functions for generating structured data (Schema.org JSON-LD)
- * Follows Single Responsibility Principle - each function handles one type of structured data
- */
-
 import { BUSINESS_INFO, AREAS_SERVED } from "../config/constants";
 
 export interface Service {
@@ -17,19 +12,23 @@ export interface BreadcrumbItem {
 }
 
 /**
- * Generate LocalBusiness structured data
+ * Canonical HairSalon entity — the single authoritative business block.
+ * All other schemas that need a business reference should use
+ * generateHairSalonRef() instead of duplicating the full entity.
  */
-export function generateLocalBusinessSchema() {
+export function generateHairSalonSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "HairSalon",
+    "@id": `${BUSINESS_INFO.website}/#business`,
     name: BUSINESS_INFO.name,
-    image: "/glow-salon-logo.webp",
-    "@id": BUSINESS_INFO.website,
+    image: `${BUSINESS_INFO.website}/glow-salon-logo.webp`,
     url: BUSINESS_INFO.website,
-    telephone: BUSINESS_INFO.phone,
+    telephone: `+1${BUSINESS_INFO.phone.replace(/-/g, "")}`,
     email: BUSINESS_INFO.email,
     priceRange: BUSINESS_INFO.priceRange,
+    description:
+      "Glow Salon & Spa offers professional hair color, balayage, highlights, haircuts, extensions, bridal styling, makeup, manicures, pedicures, and waxing services in Carmel, Indiana.",
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS_INFO.address.street,
@@ -43,7 +42,6 @@ export function generateLocalBusinessSchema() {
       latitude: BUSINESS_INFO.geo.latitude,
       longitude: BUSINESS_INFO.geo.longitude,
     },
-    hasMap: `https://www.google.com/maps?q=${BUSINESS_INFO.geo.latitude},${BUSINESS_INFO.geo.longitude}`,
     openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: hours.dayOfWeek,
@@ -53,6 +51,7 @@ export function generateLocalBusinessSchema() {
     sameAs: [
       BUSINESS_INFO.socialLinks.facebook,
       BUSINESS_INFO.socialLinks.instagram,
+      "https://www.yelp.com/biz/glow-salon-and-spa-carmel-2",
     ],
     areaServed: AREAS_SERVED,
     paymentAccepted: ["Cash", "Credit Card", "Check"],
@@ -61,70 +60,50 @@ export function generateLocalBusinessSchema() {
       "@type": "AggregateRating",
       ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
       reviewCount: BUSINESS_INFO.aggregateRating.reviewCount,
+      bestRating: BUSINESS_INFO.aggregateRating.bestRating,
+      worstRating: BUSINESS_INFO.aggregateRating.worstRating,
     },
   };
 }
 
 /**
- * Generate BeautySalon structured data
+ * Lightweight reference to the canonical HairSalon entity via @id.
+ * Used inside nested schemas (Service.provider, Person.worksFor, etc.)
+ * to avoid duplicating the full business block.
  */
-export function generateBeautySalonSchema() {
+export function generateHairSalonRef() {
   return {
-    "@context": "https://schema.org",
-    "@type": "BeautySalon",
-    name: BUSINESS_INFO.name,
-    image: "/glow-salon-logo.webp",
-    url: BUSINESS_INFO.website,
-    telephone: BUSINESS_INFO.phone,
-    email: BUSINESS_INFO.email,
-    priceRange: BUSINESS_INFO.priceRange,
-    description: "Glow Salon & Spa offers professional hair, nail, makeup, and bridal services in Carmel, Indiana. Serving Carmel, Westfield, Fishers, and the greater Indianapolis area.",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: BUSINESS_INFO.address.street,
-      addressLocality: BUSINESS_INFO.address.city,
-      addressRegion: BUSINESS_INFO.address.state,
-      postalCode: BUSINESS_INFO.address.zip,
-      addressCountry: BUSINESS_INFO.address.country,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: BUSINESS_INFO.geo.latitude,
-      longitude: BUSINESS_INFO.geo.longitude,
-    },
-    hasMap: `https://www.google.com/maps?q=${BUSINESS_INFO.geo.latitude},${BUSINESS_INFO.geo.longitude}`,
-    openingHoursSpecification: BUSINESS_INFO.openingHours.map((hours) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: hours.dayOfWeek,
-      opens: hours.opens,
-      closes: hours.closes,
-    })),
-    sameAs: [
-      BUSINESS_INFO.socialLinks.facebook,
-      BUSINESS_INFO.socialLinks.instagram,
-    ],
-    areaServed: AREAS_SERVED,
-    paymentAccepted: ["Cash", "Credit Card", "Check"],
-    currenciesAccepted: "USD",
+    "@type": "HairSalon",
+    "@id": `${BUSINESS_INFO.website}/#business`,
   };
 }
 
 /**
- * Generate WebPage structured data
+ * Person schema for named stylists (Block C from audit).
  */
-export function generateWebPageSchema(
-  title: string,
-  description: string,
-  url: string
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: title,
-    description: description,
-    url: url,
-    mainEntity: generateBeautySalonSchema(),
-  };
+export function generatePersonSchemas() {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${BUSINESS_INFO.website}/#julia-zeffner`,
+      name: "Julia Zeffner",
+      jobTitle: "Lead Bridal Hair Stylist & Makeup Artist",
+      image: `${BUSINESS_INFO.website}/_astro/julia_zeffner.webp`,
+      worksFor: generateHairSalonRef(),
+      url: `${BUSINESS_INFO.website}/team`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${BUSINESS_INFO.website}/#laura`,
+      name: "Laura",
+      jobTitle: "Manager & Hair and Bridal Stylist",
+      image: `${BUSINESS_INFO.website}/_astro/laura_brock.webp`,
+      worksFor: generateHairSalonRef(),
+      url: `${BUSINESS_INFO.website}/team`,
+    },
+  ];
 }
 
 /**
@@ -140,7 +119,7 @@ export function generateServiceSchema(
     "@type": "Service",
     name: serviceName,
     description: description,
-    provider: generateBeautySalonSchema(),
+    provider: generateHairSalonRef(),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `${serviceName} Services`,
@@ -167,17 +146,11 @@ export function generateBridalServiceSchema(
   services: Service[]
 ) {
   const baseSchema = generateServiceSchema(serviceName, description, services);
-  
+
   return {
     ...baseSchema,
     category: "Bridal Beauty Services",
     serviceType: "Wedding Hair and Makeup",
-    provider: {
-      ...baseSchema.provider,
-      email: BUSINESS_INFO.email,
-      paymentAccepted: ["Cash", "Credit Card", "Check"],
-      currenciesAccepted: "USD",
-    },
     areaServed: AREAS_SERVED,
     hasOfferCatalog: {
       ...baseSchema.hasOfferCatalog,
@@ -196,26 +169,7 @@ export function generateBridalServiceSchema(
         price: service.price,
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
-        validFrom: "2024-01-01",
-        seller: {
-          "@type": "BeautySalon",
-          name: BUSINESS_INFO.name,
-        },
       })),
-    },
-    review: {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Sarah M.",
-      },
-      reviewBody:
-        "The team at Glow Salon made me feel absolutely beautiful on my wedding day. Their mobile service was so convenient and the trial helped me feel confident about my look. Highly recommend for any bride in Carmel!",
     },
   };
 }
@@ -236,9 +190,6 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
   };
 }
 
-/**
- * Generate FAQPage structured data
- */
 export interface FAQItem {
   question: string;
   answer: string;
@@ -260,7 +211,7 @@ export function generateFAQSchema(faqs: FAQItem[]) {
 }
 
 /**
- * Generate Article structured data (for blog posts or articles)
+ * Generate Article structured data (for blog posts)
  */
 export function generateArticleSchema(
   title: string,
@@ -288,4 +239,3 @@ export function generateArticleSchema(
 
   return schema;
 }
-
