@@ -232,14 +232,19 @@ import { Image } from 'astro:assets';
       padding: 4rem 2rem 3rem;
     }
 
-    .hero-image-wrap {
+    .hero-image-inner {
       height: 55vw;
       min-height: 280px;
     }
 
     .hero-stat-bar {
-      left: 1rem;
-      bottom: 1.5rem;
+      position: relative;
+      bottom: auto;
+      left: auto;
+      box-shadow: none;
+      justify-content: center;
+      background: var(--cream);
+      padding: 1.25rem 2rem;
     }
   }
 
@@ -249,7 +254,7 @@ import { Image } from 'astro:assets';
     }
 
     .hero-stat-bar {
-      gap: 1rem;
+      gap: 1.25rem;
       padding: 1rem 1.25rem;
     }
 
