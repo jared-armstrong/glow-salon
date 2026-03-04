@@ -8,7 +8,6 @@ Disallow: /temp/
 
 # Allow important pages
 Allow: /services/
-Allow: /products/
 Allow: /contact
 Allow: /team
 Allow: /blog/

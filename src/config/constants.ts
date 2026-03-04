@@ -117,8 +117,8 @@ export const AREAS_SERVED = [
 export const NAVIGATION_LINKS = [
   { href: "/contact", label: "Contact" },
   { href: "/services", label: "Services" },
-  { href: "https://glowsalonwestclay.glossgenius.com/shop/gift-cards", label: "Gift Cards", external: true },
   { href: "/team", label: "Our Team" },
   { href: "/blog", label: "Blog" },
+  { href: "https://glowsalonwestclay.glossgenius.com/shop/gift-cards", label: "Gift Cards", external: true },
 ] as const;
 
