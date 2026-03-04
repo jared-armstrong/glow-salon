@@ -1,385 +1,164 @@
 ---
 /**
  * ReviewsSection component
- * Single Responsibility: Display customer reviews with carousel
+ * Single Responsibility: Display customer reviews in a 3-card grid
  */
 import { reviews } from '../data/reviews';
-import type { Review } from '../data/reviews';
+const displayReviews = reviews.slice(0, 3);
 ---
 
-<div class="reviews-section">
-  <div class="reviews-container">
+<section class="reviews">
+  <div class="reviews-inner">
     <div class="reviews-header">
-      <div class="reviews-icon">⭐</div>
-      <h2>What Our Clients Are Saying</h2>
-      <p>Real reviews from our amazing clients</p>
+      <p class="section-eyebrow">Client Love</p>
+      <h2 class="section-title">What our clients are <em>saying.</em></h2>
+      <p class="reviews-subtitle">Real words from the women we get to serve</p>
+      <div class="divider"><span class="divider-icon">✦</span></div>
     </div>
-    
-    <div class="reviews-carousel">
-      <div class="review-card active" data-review="0">
-        <div class="review-content">
-          <div class="review-header">
-            <div class="reviewer-info">
-              <div class="reviewer-avatar">{reviews[0].name.charAt(0)}</div>
-              <div class="reviewer-details">
-                <h4>{reviews[0].name}</h4>
-                <div class="review-meta">
-                  <div class="stars">
-                    {Array.from({length: reviews[0].rating}, (_, i) => '★').join('')}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <blockquote class="review-text">
-            "{reviews[0].text}"
-          </blockquote>
-          
-          {reviews[0].services && (
-            <div class="review-services">
-              <strong>Services:</strong> {reviews[0].services.join(', ')}
-            </div>
-          )}
-          
-          {reviews[0].stylist && (
-            <div class="review-stylist">
-              <strong>Stylist:</strong> {reviews[0].stylist}
-            </div>
+
+    <div class="reviews-grid">
+      {displayReviews.map((review) => (
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <blockquote class="review-text">"{review.text}"</blockquote>
+          <div class="review-author">{review.name}</div>
+          {review.services && (
+            <div class="review-service">{review.services[0]}{review.stylist ? ` · ${review.stylist}` : ''}</div>
           )}
         </div>
-      </div>
-      
-      <!-- Additional review cards will be populated by JavaScript -->
+      ))}
     </div>
-    
-    <div class="reviews-navigation">
-      <button class="nav-btn prev-btn" aria-label="Previous review">‹</button>
-      <div class="review-dots">
-        {reviews.map((_, index) => (
-          <button class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index} aria-label={`Go to review ${index + 1}`}></button>
-        ))}
-      </div>
-      <button class="nav-btn next-btn" aria-label="Next review">›</button>
-    </div>
-
-    <div class="review-spacer"></div>
   </div>
-</div>
-
-<script define:vars={{ reviews: JSON.stringify(reviews) }}>
-  document.addEventListener('DOMContentLoaded', () => {
-    const reviewsData = JSON.parse(reviews);
-    
-    let currentReview = 0;
-    const reviewCard = document.querySelector('.review-card');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn');
-    const nextBtn = document.querySelector('.next-btn');
-
-    if (!reviewCard || !dots.length) return;
-
-    function updateReview(index) {
-      const review = reviewsData[index];
-      if (!review || !reviewCard) return;
-
-      // Update review content
-      const reviewerAvatar = reviewCard.querySelector('.reviewer-avatar');
-      const reviewerName = reviewCard.querySelector('.reviewer-details h4');
-      const stars = reviewCard.querySelector('.stars');
-      const reviewText = reviewCard.querySelector('.review-text');
-      const reviewServices = reviewCard.querySelector('.review-services');
-      const reviewStylist = reviewCard.querySelector('.review-stylist');
-
-      if (reviewerAvatar) reviewerAvatar.textContent = review.name.charAt(0);
-      if (reviewerName) reviewerName.textContent = review.name;
-      if (stars) stars.textContent = '★'.repeat(review.rating);
-      if (reviewText) reviewText.textContent = `"${review.text}"`;
-      
-      if (reviewServices) {
-        if (review.services) {
-          reviewServices.innerHTML = `<strong>Services:</strong> ${review.services.join(', ')}`;
-          reviewServices.style.display = 'block';
-        } else {
-          reviewServices.style.display = 'none';
-        }
-      }
-      
-      if (reviewStylist) {
-        if (review.stylist) {
-          reviewStylist.innerHTML = `<strong>Stylist:</strong> ${review.stylist}`;
-          reviewStylist.style.display = 'block';
-        } else {
-          reviewStylist.style.display = 'none';
-        }
-      }
-
-      // Update dots
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-
-      currentReview = index;
-    }
-
-    function nextReview() {
-      const nextIndex = (currentReview + 1) % reviewsData.length;
-      updateReview(nextIndex);
-    }
-
-    function prevReview() {
-      const prevIndex = (currentReview - 1 + reviewsData.length) % reviewsData.length;
-      updateReview(prevIndex);
-    }
-
-    // Event listeners
-    if (nextBtn) nextBtn.addEventListener('click', nextReview);
-    if (prevBtn) prevBtn.addEventListener('click', prevReview);
-    
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => updateReview(index));
-    });
-
-    // Auto-rotate every 5 seconds
-    setInterval(nextReview, 5000);
-  });
-</script>
+</section>
 
 <style>
-  .reviews-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 3rem 0 0 0;
-    margin: 0;
+  .reviews {
+    padding: 6rem 2rem;
+    background: var(--cream);
   }
 
-  .reviews-container {
+  .reviews-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
   }
 
   .reviews-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
   }
 
-  .reviews-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    animation: sparkle 2s infinite;
+  .section-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin: 0 0 0.75rem;
   }
 
-  @keyframes sparkle {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.1) rotate(5deg); }
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--deep);
+    margin: 0 0 0.5rem;
   }
 
-  .reviews-header h2 {
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-    font-size: 2.5rem;
-    color: #333;
-    margin: 0 0 0.5rem 0;
-    font-weight: bold;
+  .section-title em {
+    font-style: italic;
+    color: var(--rose);
   }
 
-  .reviews-header p {
-    color: #666;
-    font-size: 1.1rem;
-    margin: 0;
+  .reviews-subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    margin: 0 0 2rem;
+    font-weight: 300;
   }
 
-  .reviews-carousel {
-    position: relative;
-    margin-bottom: 2rem;
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: var(--blush);
+  }
+
+  .divider-icon {
+    color: var(--rose);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
   }
 
   .review-card {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 2px solid #f8d7da;
-    max-width: 800px;
-    margin: 0 auto;
-    transition: all 0.3s ease;
-    animation: slideIn 0.6s ease-out;
+    background: #fff;
+    padding: 2rem 2rem 1.75rem;
+    border-top: 2px solid var(--blush);
+    transition: border-color 0.25s ease, transform 0.25s ease;
   }
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .review-card:hover {
+    border-color: var(--rose);
+    transform: translateY(-3px);
   }
 
-  .reviewer-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .reviewer-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-
-  .reviewer-details h4 {
-    margin: 0 0 0.5rem 0;
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-
-  .review-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .stars {
-    color: #ffd700;
-    font-size: 1.2rem;
+  .review-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
   }
 
   .review-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #333;
-    margin: 0 0 1.5rem 0;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.05rem;
     font-style: italic;
-    border-left: 4px solid #ff6b6b;
-    padding-left: 1rem;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.65;
+    margin: 0 0 1.25rem;
   }
 
-  .review-services,
-  .review-stylist {
-    margin: 0.5rem 0;
-    color: #666;
-    font-size: 0.95rem;
+  .review-author {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
   }
 
-  .review-services strong,
-  .review-stylist strong {
-    color: #333;
+  .review-service {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    color: var(--rose);
+    margin-top: 0.25rem;
   }
 
-  .review-spacer {
-    height: 2.5rem;
-  }
-
-  .reviews-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-btn {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-  }
-
-  .review-dots {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    background: #ddd;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .dot.active {
-    background: #ff6b6b;
-    transform: scale(1.2);
-  }
-
-  .dot:hover {
-    background: #ff8e8e;
-  }
-
-  /* Mobile responsive */
-  @media (max-width: 768px) {
-    .reviews-section {
-      padding: 2rem 0;
-    }
-
-    .reviews-container {
-      padding: 0 1rem;
-    }
-
-    .reviews-header h2 {
-      font-size: 2rem;
-    }
-
-    .review-card {
-      padding: 1.5rem;
-    }
-
-    .reviewer-info {
-      flex-direction: column;
-      text-align: center;
-      gap: 0.5rem;
-    }
-
-    .review-meta {
-      justify-content: center;
-    }
-
-    .reviews-navigation {
-      gap: 1rem;
-    }
-
-    .nav-btn {
-      width: 35px;
-      height: 35px;
-      font-size: 1.2rem;
+  @media (max-width: 900px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      max-width: 520px;
+      margin: 0 auto;
     }
   }
 
-  @media (max-width: 480px) {
-    .reviews-header h2 {
-      font-size: 1.8rem;
-    }
-
-    .review-card {
-      padding: 1rem;
-    }
-
-    .review-text {
-      font-size: 1rem;
+  @media (max-width: 600px) {
+    .reviews {
+      padding: 4rem 1.25rem;
     }
   }
 </style>

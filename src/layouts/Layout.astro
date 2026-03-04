@@ -80,8 +80,8 @@ if (articlePublishedTime) {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 		<!-- Preload critical fonts -->
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"></noscript>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Poppins:wght@700&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Poppins:wght@700&family=Inter:wght@300;400;500;600&display=swap"></noscript>
 
 		<!-- Preload critical images -->
 		<link rel="preload" href={landingImage.src} as="image" fetchpriority="high">
@@ -189,6 +189,32 @@ if (articlePublishedTime) {
 		</footer>
 	</body>
 </html>
+
+<style is:global>
+	:root {
+		--cream: #faf7f2;
+		--blush: #e8d5c8;
+		--rose: #c9a090;
+		--deep: #3d2b23;
+		--warm-gray: #8a7872;
+		--gold: #b89a7a;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: 'Jost', 'Arial', sans-serif;
+		background: var(--cream);
+		color: var(--deep);
+		overflow-x: hidden;
+	}
+
+	h1, h2, h3 {
+		font-family: 'Cormorant Garamond', 'Georgia', serif;
+	}
+</style>
 
 <style>
 	html,

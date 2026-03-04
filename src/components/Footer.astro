@@ -1,102 +1,167 @@
 ---
 /**
  * Footer component
- * Single Responsibility: Display site footer with logo, contact info, and social icons
+ * Single Responsibility: Display site footer with navigation, contact, and branding
  */
-import FooterLogo from '../assets/glow-salon-footer-logo.webp';
-import SocialIcons from './SocialIcons.astro';
 import { BUSINESS_INFO } from '../config/constants';
-import { Image } from 'astro:assets';
+import { NAVIGATION_LINKS } from '../config/constants';
 ---
 
 <footer class="footer" role="contentinfo">
-  <div class="footer-content">
-    <div class="logo-container">
-      <Image
-        src={FooterLogo}
-        alt="Glow Salon Logo"
-        class="footer-logo"
-        loading="lazy"
-        decoding="async"
-      />
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Glow Salon & Spa</div>
+      <p class="footer-tagline">Where beauty meets passion,<br>and every client leaves glowing.</p>
     </div>
 
-    <div class="address-info">
-      <p class="contact-info">
-        <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>
-          {BUSINESS_INFO.phone}
-        </a>
-      </p>
-      <p class="contact-info">
-        {BUSINESS_INFO.address.street} {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}
-      </p>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        {NAVIGATION_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              {...('external' in link && link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+        <li><a href="/services/bridal">Bridal</a></li>
+      </ul>
     </div>
 
-    <SocialIcons variant="dark" />
+    <div class="footer-col">
+      <div class="footer-col-title">Find Us</div>
+      <address class="footer-contact">
+        {BUSINESS_INFO.address.street}<br>
+        {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}<br><br>
+        <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>{BUSINESS_INFO.phoneFormatted}</a>
+      </address>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">© 2026 Glow Salon & Spa · Carmel, Indiana</span>
+    <span class="footer-bottom-text">Powered by GlossGenius</span>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: #333333;
-    padding: 20px;
-    
+    background: #2a1e18;
   }
 
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
     max-width: 1200px;
     margin: 0 auto;
-  }
-
-  .logo-container {
-    display: flex;
-    align-items: center;
+    padding: 3.5rem 2rem;
   }
 
   .footer-logo {
-    width: 180px;
-    height: auto;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
   }
 
-  .address-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .contact-info {
+  .footer-tagline {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    font-weight: 300;
+    line-height: 1.7;
     margin: 0;
-    font-size: 16px;
-    color: #EDE9E3;
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
   }
 
-  .contact-info a {
-    color: #EDE9E3;
+  .footer-col-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-links a {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--blush);
     text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s ease, color 0.2s ease;
   }
 
-  /* Mobile responsive */
+  .footer-links a:hover {
+    opacity: 1;
+    color: var(--cream);
+  }
+
+  .footer-contact {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--blush);
+    line-height: 2;
+    opacity: 0.8;
+    font-style: normal;
+  }
+
+  .footer-contact a {
+    color: var(--blush);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-contact a:hover {
+    color: var(--cream);
+  }
+
+  .footer-bottom {
+    background: #1e1510;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 100%;
+  }
+
+  .footer-bottom-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--warm-gray);
+  }
+
   @media (max-width: 768px) {
-    .footer-content {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2.5rem 1.25rem;
+    }
+
+    .footer-bottom {
+      padding: 1rem 1.25rem;
       flex-direction: column;
-      gap: 4px;
-    }
-
-    .logo-container {
-      display: none;
-    }
-
-    .address-info {
-      order: 1;
-    }
-
-    .contact-info {
-      font-size: 14px;
+      align-items: flex-start;
     }
   }
 </style>
