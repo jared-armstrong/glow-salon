@@ -17,6 +17,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "2026-bridal-hair-trends-indianapolis",
+    title: "2026 Bridal Hair Trends: What Indianapolis Brides Are Booking Right Now",
+    description: "From softly sculpted updos to Hollywood waves, here are the bridal hair trends our Carmel stylists are seeing most in 2026 — and how to make them work for your wedding day.",
+    publishedDate: "2026-03-03",
+    author: "Glow Salon & Spa",
+    category: "Bridal",
+    tags: ["bridal hair", "wedding trends", "Indianapolis bride", "Carmel IN", "2026 wedding"],
+    readTime: "5 min read",
+  },
+  {
     slug: "bridal-hair-tips-indiana-brides",
     title: "5 Bridal Hair Tips Every Indiana Bride Should Know",
     description: "Planning your wedding hair? Our bridal stylists share essential tips for brides in Carmel, Westfield, and Fishers to ensure flawless wedding day hair.",

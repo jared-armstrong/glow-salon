@@ -1,0 +1,70 @@
+---
+/**
+ * Blog post: 2026 bridal hair trends for Indianapolis brides
+ * Single Responsibility: Display bridal hair trends content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === '2026-bridal-hair-trends-indianapolis')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>If you are planning a 2026 wedding in the Indianapolis area, you are in good company — and great hands. Our stylists at Glow Salon & Spa have been booking bridal appointments all season, and the requests coming through WeddingWire and The Knot tell a clear story: brides this year want hair that feels effortless, elegant, and unmistakably them. Here are the five trends we are seeing most right now, and what you should know before your trial.</p>
+
+    <h2>1. Softly Sculpted Updos and Low Chignons</h2>
+    <p>The era of the tight, severe updo is over. Brides in 2026 are reaching for updos that look intentional but lived-in — soft texture, a few face-framing pieces pulled loose, and a silhouette that photographs beautifully from every angle.</p>
+
+    <p>Low chignons are especially popular right now. They sit at the nape of the neck with a quiet sophistication that works equally well for a garden ceremony in Carmel or a ballroom reception downtown. The key is in the finish: slightly undone at the surface, secure underneath.</p>
+
+    <h2>2. The Bouncy Blowout and 90s Volume</h2>
+    <p>Not every bride wants an updo — and 2026 is making a strong case for wearing your hair down. The bouncy blowout, full of soft volume and movement, has made a serious comeback. Think less stiff, more effortlessly polished.</p>
+
+    <p>What makes this trend work for weddings is longevity. Our stylists use professional techniques and setting products that hold volume through the ceremony, reception, and yes, the dance floor. If you have naturally fine hair, this style can be especially transformative with the right prep and technique.</p>
+
+    <h2>3. Hollywood Waves</h2>
+    <p>Classic never goes out of style, and Hollywood waves are proof. This look — deep, structured waves that cascade past the shoulders — is one of our most-requested styles heading into spring and summer 2026. It reads formal without being fussy, and it pairs beautifully with a wide range of gown silhouettes.</p>
+
+    <p>Hollywood waves do require some preparation. Here is what we recommend for the best results:</p>
+
+    <ul>
+        <li><strong>Start growing out your length:</strong> Waves need enough hair to fully form. Aim for at least shoulder length, ideally longer.</li>
+        <li><strong>Book a trial:</strong> This style is all about precision. A trial lets your stylist dial in the wave size and direction that flatters your face shape.</li>
+        <li><strong>Avoid heavy products before your appointment:</strong> Clean, lightly textured hair sets waves more evenly and holds longer.</li>
+    </ul>
+
+    <h2>4. Half-Up Half-Down with Face-Framing Texture</h2>
+    <p>This style is having a well-deserved moment. The half-up half-down gives brides the best of both worlds: the elegance of an updo at the crown with the softness of flowing hair at the shoulders. What sets the 2026 version apart is the texture — loose waves, a few strategically placed tendrils, and a crown section that feels sculpted rather than stiff.</p>
+
+    <p>This look works across hair types and is especially flattering for brides who want their hair to feel like a natural extension of themselves rather than a structured style they are wearing. It also photographs exceptionally well in golden-hour outdoor portraits, which is something a lot of our Indiana brides are prioritizing.</p>
+
+    <h2>5. Statement Accessories: Pearl Pins, Velvet Bows, and Gold Combs</h2>
+    <p>The accessory you choose can completely transform a style. Right now we are seeing three accessories dominate bridal appointments:</p>
+
+    <ul>
+        <li><strong>Pearl pins:</strong> Scattered through a low chignon or half-up style, pearl pins add a delicate, romantic detail that photographs softly without competing with the gown.</li>
+        <li><strong>Velvet bows:</strong> Rich in texture and unexpected in bridal contexts, a velvet bow at the nape or crown gives a modern, fashion-forward edge. Ivory and deep burgundy are the most popular colors we are seeing.</li>
+        <li><strong>Gold combs:</strong> Vintage-inspired gold combs are a natural fit for the Hollywood wave trend. They anchor the style and add warmth that complements both warm and cool skin tones.</li>
+    </ul>
+
+    <p>If you already have an accessory in mind, bring it to your trial. Seeing it in the style — and adjusting the placement — is exactly what trials are for.</p>
+
+    <blockquote>
+        "What a great experience!! My hair and my bridesmaids hair was looking soooo fabulous for my wedding day. Highly highly highly recommend!!" — Brenn O'Boyle, Glow Salon bride
+    </blockquote>
+
+    <h2>Book Your 2026 Bridal Consultation at Glow Salon West Clay</h2>
+    <p>Trends are a starting point — your stylist's job is to take what inspires you and make it work beautifully for your hair, your face, and your wedding day. The best way to get there is with a trial, and the best time to book is now.</p>
+
+    <p>Schedule a free 30-minute bridal consultation to talk through your vision, review your timeline, and get a personalized quote. Call us at <a href="tel:+13178463073">(317) 846-3073</a>, <a href="/contact">fill out our contact form</a>, or <a href="https://calendly.com/glowsalonwestclay/30min" target="_blank">book a consultation on Calendly</a>.</p>
+
+    <p>View our full <a href="/services/bridal">bridal services and pricing</a> to explore packages for your entire bridal party.</p>
+</BlogPostLayout>
