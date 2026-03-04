@@ -1,164 +1,265 @@
 ---
 /**
  * LandingSection component
- * Single Responsibility: Display hero section with call-to-action
+ * Single Responsibility: Display hero section with call-to-action and stat bar
  */
 import landingImage from '../assets/bridal/KAD_7303rs.webp';
 import { BUSINESS_INFO } from '../config/constants';
 import { Image } from 'astro:assets';
 ---
 
-<section class="call-to-action">
-  <div class="left-content">
-    <h1 class="main-heading">Glow Salon & Spa</h1>
-    <a
-      href={BUSINESS_INFO.bookingUrl}
-      target="_blank"
-      class="book-now"
-    >
-      Book Appointment
-    </a>
-    
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Carmel, Indiana · Est. 2013</p>
+    <h1 class="hero-title">
+      Where every<br>client leaves<br><em>glowing.</em>
+    </h1>
+    <p class="hero-sub">
+      Expert hair color, extensions, cuts, and bridal beauty services —
+      crafted for women who know what they want.
+    </p>
+    <div class="hero-actions">
+      <a
+        href={BUSINESS_INFO.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary"
+      >
+        Book an Appointment
+      </a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
   </div>
-  <Image 
-    src={landingImage} 
-    alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async"
-  />
 
+  <div class="hero-image-wrap">
+    <div class="hero-image-inner">
+      <Image
+        src={landingImage}
+        alt="Glow Salon & Spa - Hair, Nails, and Beauty Services in Carmel, Indiana"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="hero-img"
+      />
+      <div class="hero-image-overlay"></div>
+    </div>
+    <div class="hero-stat-bar">
+      <div class="hero-stat">
+        <div class="hero-stat-num">2013</div>
+        <div class="hero-stat-label">Est.</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.6★</div>
+        <div class="hero-stat-label">Google Rating</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5+</div>
+        <div class="hero-stat-label">Stylists</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <style>
-  .call-to-action {
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 80px);
   }
 
-  .left-content {
-    width: 60%;
+  /* ── Left: text ── */
+  .hero-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 6rem 4rem 6rem 5rem;
   }
 
-  .main-heading {
-    font-size: 3.5rem;
-    font-weight: bold;
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-    color: #333;
-    text-align: center;
-    margin-bottom: 2rem;
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
   }
 
-  .call-to-action img {
-    width: 40%;
-    height: auto;
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--deep);
+    margin-bottom: 1.75rem;
   }
 
-  .book-now {
-    text-decoration: none;
-    padding: 20px 40px;
-    font-size: 2.0rem;
-    font-weight: bold;
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
     display: flex;
-    justify-content: center;
+    gap: 1.25rem;
     align-items: center;
-    border: 2px solid #333;
-    cursor: pointer;
-    background-color: white;
-    color: #333;
-    border-radius: 0;
-    transition: all 0.3s ease;
+    flex-wrap: wrap;
   }
 
-  .book-now:hover {
-    background-color: #333;
-    color: white;
+  .btn-primary {
+    background: var(--deep);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.25s ease, transform 0.2s ease;
+    display: inline-block;
   }
-    @media (max-width: 1400px) {
-      .main-heading {
-        font-size: 3rem;
-      }
-      .book-now {
-        padding: 18px 36px;
-        font-size: 1.8rem;
-      }
+
+  .btn-primary:hover {
+    background: var(--rose);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    font-family: 'Jost', sans-serif;
+    color: var(--deep);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--rose);
+  }
+
+  /* ── Right: image ── */
+  .hero-image-wrap {
+    position: relative;
+  }
+
+  .hero-image-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: sepia(8%) brightness(0.97);
+    display: block;
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--cream) 0%, transparent 14%);
+    pointer-events: none;
+  }
+
+  /* Stat bar */
+  .hero-stat-bar {
+    position: absolute;
+    bottom: 2.5rem;
+    left: -2.5rem;
+    background: #fff;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    box-shadow: 0 8px 40px rgba(61, 43, 35, 0.13);
+    z-index: 2;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--deep);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-top: 0.25rem;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--blush);
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
     }
 
-    @media (max-width: 1200px) {
-      .main-heading {
-        font-size: 2.5rem;
-      }
-      .book-now {
-        padding: 16px 32px;
-        font-size: 1.6rem;
-      }
-    }
-  
-    @media (max-width: 1024px) {
-      .left-content {
-        width: 60%;
-        padding: 1rem;
-      }
-      .call-to-action img {
-        width: 40%;
-      }
-      .main-heading {
-        font-size: 2rem;
-      }
-      .book-now {
-        font-size: 1.3rem;
-        padding: 16px 32px;
-      }
-    }
-  
-    @media (max-width: 768px) {
-      .call-to-action {
-        flex-direction: column;
-        text-align: center;
-      }
-      .left-content {
-        width: 100%;
-      }
-      .call-to-action img {
-        width: 100%;
-        margin-top: 2rem;
-      }
-      .main-heading {
-        font-size: 1.8rem;
-      }
-      .book-now {
-        font-size: 1.2rem;
-        padding: 12px 24px;
-      }
-      .book-now:hover {
-        background-color: #333;
-        color: white;
-      }
+    .hero-text {
+      padding: 4rem 2rem 3rem;
     }
 
-    @media (max-width: 431px) {
-      .left-content {
-        padding: 1.5rem 0.5rem;
-      }
-      
-      .main-heading {
-        font-size: 1.4rem;
-      }
-      .book-now {
-        font-size: 1rem;
-        padding: 8px 16px;
-      }
-      .book-now:hover {
-        background-color: #333;
-        color: white;
-      }
+    .hero-image-inner {
+      height: 55vw;
+      min-height: 280px;
     }
+
+    .hero-stat-bar {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      box-shadow: none;
+      justify-content: center;
+      background: var(--cream);
+      padding: 1.25rem 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-text {
+      padding: 3rem 1.25rem 2.5rem;
+    }
+
+    .hero-stat-bar {
+      gap: 1.25rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .hero-stat-num {
+      font-size: 1.4rem;
+    }
+  }
 </style>

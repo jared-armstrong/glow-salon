@@ -113,22 +113,21 @@ const articleSchema = generateArticleSchema(
     }
 
     .blog-category {
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.78rem;
-        font-weight: 600;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 400;
         color: white;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        background-color: #D4B2A7;
+        letter-spacing: 0.1em;
+        background-color: var(--rose);
         padding: 4px 12px;
-        border-radius: 20px;
     }
 
     .blog-date,
     .blog-read-time {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Jost', sans-serif;
         font-size: 0.83rem;
-        color: #999999;
+        color: var(--warm-gray);
         margin-left: 14px;
     }
 
@@ -140,17 +139,17 @@ const articleSchema = generateArticleSchema(
     }
 
     .blog-post-header h1 {
-        font-family: 'Safira March', serif;
-        color: #2e2e2e;
-        font-weight: 400;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
+        font-weight: 300;
         font-size: 2.2rem;
         line-height: 1.3;
         margin: 0 0 18px 0;
     }
 
     .blog-post-description {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #8a8a8a;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
         font-size: 1.05rem;
         font-weight: 300;
         line-height: 1.7;
@@ -159,7 +158,7 @@ const articleSchema = generateArticleSchema(
 
     /* ── Article body ── */
     .blog-post-content {
-        font-family: 'Inter', 'Poppins', sans-serif;
+        font-family: 'Jost', sans-serif;
         color: #5c5c5c;
         font-size: 0.97rem;
         font-weight: 300;
@@ -187,18 +186,18 @@ const articleSchema = generateArticleSchema(
 
     /* Section headings */
     .blog-post-content :global(h2) {
-        font-family: 'Safira March', serif;
-        color: #2e2e2e;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
         font-size: 1.45rem;
-        font-weight: 400;
+        font-weight: 300;
         margin: 50px 0 12px 0;
         padding-bottom: 10px;
-        border-bottom: 1px solid #ede7e2;
+        border-bottom: 1px solid var(--blush);
     }
 
     .blog-post-content :global(h3) {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #c9a091;
+        font-family: 'Jost', sans-serif;
+        color: var(--rose);
         font-size: 0.88rem;
         font-weight: 500;
         margin: 32px 0 10px 0;
@@ -232,7 +231,7 @@ const articleSchema = generateArticleSchema(
         top: 10px;
         width: 6px;
         height: 6px;
-        background-color: #D4B2A7;
+        background-color: var(--rose);
         border-radius: 50%;
     }
 
@@ -259,9 +258,9 @@ const articleSchema = generateArticleSchema(
         top: 1px;
         width: 26px;
         height: 26px;
-        background-color: #D4B2A7;
+        background-color: var(--rose);
         color: white;
-        font-family: 'Inter', 'Poppins', sans-serif;
+        font-family: 'Jost', sans-serif;
         font-size: 0.75rem;
         font-weight: 500;
         border-radius: 50%;
@@ -278,7 +277,7 @@ const articleSchema = generateArticleSchema(
 
     /* Blockquotes */
     .blog-post-content :global(blockquote) {
-        border-left: 3px solid #D4B2A7;
+        border-left: 3px solid var(--rose);
         padding: 22px 26px;
         margin: 36px 0;
         background-color: #faf8f6;
@@ -300,23 +299,23 @@ const articleSchema = generateArticleSchema(
     .blog-cta {
         background-color: #f8f6f4;
         border-radius: 12px;
-        border-left: 4px solid #D4B2A7;
+        border-left: 4px solid var(--rose);
         padding: 35px;
         text-align: center;
         margin-bottom: 30px;
     }
 
     .blog-cta h3 {
-        font-family: 'Safira March', serif;
-        color: #2e2e2e;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
         font-size: 1.4rem;
-        font-weight: 400;
+        font-weight: 300;
         margin: 0 0 10px 0;
     }
 
     .blog-cta p {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #777777;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
         font-size: 0.95rem;
         font-weight: 300;
         line-height: 1.7;
@@ -335,37 +334,33 @@ const articleSchema = generateArticleSchema(
 
     .blog-book-btn {
         display: inline-block;
-        padding: 14px 34px;
-        background-color: white;
-        color: #333333;
+        padding: 0.75rem 1.75rem;
+        background: var(--deep);
+        color: var(--cream);
         text-decoration: none;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: 'Inter', sans-serif;
-        border-radius: 8px;
-        border: 2px solid #333333;
-        transition: all 0.3s ease;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        transition: background 0.25s ease;
     }
 
     .blog-book-btn:hover {
-        background-color: #333333;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        background: var(--rose);
     }
 
     .back-to-blog {
         display: inline-block;
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.95rem;
-        color: #D4B2A7;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.85rem;
+        color: var(--rose);
         text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s ease;
+        letter-spacing: 0.08em;
+        transition: color 0.2s ease;
     }
 
     .back-to-blog:hover {
-        color: #333333;
+        color: var(--deep);
     }
 
     /* ── Mobile ── */
@@ -387,7 +382,7 @@ const articleSchema = generateArticleSchema(
         }
 
         .blog-post-content :global(h2) {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             margin-top: 36px;
         }
 

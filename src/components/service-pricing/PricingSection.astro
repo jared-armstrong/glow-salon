@@ -31,29 +31,33 @@ const { serviceName, description, price } = Astro.props;
     }
 
     .service-name {
-        color: #D4B2A7;
-        font-family: 'Poppins', sans-serif;
-        font-size: 20px;
-        font-weight: bold;
+        color: var(--rose);
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.15rem;
+        font-weight: 400;
         margin-bottom: 0;
         max-width: 85%;
     }
 
     .description {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 300;
+        color: var(--warm-gray);
         margin-bottom: 0;
     }
 
     .travel-fee {
-        font-weight: bold;
-        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-        font-size: 1.1rem;
-        color: #333333;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--deep);
     }
 
     .price {
-      font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #333333;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--deep);
     }
 </style>

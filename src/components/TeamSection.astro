@@ -1,19 +1,16 @@
 ---
 /**
  * TeamSection component
- * Single Responsibility: Display team members with their information
+ * Single Responsibility: Display team members with portrait card layout
  */
 import { teamMembers } from '../data/team';
-import SectionHeader from './SectionHeader.astro';
 import jaredImage from '../assets/team/jared.webp';
 import lauraImage from '../assets/team/laura_brock.webp';
 import juliaImage from '../assets/team/julia_zeffner.webp';
 import emilyImage from '../assets/team/emily_saunders.webp';
 import hannahImage from '../assets/team/hannah_d.webp';
 import { Image } from 'astro:assets';
-import type { TeamMember } from '../data/team';
 
-// Map image names to actual image imports
 const imageMap: Record<string, ImageMetadata> = {
   jared: jaredImage,
   laura: lauraImage,
@@ -23,227 +20,180 @@ const imageMap: Record<string, ImageMetadata> = {
 };
 ---
 
-<div class="team-section">
-  <div class="team-container">
-    <div class="team-header">
-      <SectionHeader text="Meet Our Amazing Team" level={2} />
-      <p>The talented professionals who make Glow Salon & Spa special</p>
+<section class="team-section">
+  <div class="team-inner">
+    <div class="team-heading">
+      <p class="section-eyebrow">The people behind the magic</p>
+      <div class="team-heading-row">
+        <h2 class="section-title">Meet our <em>team.</em></h2>
+        <a href="/team" class="team-link">Full Team Profiles →</a>
+      </div>
     </div>
-    
+
     <div class="team-grid">
       {teamMembers.map((member) => {
         const imageSrc = imageMap[member.image] || hannahImage;
-        
         return (
-          <div class={`team-member ${member.isOwner ? 'owner' : ''}`}>
-            <div class="member-photo">
-              <Image 
+          <div class="team-card">
+            <div class="team-card-image">
+              <Image
                 src={imageSrc}
-                alt={`${member.name} - ${member.role}`}
-                width={300}
-                height={300}
+                alt={`${member.name} - ${member.role} at Glow Salon & Spa`}
+                width={400}
                 loading="lazy"
                 decoding="async"
                 quality={85}
-                format="webp"
-                class="member-image"
+                class="team-img"
               />
-              {member.isOwner && <div class="owner-badge">Owner</div>}
             </div>
-            <div class="member-info">
-              <h3>{member.name}</h3>
-              <h4>{member.role}</h4>
-              <p>{member.description}</p>
+            <div class="team-card-info">
+              <div class="team-name">{member.name}</div>
+              <div class="team-role">{member.role}</div>
             </div>
           </div>
         );
       })}
     </div>
   </div>
-</div>
+</section>
 
 <style>
   .team-section {
-    background: white;
-    padding: 4rem 0;
-    margin: 0;
+    padding: 6rem 2rem;
+    background: var(--cream);
   }
 
-  .team-container {
+  .team-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
   }
 
-  .team-header {
-    text-align: center;
+  .team-heading {
     margin-bottom: 3rem;
   }
 
-  .team-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    animation: bounce 2s infinite;
+  .section-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin: 0 0 0.75rem;
   }
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
+  .team-heading-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
-
-  .team-header p {
-    color: #666;
-    font-size: 1.1rem;
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--deep);
     margin: 0;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .team-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    border-bottom: 1px solid var(--blush);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .team-link:hover {
+    color: var(--deep);
+    border-color: var(--rose);
   }
 
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
   }
 
-  .team-member {
-    background: #f8f9fa;
-    border-radius: 20px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    position: relative;
+  .team-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .team-card-image {
     overflow: hidden;
-  }
-
-  .team-member:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-color: #e91e63;
-  }
-
-  .team-member.owner {
-    background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
-    border-color: #e91e63;
-  }
-
-  .team-member.owner:hover {
-    border-color: #c2185b;
-    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
-  }
-
-  .member-photo {
+    aspect-ratio: 3 / 4;
+    background: var(--blush);
     position: relative;
-    margin-bottom: 1.5rem;
   }
 
-  .member-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .team-member:hover .member-image {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .owner-badge {
+  .team-img {
     position: absolute;
-    top: -5px;
-    right: 20px;
-    background: linear-gradient(135deg, #e91e63, #c2185b);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
-    animation: pulse 2s infinite;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.5s ease;
+    filter: sepia(5%);
   }
 
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
-    }
+
+  .team-card:hover .team-img {
+    transform: scale(1.04);
   }
 
-  .member-info h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin: 0 0 0.5rem 0;
-    font-weight: bold;
+  .team-card-info {
+    padding: 0.85rem 0 0;
   }
 
-  .member-info h4 {
-    font-size: 1rem;
-    color: #e91e63;
-    margin: 0 0 1rem 0;
-    font-weight: 600;
-    line-height: 1.3;
+  .team-name {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.2rem;
   }
 
-  .member-info p {
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0;
+  .team-role {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    line-height: 1.4;
   }
 
-  /* Responsive Design */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .team-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .team-member {
-      padding: 1.2rem;
-    }
-
-    .member-image {
-      width: 120px;
-      height: 120px;
-    }
-
-    .team-header h2 {
-      font-size: 2rem;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 600px) {
     .team-section {
-      padding: 3rem 0;
+      padding: 4rem 1.25rem;
     }
 
-    .team-container {
-      padding: 0 1rem;
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .member-image {
-      width: 100px;
-      height: 100px;
-    }
-
-    .team-header h2 {
-      font-size: 1.8rem;
+    .team-heading-row {
+      flex-direction: column;
+      gap: 0.5rem;
     }
   }
 </style>

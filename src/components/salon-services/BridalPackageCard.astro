@@ -51,21 +51,19 @@ const {
 <style>
     .package-card {
         background: white;
-        border-radius: 12px;
         padding: 25px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 2px solid #e8e8e8;
+        border: 1px solid var(--blush);
     }
 
     .package-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(61, 43, 35, 0.1);
     }
 
     .package-card.featured {
-        border: 2px solid #D4B2A7;
-        background: linear-gradient(135deg, #fff 0%, #fef7f0 100%);
+        border: 2px solid var(--rose);
+        background: #faf7f2;
     }
 
     .package-header {
@@ -74,28 +72,28 @@ const {
         align-items: flex-start;
         margin-bottom: 20px;
         padding-bottom: 15px;
-        border-bottom: 2px solid #f0f0f0;
+        border-bottom: 1px solid var(--blush);
         gap: 15px;
     }
 
     .package-name {
-        font-family: 'Safira March', serif;
-        color: #333333;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
         font-size: 1.3rem;
-        font-weight: 700;
+        font-weight: 300;
         margin: 0;
         flex: 1;
     }
 
     .package-card.featured .package-name {
-        color: #D4B2A7;
+        color: var(--rose);
     }
 
     .package-price {
-        font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
         font-size: 1.8rem;
-        font-weight: bold;
-        color: #333333;
+        font-weight: 400;
+        color: var(--deep);
         white-space: nowrap;
     }
 
@@ -112,10 +110,12 @@ const {
     }
 
     .package-includes {
-        font-family: 'Poppins', sans-serif;
-        color: #555555;
-        font-size: 0.95rem;
-        font-weight: 600;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
         margin: 0;
     }
 
@@ -126,9 +126,10 @@ const {
     }
 
     .package-services li {
-        font-family: 'Poppins', sans-serif;
-        color: #333333;
-        font-size: 0.95rem;
+        font-family: 'Jost', sans-serif;
+        color: var(--deep);
+        font-size: 0.88rem;
+        font-weight: 300;
         margin-bottom: 8px;
         line-height: 1.5;
         position: relative;
@@ -140,9 +141,9 @@ const {
         position: absolute;
         left: 0;
         top: 0;
-        color: #D4B2A7;
-        font-weight: bold;
-        font-size: 1rem;
+        color: var(--rose);
+        font-weight: 400;
+        font-size: 0.9rem;
     }
 
     .package-savings {
@@ -155,17 +156,18 @@ const {
     }
 
     .bundle-value {
-        font-family: 'Poppins', sans-serif;
-        color: #666666;
-        font-size: 0.9rem;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
+        font-size: 0.85rem;
+        font-weight: 300;
         text-decoration: line-through;
     }
 
     .save-amount {
-        font-family: 'Poppins', sans-serif;
-        color: #D4B2A7;
-        font-size: 1rem;
-        font-weight: 600;
+        font-family: 'Jost', sans-serif;
+        color: var(--rose);
+        font-size: 0.9rem;
+        font-weight: 400;
     }
 
     @media (max-width: 480px) {

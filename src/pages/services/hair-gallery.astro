@@ -129,10 +129,11 @@ const imageGallerySchema = {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.85rem;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
         font-weight: 400;
-        color: #888;
+        color: var(--warm-gray);
         text-decoration: none;
         margin-bottom: 16px;
         transition: color 0.2s ease;
@@ -145,7 +146,7 @@ const imageGallerySchema = {
     }
 
     .back-link:hover {
-        color: #333;
+        color: var(--deep);
     }
 
     .back-link:hover svg {
@@ -153,18 +154,18 @@ const imageGallerySchema = {
     }
 
     .gallery-header h1 {
-        font-family: 'Safira March', serif;
-        color: #333333;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
         font-size: 2.8rem;
-        font-weight: 700;
+        font-weight: 300;
         margin: 0 0 10px;
         line-height: 1.1;
     }
 
     .gallery-subtitle {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #8a8a8a;
-        font-size: 1rem;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
+        font-size: 0.9rem;
         font-weight: 300;
         margin: 0;
         letter-spacing: 0.01em;
@@ -209,9 +210,10 @@ const imageGallerySchema = {
     }
 
     .gallery-cta p {
-        font-family: 'Inter', sans-serif;
-        color: #666;
-        font-size: 1rem;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
+        font-size: 0.9rem;
+        font-weight: 300;
         margin: 0 0 16px;
     }
 
@@ -219,16 +221,17 @@ const imageGallerySchema = {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: #333333;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 400;
+        color: var(--deep);
         background: transparent;
         text-decoration: none;
-        padding: 12px 24px;
-        border: 1.5px solid #333333;
-        border-radius: 6px;
-        transition: all 0.3s ease;
+        padding: 0.75rem 1.75rem;
+        border: 1px solid var(--deep);
+        transition: all 0.25s ease;
     }
 
     .cta-link svg {
@@ -238,10 +241,9 @@ const imageGallerySchema = {
     }
 
     .cta-link:hover {
-        background-color: #333333;
-        color: white;
+        background: var(--deep);
+        color: var(--cream);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .cta-link:hover svg {

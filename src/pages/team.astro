@@ -1,17 +1,255 @@
 ---
+/**
+ * Team page
+ * Single Responsibility: Display full team profiles
+ */
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import TeamSection from '../components/TeamSection.astro';
 import Footer from '../components/Footer.astro';
+import { teamMembers } from '../data/team';
+import jaredImage from '../assets/team/jared.webp';
+import lauraImage from '../assets/team/laura_brock.webp';
+import juliaImage from '../assets/team/julia_zeffner.webp';
+import emilyImage from '../assets/team/emily_saunders.webp';
+import hannahImage from '../assets/team/hannah_d.webp';
+import { Image } from 'astro:assets';
+import { BUSINESS_INFO } from '../config/constants';
 
 const title = "Meet Our Team | Glow Salon & Spa - Carmel, IN";
 const description = "Meet the talented professionals at Glow Salon & Spa in Carmel, Indiana. Our experienced team of stylists, nail technicians, and beauty experts are here to help you look and feel your best.";
+
+const imageMap: Record<string, ImageMetadata> = {
+  jared: jaredImage,
+  laura: lauraImage,
+  julia: juliaImage,
+  emily: emilyImage,
+  hannah: hannahImage,
+};
 ---
 
 <Layout title={title} description={description}>
-	<main>
-		<Header />
-		<TeamSection />
-	</main>
-	<Footer />
+  <main>
+    <Header />
+
+    <section class="team-page">
+      <div class="team-inner">
+
+        <div class="page-heading">
+          <p class="section-eyebrow">The people behind the magic</p>
+          <h1 class="section-title">Meet our <em>team.</em></h1>
+          <p class="page-subtitle">
+            Every client who walks through our doors is met by someone who genuinely
+            cares — about their hair, their comfort, and their experience.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          {teamMembers.map((member) => {
+            const imageSrc = imageMap[member.image] || hannahImage;
+            return (
+              <div class="member-card">
+                <div class="member-image-wrap">
+                  <Image
+                    src={imageSrc}
+                    alt={`${member.name} - ${member.role} at Glow Salon & Spa`}
+                    width={500}
+                    loading="lazy"
+                    decoding="async"
+                    quality={85}
+                    class="member-img"
+                  />
+                </div>
+                <div class="member-info">
+                  <div class="member-name">{member.name}</div>
+                  <div class="member-role">{member.role}</div>
+                  <p class="member-bio">{member.description}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div class="team-cta">
+          <p class="cta-text">Ready to book with one of our stylists?</p>
+          <a
+            href={BUSINESS_INFO.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn"
+          >
+            Book an Appointment
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <Footer />
 </Layout>
+
+<style>
+  .team-page {
+    padding: 5rem 2rem 6rem;
+    background: var(--cream);
+  }
+
+  .team-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-heading {
+    margin-bottom: 4rem;
+    max-width: 600px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin: 0 0 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--deep);
+    margin: 0 0 1.25rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .page-subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2rem;
+  }
+
+  .member-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .member-image-wrap {
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    background: var(--blush);
+    margin-bottom: 1.25rem;
+  }
+
+  .member-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.5s ease;
+    filter: sepia(5%);
+  }
+
+
+  .member-card:hover .member-img {
+    transform: scale(1.03);
+  }
+
+  .member-name {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.25rem;
+  }
+
+  .member-role {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .member-bio {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--warm-gray);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .team-cta {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--blush);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-text {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--deep);
+    margin: 0;
+  }
+
+  .cta-btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--deep);
+    text-decoration: none;
+    padding: 0.85rem 2rem;
+    transition: background 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .cta-btn:hover {
+    background: var(--rose);
+  }
+
+  @media (max-width: 900px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .team-page {
+      padding: 4rem 1.25rem 5rem;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 1rem;
+    }
+
+    .team-cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

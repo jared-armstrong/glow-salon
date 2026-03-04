@@ -1,12 +1,12 @@
 ---
 /**
- * SalonServices component
- * Single Responsibility: Display services page with bridal hero card and 3-card grid
+ * ServicesPreview component
+ * Single Responsibility: Display services section on homepage with bridal hero card and 3-card row
  */
-import hairServiceImage from '../../assets/services/hair.webp';
-import nailServiceImage from '../../assets/services/nails.webp';
-import makeupServiceImage from '../../assets/services/IMG_3704rs.webp';
-import bridalServiceImage from '../../assets/bridal/IMG_3583.webp';
+import hairServiceImage from '../assets/services/hair.webp';
+import nailServiceImage from '../assets/services/nails.webp';
+import makeupServiceImage from '../assets/services/IMG_3704rs.webp';
+import bridalServiceImage from '../assets/bridal/IMG_3583.webp';
 import { Image } from 'astro:assets';
 
 const standardServices = [
@@ -34,16 +34,18 @@ const standardServices = [
 ];
 ---
 
-<section class="salon-services">
+<section class="services-preview" id="services">
   <div class="services-inner">
 
-    <div class="page-heading">
-      <p class="section-eyebrow">Glow Salon & Spa</p>
-      <h1 class="section-title">Our <em>Services</em></h1>
+    <div class="services-header">
+      <div>
+        <p class="section-eyebrow">What We Offer</p>
+        <h2 class="section-title">Beauty services<br>done <em>beautifully.</em></h2>
+      </div>
+      <a href="/services" class="section-link">View All Services</a>
     </div>
 
     <div class="services-grid">
-
       <!-- Bridal featured card -->
       <a href="/services/bridal" class="bridal-card">
         <div class="bridal-card-image">
@@ -58,7 +60,7 @@ const standardServices = [
         </div>
         <div class="bridal-card-content">
           <span class="bridal-badge">✦ Featured</span>
-          <h2 class="bridal-card-title">Bridal Hair<br><em>& Makeup</em></h2>
+          <h3 class="bridal-card-title">Bridal Hair<br><em>& Makeup</em></h3>
           <p class="bridal-card-desc">
             From intimate ceremonies to grand celebrations, our bridal specialists
             craft the look you've always imagined — and make sure it lasts all day.
@@ -94,9 +96,10 @@ const standardServices = [
 </section>
 
 <style>
-  .salon-services {
-    padding: 6rem 2rem 7rem;
+  .services-preview {
+    padding: 7rem 2rem;
     background: #fff;
+    position: relative;
   }
 
   .services-inner {
@@ -104,8 +107,14 @@ const standardServices = [
     margin: 0 auto;
   }
 
-  .page-heading {
-    margin-bottom: 3rem;
+  /* Section header */
+  .services-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .section-eyebrow {
@@ -118,9 +127,9 @@ const standardServices = [
   }
 
   .section-title {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
     font-weight: 300;
-    line-height: 1.15;
+    line-height: 1.2;
     color: var(--deep);
     margin: 0;
   }
@@ -128,6 +137,25 @@ const standardServices = [
   .section-title em {
     font-style: italic;
     color: var(--rose);
+  }
+
+  .section-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    text-decoration: none;
+    border-bottom: 1px solid var(--blush);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .section-link:hover {
+    color: var(--rose);
+    border-color: var(--rose);
   }
 
   /* Grid */
@@ -143,7 +171,7 @@ const standardServices = [
     grid-template-columns: 1.2fr 1fr;
     background: var(--deep);
     overflow: hidden;
-    min-height: 360px;
+    min-height: 340px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -243,7 +271,7 @@ const standardServices = [
   .service-card {
     position: relative;
     overflow: hidden;
-    height: 280px;
+    height: 260px;
     text-decoration: none;
     display: block;
     cursor: pointer;
@@ -289,7 +317,7 @@ const standardServices = [
   }
 
   .service-card-name {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 400;
     color: #fff;
     margin: 0 0 0.3rem;
@@ -338,6 +366,7 @@ const standardServices = [
   @media (max-width: 900px) {
     .bridal-card {
       grid-template-columns: 1fr;
+      min-height: auto;
     }
 
     .bridal-card-image {
@@ -345,7 +374,7 @@ const standardServices = [
     }
 
     .bridal-card-content {
-      padding: 2rem;
+      padding: 2rem 2rem;
     }
 
     .services-row {
@@ -358,8 +387,13 @@ const standardServices = [
   }
 
   @media (max-width: 600px) {
-    .salon-services {
-      padding: 4rem 1.25rem 5rem;
+    .services-preview {
+      padding: 4rem 1.25rem;
+    }
+
+    .services-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .bridal-card-title {

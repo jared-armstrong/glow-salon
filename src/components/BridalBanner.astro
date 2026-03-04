@@ -1,149 +1,62 @@
 ---
 /**
  * BridalBanner component
- * Single Responsibility: Display promotional banner for bridal services
+ * Single Responsibility: Display contextual bridal prompt above services section
  */
+import { BUSINESS_INFO } from '../config/constants';
 ---
 
 <div class="bridal-banner">
-  <div class="banner-content">
-    <div class="banner-icon">💍</div>
-    <div class="banner-text">
-      <h3>Ready to Say "I Do" to Flawless Hair?</h3>
-      <p>Book Your Bridal Trial Today & Save!</p>
-    </div>
-    <a href="/services/bridal" class="banner-cta">View Bridal Packages</a>
-  </div>
+  <span class="banner-text">
+    ✦ Spring Bridal Trials — Book Now &amp; Save
+  </span>
+  <a href="/services/bridal" class="banner-link">
+    View Bridal Packages →
+  </a>
 </div>
-
-
 
 <style>
   .bridal-banner {
-    background: linear-gradient(135deg, #fff5f5 0%, #fef7f0 100%);
-    border: 2px solid #f8d7da;
-    border-radius: 15px;
-    margin: 20px auto;
-    max-width: 1200px;
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.15);
-    animation: bannerSlideIn 0.6s ease-out;
-  }
-  
-  @keyframes bannerSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .banner-content {
+    background: linear-gradient(135deg, var(--deep) 0%, #5a3d32 100%);
+    color: var(--cream);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    gap: 1rem;
-    position: relative;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.85rem 2rem;
+    flex-wrap: wrap;
   }
-  
-  .banner-icon {
-    font-size: 2.5rem;
-    animation: sparkle 2s infinite;
-    flex-shrink: 0;
-  }
-  
-  @keyframes sparkle {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.1) rotate(5deg); }
-  }
-  
+
   .banner-text {
-    flex: 1;
-    text-align: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.9;
   }
-  
-  .banner-text h3 {
-    font-family: 'Safira March', serif;
-    color: #333;
-    margin: 0 0 0.5rem 0;
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
-  
-  .banner-text p {
-    color: #666;
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-  
-  .banner-cta {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
+
+  .banner-link {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--blush);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
-    flex-shrink: 0;
+    border-bottom: 1px solid var(--rose);
+    padding-bottom: 1px;
+    transition: color 0.2s ease;
+    white-space: nowrap;
   }
-  
-  .banner-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-  }
-  
 
-  
-  @media (max-width: 768px) {
+  .banner-link:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 600px) {
     .bridal-banner {
-      margin: 15px;
-      border-radius: 12px;
-    }
-    
-    .banner-content {
       flex-direction: column;
+      gap: 0.5rem;
       text-align: center;
-      padding: 1.5rem 1rem;
-      gap: 1rem;
-    }
-    
-    .banner-text h3 {
-      font-size: 1.2rem;
-    }
-    
-    .banner-text p {
-      font-size: 0.9rem;
-    }
-    
-    .banner-icon {
-      font-size: 2rem;
-    }
-    
-    .banner-cta {
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    
-
-  }
-  
-  @media (max-width: 480px) {
-    .banner-content {
-      padding: 1rem;
-    }
-    
-    .banner-text h3 {
-      font-size: 1.1rem;
-    }
-    
-    .banner-text p {
-      font-size: 0.85rem;
+      padding: 0.85rem 1rem;
     }
   }
-</style> 
+</style>
