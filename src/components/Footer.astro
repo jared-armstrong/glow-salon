@@ -10,7 +10,7 @@ import { NAVIGATION_LINKS } from '../config/constants';
 <footer class="footer" role="contentinfo">
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="footer-logo">Glow Salon & Spa</div>
+      <div class="footer-logo">Glow <em>Salon</em> &amp; Spa</div>
       <p class="footer-tagline">Where beauty meets passion,<br>and every client leaves glowing.</p>
     </div>
 
@@ -64,10 +64,15 @@ import { NAVIGATION_LINKS } from '../config/constants';
 
   .footer-logo {
     font-family: 'Cormorant Garamond', 'Georgia', serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 400;
     color: var(--cream);
     margin-bottom: 0.75rem;
+  }
+
+  .footer-logo em {
+    font-style: italic;
+    color: var(--rose);
   }
 
   .footer-tagline {

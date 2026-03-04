@@ -3,22 +3,14 @@
  * Header component
  * Single Responsibility: Display site header with logo, navigation, and book now CTA
  */
-import Logo from '../assets/glow-salon-alt-header-logo.webp';
 import Nav from './Nav.astro';
-import { Image } from 'astro:assets';
 import { BUSINESS_INFO } from '../config/constants';
 ---
 
 <header role="banner">
     <div class="header-content">
-        <a href="/" class="logo-container">
-            <Image
-                src={Logo}
-                alt="Glow Salon Logo"
-                class="logo"
-                loading="eager"
-                decoding="async"
-            />
+        <a href="/" class="logo-container" aria-label="Glow Salon & Spa — Home">
+            <span class="logo-text">Glow <em>Salon</em> &amp; Spa</span>
         </a>
 
         <Nav role="navigation" aria-label="Main navigation" />
@@ -59,11 +51,21 @@ import { BUSINESS_INFO } from '../config/constants';
         display: flex;
         align-items: center;
         flex-shrink: 0;
+        text-decoration: none;
     }
 
-    .logo {
-        width: 160px;
-        height: auto;
+    .logo-text {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.45rem;
+        font-weight: 400;
+        color: var(--deep);
+        letter-spacing: 0.01em;
+        line-height: 1;
+    }
+
+    .logo-text em {
+        font-style: italic;
+        color: var(--rose);
     }
 
     .header-book-btn {
@@ -89,8 +91,8 @@ import { BUSINESS_INFO } from '../config/constants';
             height: 60px;
         }
 
-        .logo {
-            width: 130px;
+        .logo-text {
+            font-size: 1.2rem;
         }
 
         .header-book-btn {

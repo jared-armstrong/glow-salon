@@ -75,17 +75,6 @@ import { Image } from 'astro:assets';
     flex-direction: column;
     justify-content: center;
     padding: 6rem 4rem 6rem 5rem;
-    position: relative;
-  }
-
-  .hero-text::after {
-    content: '';
-    position: absolute;
-    top: 15%;
-    left: 3rem;
-    width: 1px;
-    height: 60%;
-    background: linear-gradient(to bottom, transparent, var(--rose), transparent);
   }
 
   .hero-eyebrow {
@@ -241,10 +230,6 @@ import { Image } from 'astro:assets';
 
     .hero-text {
       padding: 4rem 2rem 3rem;
-    }
-
-    .hero-text::after {
-      display: none;
     }
 
     .hero-image-wrap {
