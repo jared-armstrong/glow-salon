@@ -10,19 +10,26 @@
 <style>
   .pricing-nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2rem;
     width: 100%;
-    padding: 1rem 0;
-    background-color: #e7d7c9;
+    padding: 0.85rem 0;
+    background-color: var(--blush);
   }
 
   .pricing-nav a {
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS';
-    color: #333333;
+    font-family: 'Jost', sans-serif;
+    color: var(--deep);
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.2s ease;
     cursor: pointer;
+  }
+
+  .pricing-nav a:hover {
+    color: var(--rose);
   }
 </style>

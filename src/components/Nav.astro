@@ -23,24 +23,42 @@ const currentPath = Astro.url.pathname;
 <style>
     .header-nav {
         display: flex;
-        gap: 30px;
+        gap: 2rem;
         align-items: center;
     }
 
     .nav-link {
-        color: #333333;
-        text-decoration: none;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
         font-weight: 400;
-        transition: color 0.3s ease;
+        color: var(--warm-gray);
+        text-decoration: none;
+        transition: color 0.2s ease;
     }
 
     .nav-link:hover {
-        color: #D4B2A7; /* Deeper rose/copper color for hover state */
+        color: var(--deep);
     }
 
     .nav-link.active {
-        color: #D4B2A7; /* Deeper rose/copper color for active state */
+        color: var(--deep);
+    }
+
+    @media (max-width: 768px) {
+        .header-nav {
+            gap: 1.25rem;
+        }
+
+        .nav-link {
+            font-size: 0.65rem;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .header-nav {
+            display: none;
+        }
     }
 </style> 

@@ -1,12 +1,12 @@
 ---
 /**
  * Header component
- * Single Responsibility: Display site header with logo, navigation, and social icons
+ * Single Responsibility: Display site header with logo, navigation, and book now CTA
  */
 import Logo from '../assets/glow-salon-alt-header-logo.webp';
 import Nav from './Nav.astro';
-import SocialIcons from './SocialIcons.astro';
 import { Image } from 'astro:assets';
+import { BUSINESS_INFO } from '../config/constants';
 ---
 
 <header role="banner">
@@ -23,16 +23,27 @@ import { Image } from 'astro:assets';
 
         <Nav role="navigation" aria-label="Main navigation" />
 
-        <SocialIcons variant="light" />
+        <a
+            href={BUSINESS_INFO.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="header-book-btn"
+        >
+            Book Now
+        </a>
     </div>
 </header>
 
 <style>
     header {
-        background-color: white;
-        padding: 20px;
-        position: relative;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: rgba(250, 247, 242, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 0 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid rgba(184, 154, 122, 0.15);
     }
 
     .header-content {
@@ -41,27 +52,50 @@ import { Image } from 'astro:assets';
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
+        height: 72px;
     }
 
     .logo-container {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
     }
 
     .logo {
-        width: 180px;
+        width: 160px;
         height: auto;
+    }
+
+    .header-book-btn {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--cream);
+        background: var(--deep);
+        text-decoration: none;
+        padding: 0.65rem 1.5rem;
+        transition: background 0.25s ease;
+        flex-shrink: 0;
+    }
+
+    .header-book-btn:hover {
+        background: var(--rose);
     }
 
     /* Mobile responsive */
     @media (max-width: 768px) {
         .header-content {
-            flex-direction: column;
-            gap: 20px;
+            height: 60px;
         }
 
         .logo {
-            width: 140px;
+            width: 130px;
+        }
+
+        .header-book-btn {
+            padding: 0.55rem 1rem;
+            font-size: 0.68rem;
         }
     }
 </style>

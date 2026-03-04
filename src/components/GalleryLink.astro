@@ -32,17 +32,17 @@ const { heading, subtext, href, label = "View Full Gallery" } = Astro.props;
     }
 
     .gallery-heading {
-        font-family: 'Safira March', serif;
-        color: #333333;
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        color: var(--deep);
         font-size: 1.8rem;
-        font-weight: 700;
+        font-weight: 300;
         margin: 0 0 8px 0;
     }
 
     .gallery-subtext {
-        font-family: 'Inter', 'Poppins', sans-serif;
-        color: #8a8a8a;
-        font-size: 0.95rem;
+        font-family: 'Jost', sans-serif;
+        color: var(--warm-gray);
+        font-size: 0.88rem;
         font-weight: 300;
         margin: 0 0 20px 0;
     }
@@ -51,15 +51,16 @@ const { heading, subtext, href, label = "View Full Gallery" } = Astro.props;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: #333333;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 400;
+        color: var(--deep);
         text-decoration: none;
-        padding: 12px 24px;
-        border: 1.5px solid #333333;
-        border-radius: 6px;
-        transition: all 0.3s ease;
+        padding: 0.75rem 1.75rem;
+        border: 1px solid var(--deep);
+        transition: all 0.25s ease;
     }
 
     .view-gallery-link svg {
@@ -69,10 +70,9 @@ const { heading, subtext, href, label = "View Full Gallery" } = Astro.props;
     }
 
     .view-gallery-link:hover {
-        background-color: #333333;
-        color: white;
+        background: var(--deep);
+        color: var(--cream);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     .view-gallery-link:hover svg {

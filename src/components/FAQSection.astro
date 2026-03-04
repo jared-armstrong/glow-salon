@@ -40,16 +40,15 @@ const faqSchema = generateFAQSchema(faqs);
   .faq-section {
     margin: 40px 0;
     padding: 30px;
-    background-color: #f8f6f4;
-    border-radius: 8px;
-    border-left: 4px solid #D4B2A7;
+    background-color: var(--cream);
+    border-left: 4px solid var(--rose);
   }
 
   .faq-heading {
-    font-family: 'Safira March', serif;
-    color: #333333;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: var(--deep);
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 300;
     margin: 0 0 25px 0;
   }
 
@@ -60,7 +59,7 @@ const faqSchema = generateFAQSchema(faqs);
   }
 
   .faq-item {
-    border-bottom: 1px solid #e7d7c9;
+    border-bottom: 1px solid var(--blush);
   }
 
   .faq-item:last-child {
@@ -82,18 +81,18 @@ const faqSchema = generateFAQSchema(faqs);
   }
 
   .faq-question-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333333;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--deep);
     line-height: 1.4;
     padding-right: 1rem;
   }
 
   .faq-icon {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Jost', sans-serif;
     font-size: 1.4rem;
-    color: #D4B2A7;
+    color: var(--rose);
     font-weight: 300;
     flex-shrink: 0;
     transition: transform 0.3s ease;
@@ -110,15 +109,15 @@ const faqSchema = generateFAQSchema(faqs);
   }
 
   .faq-answer p {
-    font-family: 'Poppins', sans-serif;
-    color: #555555;
-    font-size: 0.95rem;
+    font-family: 'Jost', sans-serif;
+    color: var(--warm-gray);
+    font-size: 0.9rem;
     line-height: 1.7;
     margin: 0;
   }
 
   .faq-question:hover .faq-question-text {
-    color: #D4B2A7;
+    color: var(--rose);
   }
 
   @media (max-width: 768px) {
