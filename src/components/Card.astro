@@ -1,21 +1,24 @@
 ---
 /**
  * Card component
- * Single Responsibility: Display service card with image and name
+ * Single Responsibility: Display service card with image, hover overlay, and CTA
  */
 import { Image } from 'astro:assets';
 
 interface Props {
   image: ImageMetadata | string;
   serviceName: string;
+  descriptor: string;
   seoAlt: string;
+  ctaLabel?: string;
+  isFeatured?: boolean;
 }
 
-const { image, serviceName, seoAlt } = Astro.props;
+const { image, serviceName, descriptor, seoAlt, ctaLabel = 'Explore Services', isFeatured = false } = Astro.props;
 const isImport = typeof image !== 'string';
 ---
 
-<div class="card">
+<div class:list={['card', { featured: isFeatured }]}>
   <div class="image-container">
     {isImport ? (
       <Image
@@ -23,7 +26,7 @@ const isImport = typeof image !== 'string';
         alt={seoAlt}
         loading="lazy"
         decoding="async"
-        width={640}
+        width={isFeatured ? 1200 : 640}
         quality={85}
       />
     ) : (
@@ -32,75 +35,178 @@ const isImport = typeof image !== 'string';
         alt={seoAlt}
         loading="lazy"
         decoding="async"
-        width="320"
-        height="200"
       />
     )}
-    <div class="overlay">
+    <div class="warm-tint"></div>
+    <div class="card-label">
       <p class="service-name">{serviceName}</p>
+    </div>
+    <div class="hover-overlay">
+      <p class="descriptor">{descriptor}</p>
+      <span class="cta-btn">{ctaLabel}</span>
     </div>
   </div>
 </div>
 
 <style>
   .card {
-    width: 320px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border-radius: 14px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    background: #1a1a1a;
+  }
+
+  .card:hover {
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+    transform: translateY(-4px);
   }
 
   .image-container {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 380px;
+  }
+
+  .card.featured .image-container {
+    height: 460px;
   }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
   }
 
-  .overlay {
+  .card:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Always-on warm tint */
+  .warm-tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(201, 169, 154, 0.08) 0%,
+      rgba(100, 58, 38, 0.48) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Always-visible bottom label */
+  .card-label {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0.5rem;
-    text-align: center;
+    right: 0;
+    padding: 1.5rem 2rem 1.4rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+    transition: opacity 0.3s ease;
+  }
+
+  .card:hover .card-label {
+    opacity: 0;
   }
 
   .service-name {
-    color: #ede9e3;
-    font-family: 'Brush Script MT', 'Pacifico', 'Comic Sans MS'; 
-    font-size: 1.2rem;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 600;
     margin: 0;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   }
 
+  .card.featured .service-name {
+    font-size: 2.25rem;
+  }
+
+  /* Hover overlay */
+  .hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(88, 48, 32, 0.84);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .card:hover .hover-overlay {
+    opacity: 1;
+  }
+
+  .descriptor {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    color: #f5e8df;
+    font-size: 1.2rem;
+    font-style: italic;
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  .card.featured .descriptor {
+    font-size: 1.5rem;
+  }
+
+  .cta-btn {
+    border: 2px solid #e8ccbc;
+    color: #f5e8df;
+    padding: 0.65rem 1.8rem;
+    border-radius: 30px;
+    font-family: 'Poppins', 'Arial', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .hover-overlay:hover .cta-btn {
+    background: #e8ccbc;
+    color: #5a3220;
+  }
+
+  /* Mobile — show descriptor always, no hover needed */
   @media (max-width: 768px) {
-    .card {
-        margin: 0 auto;
-        max-width: 300px;
-        width: 80vw;
-        height: 80vw;
-    }
     .image-container {
-        height: 100%;
+      height: 260px;
     }
-  }
 
-  @media (min-width: 768px) {
-    .card {
-        margin: 0;
-        height: 400px;
+    .card.featured .image-container {
+      height: 320px;
     }
-    .image-container {
-      height: 400px;
+
+    .service-name {
+      font-size: 1.4rem;
+    }
+
+    .card.featured .service-name {
+      font-size: 1.75rem;
+    }
+
+    .card:hover {
+      transform: none;
+    }
+
+    .card:hover .card-label {
+      opacity: 1;
+    }
+
+    .card:hover .hover-overlay {
+      opacity: 0;
     }
   }
 </style>

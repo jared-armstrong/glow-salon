@@ -1,7 +1,7 @@
 ---
 /**
  * SalonServices component
- * Single Responsibility: Display grid of service cards
+ * Single Responsibility: Display service cards with featured bridal hero and 3-column grid
  */
 import hairServiceImage from '../../assets/services/hair.webp';
 import Card from '../Card.astro';
@@ -9,70 +9,127 @@ import nailServiceImage from '../../assets/services/nails.webp';
 import makeupServiceImage from '../../assets/services/IMG_3704rs.webp';
 import bridalServiceImage from '../../assets/bridal/IMG_3583.webp';
 import SectionHeader from '../SectionHeader.astro';
+import BridalBanner from '../BridalBanner.astro';
 
-const services = [
+const standardServices = [
   {
     image: hairServiceImage,
-    serviceName: 'Hair',
+    serviceName: 'Color, Cuts & Balayage',
+    descriptor: 'From lived-in color to precision cuts',
     href: '/services/hair',
-    altText: 'Haircuts, hair styling, and balayage at Glow Salon & Spa in Carmel, Indiana'
+    altText: 'Haircuts, hair styling, and balayage at Glow Salon & Spa in Carmel, Indiana',
+    ctaLabel: 'Explore Hair',
   },
   {
     image: nailServiceImage,
-    serviceName: 'Nails',
+    serviceName: 'Manicures & Pedicures',
+    descriptor: 'Gel, dip, spa pedicures & more',
     href: '/services/nails',
-    altText: 'Manicures, pedicures, and gel nails at Glow Salon & Spa in Carmel, Indiana'
+    altText: 'Manicures, pedicures, and gel nails at Glow Salon & Spa in Carmel, Indiana',
+    ctaLabel: 'Explore Nails',
   },
   {
     image: makeupServiceImage,
-    serviceName: 'Waxing & Makeup',
+    serviceName: 'Waxing & Glam',
+    descriptor: 'Professional waxing & makeup application',
     href: '/services/makeup',
-    altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana'
+    altText: 'Professional waxing and makeup services at Glow Salon & Spa in Carmel, Indiana',
+    ctaLabel: 'Explore Services',
   },
-  {
-    image: bridalServiceImage,
-    serviceName: 'Bridal',
-    href: '/services/bridal',
-    altText: 'Professional bridal hair and makeup services at Glow Salon & Spa in Carmel, Indiana'
-  }
 ];
+
+const bridalService = {
+  image: bridalServiceImage,
+  serviceName: 'Bridal Hair & Makeup',
+  descriptor: 'Wedding Day Hair, Trials & Full Bridal Parties',
+  href: '/services/bridal',
+  altText: 'Professional bridal hair and makeup services at Glow Salon & Spa in Carmel, Indiana',
+  ctaLabel: 'View Bridal Packages',
+};
 ---
 
 <section class="salon-services">
-  <SectionHeader text="Our Services" level={1} />
-  <div class="cards">
-    {services.map((service) => (
-      <a href={service.href} target="_self">
-        <Card image={service.image} serviceName={service.serviceName} seoAlt={service.altText} />
+  <div class="services-inner">
+    <SectionHeader text="Our Services" level={1} />
+
+    <div class="bridal-section">
+      <BridalBanner />
+      <a href={bridalService.href} class="card-link">
+        <Card
+          image={bridalService.image}
+          serviceName={bridalService.serviceName}
+          descriptor={bridalService.descriptor}
+          seoAlt={bridalService.altText}
+          ctaLabel={bridalService.ctaLabel}
+          isFeatured={true}
+        />
       </a>
-    ))}
+    </div>
+
+    <div class="services-grid">
+      {standardServices.map((service) => (
+        <a href={service.href} class="card-link">
+          <Card
+            image={service.image}
+            serviceName={service.serviceName}
+            descriptor={service.descriptor}
+            seoAlt={service.altText}
+            ctaLabel={service.ctaLabel}
+          />
+        </a>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .salon-services {
+    background: #fdf8f5;
+    padding: 3rem 0 5rem;
     width: 100%;
-    margin-bottom: 30px;
   }
 
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 3rem;
-    width: 100%;
-    padding: 0 1rem;
+  .services-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
     box-sizing: border-box;
   }
 
-  @media (max-width: 767px) {
-    .cards {
-      flex-direction: column;
-      align-items: center;
+  .bridal-section {
+    margin-bottom: 2rem;
+  }
+
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 900px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .services-inner {
+      padding: 0 1rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
 
     .salon-services {
-      margin-bottom: 50px;
+      padding: 2rem 0 3.5rem;
     }
   }
 </style>
