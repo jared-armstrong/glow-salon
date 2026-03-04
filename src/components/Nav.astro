@@ -12,7 +12,8 @@ const currentPath = Astro.url.pathname;
     {NAVIGATION_LINKS.map((link) => (
         <a
             href={link.href}
-            class={`nav-link ${currentPath === link.href ? 'active' : ''}`}
+            class={`nav-link ${'external' in link && link.external ? '' : currentPath === link.href ? 'active' : ''}`}
+            {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
             {link.label}
         </a>
