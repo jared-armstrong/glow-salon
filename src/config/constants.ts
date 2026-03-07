@@ -10,6 +10,7 @@ export const BUSINESS_INFO = {
   email: "glowsalonwestclay@gmail.com",
   website: "https://www.glowsalonwestclay.com",
   priceRange: "$$",
+  googleMapsUrl: "https://www.google.com/maps/place/Glow+Salon+%26+Spa/@39.9245503,-86.1832597,17z",
   address: {
     street: "1928 Rhettsbury St",
     city: "Carmel",
@@ -53,12 +54,12 @@ export const BUSINESS_INFO = {
   bridalConsultationUrl: "https://calendly.com/glowsalonwestclay/30min",
   formspreeId: "mkgjnwqo",
   aggregateRating: {
-    ratingValue: "4.6",
-    reviewCount: "51",
-    bestRating: "5",
-    worstRating: "1",
+    ratingValue: 4.6,
+    reviewCount: 51,
+    bestRating: 5,
+    worstRating: 1,
   },
-} as const;
+};
 
 export const SERVICES = {
   hair: {

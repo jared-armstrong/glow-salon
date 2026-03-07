@@ -2,7 +2,7 @@
 import BridalServicePage from '../../components/salon-services/BridalServicePage.astro';
 import { bridalFAQs } from '../../data/faqs';
 
-const title = "Bridal Hair & Makeup in Carmel, IN – Look Flawless on Your Special Day | Glow Salon & Spa";
+const title = "Bridal Hair & Makeup in Carmel, IN | Glow Salon & Spa";
 const description = "Professional bridal hair and makeup artist near me in Carmel, Indiana. Mobile wedding makeup services, airbrush bridal makeup, and natural bridal looks. Book your trial today!";
 
 const bridal_services = [
@@ -25,11 +25,59 @@ const bridal_services = [
 ]
 ---
 
-<BridalServicePage 
+<BridalServicePage
     title={title}
     description={description}
     pageTitle="Bridal Services"
     introText="Glow Salon & Spa delivers on-site bridal hair and makeup in Carmel, Westfield, Fishers, and greater Indianapolis. Our licensed artists specialize in long-wear updos, traditional makeup, and detailed timelines so you can relax from trial to wedding morning."
     services={bridal_services}
     faqs={bridalFAQs}
-/> 
+/>
+
+<section class="blog-links-section">
+    <h2 class="blog-links-heading">From Our Blog</h2>
+    <ul class="blog-links-list">
+        <li><a href="/blog/2026-bridal-hair-trends-indianapolis">2026 Bridal Hair Trends: What Indianapolis Brides Are Booking</a></li>
+        <li><a href="/blog/bridal-hair-tips-indiana-brides">5 Bridal Hair Tips Every Indiana Bride Should Know</a></li>
+    </ul>
+</section>
+
+<style>
+    .blog-links-section {
+        max-width: 720px;
+        margin: 0 auto 3rem;
+        padding: 2rem;
+        border-top: 1px solid var(--blush);
+    }
+
+    .blog-links-heading {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: var(--deep);
+        margin: 0 0 1rem;
+    }
+
+    .blog-links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .blog-links-list li {
+        margin-bottom: 0.6rem;
+    }
+
+    .blog-links-list a {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--rose);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .blog-links-list a:hover {
+        color: var(--deep);
+    }
+</style>

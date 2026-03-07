@@ -14,18 +14,16 @@ import AboutSection from '../components/AboutSection.astro';
 import Footer from '../components/Footer.astro';
 
 const title = "Best Hair & Nail Salon in Carmel, IN | Glow Salon & Spa";
-const description = "Glow Salon & Spa in Carmel, Indiana offers expert haircuts, hair color, balayage, highlights, keratin treatments, manicures, pedicures, waxing, and makeup services. Book your appointment today!";
+const description = "Expert hair color, balayage, haircuts, nails, and bridal beauty at Glow Salon & Spa in Carmel, Indiana. Serving Westfield, Fishers & Indianapolis.";
 ---
 
-<Layout title={title} description={description}>
-  <main>
-    <Header />
-    <BridalBanner />
-    <LandingSection />
-    <ServicesPreview />
-    <ReviewsSection />
-    <TeamSection />
-    <AboutSection />
-  </main>
+<Layout title={title} description={description} isHomepage={true}>
+  <Header />
+  <BridalBanner />
+  <LandingSection />
+  <ServicesPreview />
+  <ReviewsSection />
+  <TeamSection />
+  <AboutSection />
   <Footer />
 </Layout>

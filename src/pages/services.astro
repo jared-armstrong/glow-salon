@@ -3,12 +3,21 @@ import Layout from '../layouts/Layout.astro';
 import SalonServices from '../components/salon-services/SalonServices.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/SEO/Breadcrumbs.astro';
+import StructuredData from '../components/SEO/StructuredData.astro';
+import { generateServiceListSchema } from '../utils/structuredData';
+import { BUSINESS_INFO } from '../config/constants';
+
+const serviceListSchema = generateServiceListSchema();
 ---
 
-<Layout title="Services - Glow Salon & Spa" description="Discover our professional hair, nail, and makeup services at Glow Salon & Spa in Carmel, Indiana. Book your appointment today for expert beauty treatments.">
-  <main>
-    <Header />
-    <SalonServices />
-    <Footer />
-  </main>
+<Layout title="Hair, Nail & Makeup Services in Carmel, IN | Glow Salon & Spa" description="Discover our professional hair, nail, and makeup services at Glow Salon & Spa in Carmel, Indiana. Book your appointment today for expert beauty treatments.">
+  <StructuredData data={serviceListSchema} />
+  <Breadcrumbs items={[
+    { name: "Home", url: BUSINESS_INFO.website },
+    { name: "Services", url: `${BUSINESS_INFO.website}/services` },
+  ]} />
+  <Header />
+  <SalonServices />
+  <Footer />
 </Layout>

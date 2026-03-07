@@ -6,9 +6,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import Layout from '../../layouts/Layout.astro';
-import StructuredData from '../SEO/StructuredData.astro';
 import Breadcrumbs from '../SEO/Breadcrumbs.astro';
-import { generateArticleSchema } from '../../utils/structuredData';
 import { BUSINESS_INFO } from '../../config/constants';
 
 export interface Props {
@@ -23,17 +21,6 @@ export interface Props {
 }
 
 const { title, description, publishedDate, modifiedDate, author, category, tags, readTime } = Astro.props;
-
-const articleSchema = generateArticleSchema(
-    title,
-    description,
-    Astro.url.href,
-    publishedDate,
-    modifiedDate || publishedDate,
-    author,
-    category,
-    tags.join(", ")
-);
 ---
 
 <Layout
@@ -46,7 +33,6 @@ const articleSchema = generateArticleSchema(
     articleSection={category}
     articleTag={tags.join(", ")}
 >
-    <StructuredData data={articleSchema} />
     <Breadcrumbs items={[
         { name: "Home", url: BUSINESS_INFO.website },
         { name: "Blog", url: `${BUSINESS_INFO.website}/blog` },
@@ -55,7 +41,7 @@ const articleSchema = generateArticleSchema(
 
     <Header />
 
-    <main class="blog-post-page">
+    <div class="blog-post-page">
         <article class="blog-post-container">
             <header class="blog-post-header">
                 <div class="blog-post-meta">
@@ -80,7 +66,7 @@ const articleSchema = generateArticleSchema(
                 <a href="/blog" class="back-to-blog">&larr; Back to Blog</a>
             </footer>
         </article>
-    </main>
+    </div>
     <Footer />
 </Layout>
 

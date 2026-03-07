@@ -29,6 +29,8 @@ export function generateHairSalonSchema() {
     priceRange: BUSINESS_INFO.priceRange,
     description:
       "Glow Salon & Spa offers professional hair color, balayage, highlights, haircuts, extensions, bridal styling, makeup, manicures, pedicures, and waxing services in Carmel, Indiana.",
+    foundingDate: "2013",
+    hasMap: BUSINESS_INFO.googleMapsUrl,
     address: {
       "@type": "PostalAddress",
       streetAddress: BUSINESS_INFO.address.street,
@@ -79,31 +81,74 @@ export function generateHairSalonRef() {
 }
 
 /**
- * Person schema for named stylists (Block C from audit).
+ * Person schema for named stylists.
  */
 export function generatePersonSchemas() {
   return [
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": `${BUSINESS_INFO.website}/#julia-zeffner`,
-      name: "Julia Zeffner",
-      jobTitle: "Lead Bridal Hair Stylist & Makeup Artist",
-      image: `${BUSINESS_INFO.website}/_astro/julia_zeffner.webp`,
+      "@id": `${BUSINESS_INFO.website}/#jared`,
+      name: "Jared",
+      jobTitle: "Owner",
+      image: `${BUSINESS_INFO.website}/team/jared.webp`,
       worksFor: generateHairSalonRef(),
       url: `${BUSINESS_INFO.website}/team`,
     },
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": `${BUSINESS_INFO.website}/#laura`,
+      "@id": `${BUSINESS_INFO.website}/#laura-brock`,
       name: "Laura",
       jobTitle: "Manager & Hair and Bridal Stylist",
-      image: `${BUSINESS_INFO.website}/_astro/laura_brock.webp`,
+      image: `${BUSINESS_INFO.website}/team/laura_brock.webp`,
+      worksFor: generateHairSalonRef(),
+      url: `${BUSINESS_INFO.website}/team`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${BUSINESS_INFO.website}/#julia-zeffner`,
+      name: "Julia Zeffner",
+      jobTitle: "Lead Bridal Hair Stylist & Makeup Artist",
+      image: `${BUSINESS_INFO.website}/team/julia_zeffner.webp`,
+      worksFor: generateHairSalonRef(),
+      url: `${BUSINESS_INFO.website}/team`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${BUSINESS_INFO.website}/#emily-saunders`,
+      name: "Emily",
+      jobTitle: "Nail Technician",
+      image: `${BUSINESS_INFO.website}/team/emily_saunders.webp`,
+      worksFor: generateHairSalonRef(),
+      url: `${BUSINESS_INFO.website}/team`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${BUSINESS_INFO.website}/#hannah`,
+      name: "Hannah",
+      jobTitle: "Stylist",
+      image: `${BUSINESS_INFO.website}/team/hannah_d.webp`,
       worksFor: generateHairSalonRef(),
       url: `${BUSINESS_INFO.website}/team`,
     },
   ];
+}
+
+/**
+ * Parse a price string and return structured offer data.
+ * Returns price + priceCurrency for exact prices like "$55".
+ * Returns only description for text prices like "Starting at $150" or "Priced upon consultation".
+ */
+function parsePrice(priceStr: string): { price?: string; priceCurrency?: string } {
+  const exactMatch = priceStr.match(/^\$(\d+(?:\.\d+)?)$/);
+  if (exactMatch) {
+    return { price: exactMatch[1], priceCurrency: "USD" };
+  }
+  return {};
 }
 
 /**
@@ -120,19 +165,23 @@ export function generateServiceSchema(
     name: serviceName,
     description: description,
     provider: generateHairSalonRef(),
+    areaServed: AREAS_SERVED,
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `${serviceName} Services`,
-      itemListElement: services.map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.serviceName,
-          description: service.description || service.serviceName,
-        },
-        price: service.price,
-        priceCurrency: "USD",
-      })),
+      itemListElement: services.map((service) => {
+        const priceData = parsePrice(service.price);
+        return {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.serviceName,
+            description: service.description || service.serviceName,
+          },
+          ...priceData,
+          ...(priceData.price ? {} : { description: service.price || service.serviceName }),
+        };
+      }),
     },
   };
 }
@@ -151,25 +200,27 @@ export function generateBridalServiceSchema(
     ...baseSchema,
     category: "Bridal Beauty Services",
     serviceType: "Wedding Hair and Makeup",
-    areaServed: AREAS_SERVED,
     hasOfferCatalog: {
       ...baseSchema.hasOfferCatalog,
-      itemListElement: services.map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.serviceName,
-          description: service.description || service.serviceName,
-          category: service.serviceName.includes("Hair")
-            ? "Hair Styling"
-            : service.serviceName.includes("Makeup")
-            ? "Makeup Application"
-            : "Beauty Services",
-        },
-        price: service.price,
-        priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
-      })),
+      itemListElement: services.map((service) => {
+        const priceData = parsePrice(service.price);
+        return {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.serviceName,
+            description: service.description || service.serviceName,
+            category: service.serviceName.includes("Hair")
+              ? "Hair Styling"
+              : service.serviceName.includes("Makeup")
+              ? "Makeup Application"
+              : "Beauty Services",
+          },
+          ...priceData,
+          ...(priceData.price ? {} : { description: service.price || service.serviceName }),
+          availability: "https://schema.org/InStock",
+        };
+      }),
     },
   };
 }
@@ -211,7 +262,7 @@ export function generateFAQSchema(faqs: FAQItem[]) {
 }
 
 /**
- * Generate Article structured data (for blog posts)
+ * Generate BlogPosting structured data (for blog posts)
  */
 export function generateArticleSchema(
   title: string,
@@ -219,23 +270,73 @@ export function generateArticleSchema(
   url: string,
   publishedTime?: string,
   modifiedTime?: string,
-  author?: string,
+  _author?: string,
   section?: string,
   tag?: string
 ) {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: title,
     description: description,
     url: url,
+    mainEntityOfPage: url,
+    author: {
+      "@type": "Organization",
+      name: "Glow Salon & Spa",
+      "@id": `${BUSINESS_INFO.website}/#business`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Glow Salon & Spa",
+      logo: {
+        "@type": "ImageObject",
+        url: `${BUSINESS_INFO.website}/glow-salon-logo.webp`,
+      },
+    },
   };
 
   if (publishedTime) schema.datePublished = publishedTime;
   if (modifiedTime) schema.dateModified = modifiedTime;
-  if (author) schema.author = { "@type": "Person", name: author };
   if (section) schema.articleSection = section;
   if (tag) schema.articleTag = tag;
 
   return schema;
+}
+
+/**
+ * Generate ItemList structured data for the services hub page
+ */
+export function generateServiceListSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Services at Glow Salon & Spa",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Hair Services",
+        url: `${BUSINESS_INFO.website}/services/hair`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Nail Services",
+        url: `${BUSINESS_INFO.website}/services/nails`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Waxing & Makeup Services",
+        url: `${BUSINESS_INFO.website}/services/makeup`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Bridal Hair & Makeup",
+        url: `${BUSINESS_INFO.website}/services/bridal`,
+      },
+    ],
+  };
 }

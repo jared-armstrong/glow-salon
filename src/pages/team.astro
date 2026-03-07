@@ -13,10 +13,11 @@ import juliaImage from '../assets/team/julia_zeffner.webp';
 import emilyImage from '../assets/team/emily_saunders.webp';
 import hannahImage from '../assets/team/hannah_d.webp';
 import { Image } from 'astro:assets';
+import Breadcrumbs from '../components/SEO/Breadcrumbs.astro';
 import { BUSINESS_INFO } from '../config/constants';
 
 const title = "Meet Our Team | Glow Salon & Spa - Carmel, IN";
-const description = "Meet the talented professionals at Glow Salon & Spa in Carmel, Indiana. Our experienced team of stylists, nail technicians, and beauty experts are here to help you look and feel your best.";
+const description = "Meet the stylists and nail technicians at Glow Salon & Spa in Carmel, Indiana. Hair color, bridal, and nail care experts.";
 
 const imageMap: Record<string, ImageMetadata> = {
   jared: jaredImage,
@@ -28,15 +29,18 @@ const imageMap: Record<string, ImageMetadata> = {
 ---
 
 <Layout title={title} description={description}>
-  <main>
-    <Header />
+  <Breadcrumbs items={[
+    { name: "Home", url: BUSINESS_INFO.website },
+    { name: "Our Team", url: `${BUSINESS_INFO.website}/team` },
+  ]} />
+  <Header />
 
     <section class="team-page">
       <div class="team-inner">
 
         <div class="page-heading">
           <p class="section-eyebrow">The people behind the magic</p>
-          <h1 class="section-title">Meet our <em>team.</em></h1>
+          <h1 class="section-title">Meet Our Stylists & <em>Beauty Team</em></h1>
           <p class="page-subtitle">
             Every client who walks through our doors is met by someone who genuinely
             cares — about their hair, their comfort, and their experience.
@@ -84,7 +88,6 @@ const imageMap: Record<string, ImageMetadata> = {
       </div>
     </section>
 
-  </main>
   <Footer />
 </Layout>
 
