@@ -39,7 +39,8 @@ const imageMap: Record<string, ImageMetadata> = {
               <Image
                 src={imageSrc}
                 alt={`${member.name} - ${member.role} at Glow Salon & Spa`}
-                width={400}
+                widths={[200, 300, 400]}
+                sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, 20vw"
                 loading="lazy"
                 decoding="async"
                 quality={85}
