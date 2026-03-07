@@ -17,6 +17,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "spring-2026-hair-color-trends-indianapolis",
+    title: "Spring 2026 Hair Color Trends: What Our Carmel Stylists Are Booking Right Now",
+    description: "Butter blonde, strawberry copper, espresso brunette — these are the spring 2026 hair color trends our Carmel stylists are seeing the most. Here is what to know before your next appointment.",
+    publishedDate: "2026-03-07",
+    author: "Glow Salon & Spa",
+    category: "Hair Color",
+    tags: ["hair color trends", "spring 2026", "highlights", "Carmel IN", "Indianapolis"],
+    readTime: "5 min read",
+  },
+  {
     slug: "2026-bridal-hair-trends-indianapolis",
     title: "2026 Bridal Hair Trends: What Indianapolis Brides Are Booking Right Now",
     description: "From softly sculpted updos to Hollywood waves, here are the bridal hair trends our Carmel stylists are seeing most in 2026 — and how to make them work for your wedding day.",

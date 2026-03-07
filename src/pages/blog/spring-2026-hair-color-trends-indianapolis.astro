@@ -1,0 +1,65 @@
+---
+/**
+ * Blog post: Spring 2026 hair color trends
+ * Single Responsibility: Display spring hair color trends content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'spring-2026-hair-color-trends-indianapolis')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>Every spring brings a shift in color, and 2026 is no exception. Clients across Carmel, Westfield, and Fishers are walking in with fresh inspiration — and the requests this season are all about warmth. Cool, icy tones are taking a back seat to richer, sun-kissed shades that look natural and feel effortless. Here are the four color trends our stylists at Glow Salon &amp; Spa are booking the most right now.</p>
+
+    <h2>Butter Blonde</h2>
+    <p>If you have been wearing a platinum or ash blonde, this is the shift worth considering. Butter blonde is a warm, creamy golden tone that looks like natural sunlight on your hair. It is softer and more dimensional than the flat, cool blondes that dominated the last couple of years.</p>
+
+    <p>What makes it work is the warmth. Instead of fighting brassy undertones, butter blonde leans into them — just in a polished, intentional way. The result is a shade that looks lived-in without looking grown-out. It flatters a wide range of skin tones and pairs beautifully with face-framing highlights or a subtle root shadow.</p>
+
+    <p>At Glow Salon &amp; Spa, a full highlight with toner starts at $175. If you are already blonde and want to warm things up, a glaze or toner refresh may be all you need.</p>
+
+    <h2>Strawberry Copper</h2>
+    <p>Copper has been trending for a while now, but the version gaining traction this spring is softer. Strawberry copper sits somewhere between a muted ginger and a warm peach — it is less of a statement than a full copper and more of a wearable, everyday shade.</p>
+
+    <p>This works especially well for clients who love the idea of red tones but are not ready to commit to a dramatic change. A few strawberry copper highlights woven through a warm brunette base can add dimension without requiring a full color overhaul. It also looks stunning on naturally lighter hair as an all-over glaze.</p>
+
+    <p>One thing to know about copper-family colors: they fade faster than most shades. Our stylists recommend a color-safe, sulfate-free shampoo and spacing out your washes to keep the warmth vibrant. A glaze refresh every four to six weeks will keep the tone looking intentional rather than washed out.</p>
+
+    <h2>Espresso Brunette</h2>
+    <p>This is the shade brunettes have been asking for all year. Espresso brunette is deep, rich, and glossy — think freshly brewed coffee with just a hint of warmth underneath. It is the opposite of a flat, one-dimensional dark brown. The depth comes from layering tones and finishing with a high-shine glaze.</p>
+
+    <p>What clients love about espresso brunette is how polished it looks with minimal effort. The dark base means less visible regrowth, and the warmth keeps it from reading harsh or aging. Pair it with a few caramel or toffee highlights around the face and you get dimension without losing the richness.</p>
+
+    <p>This color works beautifully on all hair textures and lengths. It is one of the most low-maintenance options we offer while still looking like you just walked out of the salon.</p>
+
+    <h2>Halo Highlights</h2>
+    <p>You may have heard of money pieces — those bold, face-framing highlights that were everywhere for the last few years. Halo highlights are the natural evolution of that trend. Instead of concentrating brightness at two thick front sections, halo highlights place a ring of lighter pieces around the crown of the head, creating a soft, sun-around-the-face glow.</p>
+
+    <p>The effect is more blended and less obvious than a traditional money piece. It catches light in a way that looks natural, like you just spent a week at the beach. Halo highlights work with nearly any base color — they are equally beautiful on a butter blonde, a strawberry copper, or an espresso brunette.</p>
+
+    <p>If you already have highlights, transitioning to a halo placement is usually straightforward. Your stylist can adjust where the brightness falls over one or two sessions without a complete redo.</p>
+
+    <h2>How to Pick the Right Spring Color for You</h2>
+    <p>Not sure which trend fits you best? Here are a few things to think about before your appointment:</p>
+
+    <ul>
+        <li><strong>Your natural undertone matters:</strong> Warm skin tones tend to shine with butter blonde and strawberry copper, while cool and neutral undertones often pair beautifully with espresso brunette</li>
+        <li><strong>Lifestyle and maintenance:</strong> If you want something low-maintenance, espresso brunette or halo highlights offer the longest wear between appointments</li>
+        <li><strong>Starting point:</strong> Going from very dark to butter blonde is a process that may take multiple sessions — your stylist will map out a realistic plan</li>
+        <li><strong>Hair health first:</strong> Healthy hair holds color better, looks shinier, and styles more easily. Our team will always recommend protecting your hair integrity over chasing a trend</li>
+    </ul>
+
+    <p>The best approach is to bring a few inspiration photos to your appointment. Your stylist can look at your current color, texture, and skin tone and recommend the version of any trend that will look best on you specifically.</p>
+
+    <h2>Book Your Spring Color Appointment</h2>
+    <p>Ready to refresh your color for spring? Our stylists at Glow Salon &amp; Spa are here to help you find the perfect shade. Call us at <a href="tel:+13178463073">(317) 846-3073</a> or <a href="/contact">contact us online</a> to schedule your appointment. View our full <a href="/services/hair">hair color services and pricing</a>.</p>
+</BlogPostLayout>
