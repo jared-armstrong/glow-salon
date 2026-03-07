@@ -1,16 +1,7 @@
 User-agent: *
 Allow: /
-
-# Disallow admin or private areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /temp/
 
-# Crawl delay for respectful crawling
-Crawl-delay: 1
-
-# Sitemap location
 Sitemap: https://www.glowsalonwestclay.com/sitemap-index.xml
-
-# LLMs.txt - structured business info for AI assistants
-LLMs-Txt: https://www.glowsalonwestclay.com/llms.txt
