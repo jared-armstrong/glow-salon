@@ -4,11 +4,7 @@
  * Single Responsibility: Provide HTML structure and SEO metadata
  */
 import landingImage from '../assets/glow-salon-landing.webp';
-import headerLogo from '../assets/glow-salon-alt-header-logo.webp';
-import hairServiceImage from '../assets/services/hair.webp';
-import nailServiceImage from '../assets/services/nails.webp';
-import makeupServiceImage from '../assets/services/makeup-artist.webp';
-import giftCardImage from '../assets/services/salon-egift.webp';
+import heroImage from '../assets/bridal/KAD_7303rs.webp';
 import StructuredData from '../components/SEO/StructuredData.astro';
 import {
 	generateHairSalonSchema,
@@ -82,25 +78,20 @@ if (articlePublishedTime) {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 		<!-- Preload critical fonts -->
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Poppins:wght@700&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Poppins:wght@700&family=Inter:wght@300;400;500;600&display=swap"></noscript>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"></noscript>
 
-		<!-- Preload critical images -->
-		<link rel="preload" href={headerLogo.src} as="image">
-		{isHomepage && <>
-			<link rel="preload" href={landingImage.src} as="image" fetchpriority="high">
-			<link rel="preload" href={hairServiceImage.src} as="image">
-			<link rel="preload" href={nailServiceImage.src} as="image">
-			<link rel="preload" href={makeupServiceImage.src} as="image">
-			<link rel="preload" href={giftCardImage.src} as="image">
-		</>}
+		<!-- Preload critical hero image -->
+		{isHomepage && (
+			<link rel="preload" href={heroImage.src} as="image" fetchpriority="high">
+		)}
 		
 		<!-- Preload critical CSS -->
 		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
 
 		<!-- ahrefs analytics -->
-		<script src="https://analytics.ahrefs.com/analytics.js" data-key="cLD7yENK+8muOupoEIIYwg" async></script>
+		<script type="text/partytown" src="https://analytics.ahrefs.com/analytics.js" data-key="cLD7yENK+8muOupoEIIYwg"></script>
 		<!-- Google Analytics (gtag.js) -->
 		<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-YJS85CR3ET"></script>
 		<script type="text/partytown">
