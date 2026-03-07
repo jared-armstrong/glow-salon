@@ -12,8 +12,9 @@ import { Image } from 'astro:assets';
   <div class="hero-text">
     <p class="hero-eyebrow">Carmel, Indiana · Est. 2013</p>
     <h1 class="hero-title">
-      Where every<br>client leaves<br><em>glowing.</em>
+      Hair Salon & Spa<br>in <em>Carmel, Indiana</em>
     </h1>
+    <p class="hero-tagline">Where every client leaves <em>glowing.</em></p>
     <p class="hero-sub">
       Expert hair color, extensions, cuts, and bridal beauty services —
       crafted for women who know what they want.
@@ -96,6 +97,20 @@ import { Image } from 'astro:assets';
   }
 
   .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--warm-gray);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tagline em {
     font-style: italic;
     color: var(--rose);
   }
