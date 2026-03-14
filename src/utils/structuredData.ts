@@ -1,4 +1,5 @@
 import { BUSINESS_INFO, AREAS_SERVED } from "../config/constants";
+import { reviews } from "../data/reviews";
 
 export interface Service {
   serviceName: string;
@@ -20,6 +21,11 @@ export function generateHairSalonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "HairSalon",
+    additionalType: [
+      "https://schema.org/BeautySalon",
+      "https://schema.org/NailSalon",
+      "https://schema.org/DaySpa",
+    ],
     "@id": `${BUSINESS_INFO.website}/#business`,
     name: BUSINESS_INFO.name,
     image: `${BUSINESS_INFO.website}/glow-salon-logo.webp`,
@@ -28,7 +34,7 @@ export function generateHairSalonSchema() {
     email: BUSINESS_INFO.email,
     priceRange: BUSINESS_INFO.priceRange,
     description:
-      "Glow Salon & Spa offers professional hair color, balayage, highlights, haircuts, extensions, bridal styling, makeup, manicures, pedicures, and waxing services in Carmel, Indiana.",
+      "Glow Salon & Spa is a full-service hair salon and spa in the Village of West Clay, Carmel, Indiana. We offer professional hair color, balayage, highlights, haircuts, extensions, bridal hair and makeup, manicures, pedicures, and waxing services. Serving Carmel, Westfield, Fishers, Noblesville, Zionsville, and the greater Indianapolis area.",
     foundingDate: "2013",
     hasMap: BUSINESS_INFO.googleMapsUrl,
     address: {
@@ -65,6 +71,48 @@ export function generateHairSalonSchema() {
       bestRating: BUSINESS_INFO.aggregateRating.bestRating,
       worstRating: BUSINESS_INFO.aggregateRating.worstRating,
     },
+    review: reviews.slice(0, 3).map((r) => ({
+      "@type": "Review",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: 5,
+      },
+      author: {
+        "@type": "Person",
+        name: r.name,
+      },
+      reviewBody: r.text,
+    })),
+    makesOffer: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Hair Coloring",
+          description:
+            "Professional hair color, highlights, balayage, and glaze services in Carmel, Indiana",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Waxing",
+          description:
+            "Brow waxing and lip waxing services in Carmel, Indiana",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Bridal Hair and Makeup",
+          description:
+            "On-site bridal hair and makeup services in Carmel, Westfield, Fishers, and Indianapolis, Indiana",
+        },
+      },
+    ],
   };
 }
 

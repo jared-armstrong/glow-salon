@@ -7,6 +7,7 @@ export default defineConfig({
   site: "https://www.glowsalonwestclay.com/",
   base: "/",
   output: "static",
+  trailingSlash: "never",
   integrations: [
     sitemap({
       serialize(item) {

@@ -2,8 +2,8 @@
 import ServicePage from '../../components/salon-services/ServicePage.astro';
 import { makeupFAQs } from '../../data/faqs';
 
-const title = "Waxing & Makeup Services in Carmel, IN | Glow Salon & Spa";
-const description = "Professional waxing and makeup services including brow wax, lip wax, and makeup application. Serving Carmel, Indiana.";
+const title = "Waxing & Makeup in Carmel, Indiana | Glow Salon & Spa";
+const description = "Professional brow waxing, lip waxing, and glam makeup application at Glow Salon & Spa in Carmel, Indiana. Walk-ins welcome for waxing. Call (317) 846-3073.";
 
 const waxing_makeup = [
     { serviceName: "Brow Wax", price: "$15" },
@@ -17,7 +17,56 @@ const waxing_makeup = [
     title={title}
     description={description}
     pageTitle="Waxing & Makeup in Carmel, IN"
-    introText="Brow waxing, lip waxing, and professional makeup application at Glow Salon & Spa in Carmel, IN."
+    introText="Professional waxing and makeup services in Carmel, Indiana. Glow Salon & Spa offers brow waxing, lip waxing, and glam makeup application in the Village of West Clay. Serving Carmel, Westfield, Fishers, Noblesville, and the Indianapolis area."
     services={waxing_makeup}
     faqs={makeupFAQs}
 />
+
+<section class="related-services-section">
+    <h2 class="related-heading">Related Services</h2>
+    <ul class="related-list">
+        <li><a href="/services/hair">Hair Services - Cuts, Color &amp; Balayage</a></li>
+        <li><a href="/services/nails">Nail Services - Manicures &amp; Pedicures</a></li>
+        <li><a href="/services/bridal">Bridal Hair &amp; Makeup Packages</a></li>
+    </ul>
+</section>
+
+<style>
+    .related-services-section {
+        max-width: 720px;
+        margin: 0 auto 3rem;
+        padding: 2rem;
+        border-top: 1px solid var(--blush);
+    }
+
+    .related-heading {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: var(--deep);
+        margin: 0 0 1rem;
+    }
+
+    .related-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .related-list li {
+        margin-bottom: 0.6rem;
+    }
+
+    .related-list a {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--rose);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .related-list a:hover {
+        color: var(--deep);
+    }
+</style>

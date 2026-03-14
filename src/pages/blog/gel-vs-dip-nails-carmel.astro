@@ -1,0 +1,55 @@
+---
+/**
+ * Blog post: Gel vs. dip nails — Carmel nail tech explains
+ * Single Responsibility: Display gel vs. dip nails comparison content
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'gel-vs-dip-nails-carmel')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>One of the most common questions we hear at Glow Salon &amp; Spa is "should I get gel or dip?" It is a fair question — both services look great, last longer than a classic manicure, and come with their own trade-offs. Emily, our nail technician here in Carmel, Indiana, walks clients through the differences every week. Here is her straightforward breakdown so you can walk in knowing exactly what to ask for.</p>
+
+    <h2>What Are Gel Nails?</h2>
+    <p>A gel manicure uses a specially formulated polish that is cured under a UV or LED lamp. The process is similar to a regular manicure — your nails are shaped and prepped, the gel is applied in thin layers, and each coat is cured for about 30 seconds under the light. The result is a high-gloss finish that feels harder than regular polish and resists chipping.</p>
+
+    <p>Gel nails typically last two to three weeks before they start to lift or lose their shine. The look is thinner and more natural than dip, which is one reason many clients prefer it for shorter nails or a more understated finish. Removal is done with an acetone soak, and when done properly by a trained nail tech, it leaves the nail bed in good condition. Gel Manicures at Glow Salon &amp; Spa are $45.</p>
+
+    <h2>What Are Dip Nails?</h2>
+    <p>Dip powder nails use a different application method entirely. After your nails are prepped, a bonding base coat is applied, and your finger is dipped into a colored powder — or the powder is brushed on. This process is repeated a few times to build up the color and thickness, then sealed with a topcoat and buffed smooth. No UV lamp is needed.</p>
+
+    <p>The result is a stronger, more durable finish that typically lasts three to four weeks. Dip tends to sit slightly thicker on the nail than gel, which makes it a good option for clients with brittle or thin nails who want added strength without extensions. The powder formula also tends to hold its color well over time without fading. Dip Manicures at Glow are $55.</p>
+
+    <h2>Gel vs. Dip: How to Choose</h2>
+    <p>Both services are popular at our nail salon in Carmel, Indiana, and neither is objectively better — it comes down to your priorities. Here is a quick comparison:</p>
+
+    <ul>
+        <li><strong>Durability:</strong> Dip typically outlasts gel by about a week, making it the stronger option for clients who are hard on their hands.</li>
+        <li><strong>Natural look:</strong> Gel sits thinner on the nail and tends to look more like a high-quality polish. Dip can look slightly more built-up, especially after multiple fills.</li>
+        <li><strong>Removal:</strong> Both require acetone removal. Gel is generally considered slightly gentler to remove, but dip removal is straightforward when done correctly.</li>
+        <li><strong>Nail health:</strong> If your nails are brittle or prone to breaking, dip powder can provide extra reinforcement. If your nails are already healthy and you want to keep them natural-looking, gel is a great fit.</li>
+        <li><strong>Price:</strong> Gel Manicure is $45; Dip Manicure is $55 at Glow Salon &amp; Spa.</li>
+    </ul>
+
+    <p>Gel tends to be the better choice if you want a natural-looking finish, prefer a shorter wear time, or like to switch colors frequently. Dip tends to win out if you want maximum durability, added strength for weaker nails, or a longer time between appointments.</p>
+
+    <h2>What About Classic Manicures?</h2>
+    <p>Not every client needs gel or dip, and that is perfectly fine. A Classic Manicure at Glow Salon &amp; Spa is $30 and includes nail shaping, cuticle care, and a regular polish finish. It is a great low-maintenance option for clients who prefer to change their nail color often, or who want to let their nails breathe between gel or dip services.</p>
+
+    <p>A classic manicure also pairs well with a Spa Pedicure ($65) or Classic Pedicure ($45) if you want a full nail appointment in one visit. Many clients from Westfield, Fishers, and the surrounding area come in for a manicure-pedicure combination on a Saturday morning.</p>
+
+    <h2>Book Your Nail Appointment in Carmel</h2>
+    <p>Whether you are ready to try dip for the first time or you are a longtime gel client curious about your options, Emily is happy to talk through what will work best for your nails during your appointment. Glow Salon &amp; Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032 — a convenient stop for clients across Carmel, Westfield, Fishers, Noblesville, Zionsville, and Indianapolis.</p>
+
+    <p>Call us at <a href="tel:+13178463073">(317) 846-3073</a> to book, or <a href="/contact">contact us online</a>. We are open Tuesday through Friday 10am to 6pm and Saturday 10am to 4pm. View our full <a href="/services/nails">nail services and pricing</a> or browse all <a href="/services">Glow Salon &amp; Spa services</a>.</p>
+</BlogPostLayout>

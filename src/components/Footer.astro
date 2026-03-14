@@ -32,6 +32,9 @@ import SocialIcons from './SocialIcons.astro';
           </li>
         ))}
         <li><a href="/services/bridal">Bridal</a></li>
+        <li><a href="/services/hair">Hair</a></li>
+        <li><a href="/services/nails">Nails</a></li>
+        <li><a href="/services/makeup">Waxing &amp; Makeup</a></li>
       </ul>
     </div>
 
@@ -41,6 +44,8 @@ import SocialIcons from './SocialIcons.astro';
         {BUSINESS_INFO.address.street}<br>
         {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}<br><br>
         <a href={`tel:${BUSINESS_INFO.phone.replace(/-/g, '')}`}>{BUSINESS_INFO.phoneFormatted}</a>
+        <br><br>
+        <span class="footer-areas">Serving Carmel, Westfield, Fishers, Noblesville, Zionsville &amp; Indianapolis</span>
       </address>
     </div>
   </div>

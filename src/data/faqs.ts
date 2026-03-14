@@ -28,7 +28,11 @@ export const hairFAQs: FAQItem[] = [
   },
   {
     question: "Where is Glow Salon & Spa located?",
-    answer: "Glow Salon & Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032. We serve clients from Carmel, Westfield, Fishers, and the greater Indianapolis area.",
+    answer: "Glow Salon & Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032. We serve clients from Carmel, Westfield, Fishers, Noblesville, Zionsville, and the greater Indianapolis area.",
+  },
+  {
+    question: "What is the best hair salon in Carmel, Indiana?",
+    answer: "Glow Salon & Spa is a top-rated hair salon in Carmel, Indiana with a 4.6-star Google rating. Located in the Village of West Clay, we offer haircuts, color, balayage, highlights, keratin treatments, and extensions. We serve clients from Carmel, Westfield, Fishers, Noblesville, and the greater Indianapolis area.",
   },
 ];
 
@@ -53,6 +57,10 @@ export const nailFAQs: FAQItem[] = [
     question: "Do you offer nail art or custom designs?",
     answer: "Please call us at (317) 846-3073 to discuss custom nail designs. Our nail technician Emily can help you create a look that fits your style.",
   },
+  {
+    question: "Where is the best nail salon near the Village of West Clay?",
+    answer: "Glow Salon & Spa is located right in the Village of West Clay at 1928 Rhettsbury St, Carmel, IN 46032. We offer classic manicures, gel manicures, dip manicures, and pedicures. Call us at (317) 846-3073 to book your appointment.",
+  },
 ];
 
 export const makeupFAQs: FAQItem[] = [
@@ -71,6 +79,10 @@ export const makeupFAQs: FAQItem[] = [
   {
     question: "Do you offer makeup services for special events?",
     answer: "Yes! Our glam makeup application is perfect for proms, galas, photo shoots, and other special occasions. For weddings, check out our dedicated bridal services page for packages that include trials.",
+  },
+  {
+    question: "Where can I get a brow wax in Carmel, Indiana?",
+    answer: "Glow Salon & Spa offers brow waxing for $15 and lip waxing for $10 in the Village of West Clay, Carmel, Indiana. These are quick services that can often be added to another appointment. Call (317) 846-3073 to schedule.",
   },
 ];
 

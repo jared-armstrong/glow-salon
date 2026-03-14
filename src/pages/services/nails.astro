@@ -2,8 +2,8 @@
 import ServicePage from '../../components/salon-services/ServicePage.astro';
 import { nailFAQs } from '../../data/faqs';
 
-const title = "Nail Services in Carmel, IN | Glow Salon & Spa";
-const description = "Professional nail services including manicures, pedicures, gel and dip treatments. Serving Carmel, Indiana.";
+const title = "Nail Salon in Carmel, Indiana - Manicures & Pedicures | Glow Salon & Spa";
+const description = "Manicures, pedicures, gel and dip nails at Glow Salon & Spa in the Village of West Clay, Carmel, Indiana. Book online or call (317) 846-3073.";
 
 const nail_services = [
     { serviceName: "Manicure", price: "$30" },
@@ -18,7 +18,70 @@ const nail_services = [
     title={title}
     description={description}
     pageTitle="Nail Services in Carmel, IN"
-    introText="Professional manicures, pedicures, gel, and dip nail services in Carmel, Indiana. Appointments recommended."
+    introText="Visit the top-rated nail salon in the Village of West Clay for professional manicures, pedicures, gel, and dip nail services. Located in Carmel, Indiana, Glow Salon & Spa serves clients from Westfield, Fishers, Noblesville, and the greater Indianapolis area. Appointments recommended; call (317) 846-3073."
     services={nail_services}
     faqs={nailFAQs}
 />
+
+<section class="blog-links-section">
+    <h2 class="blog-links-heading">From Our Blog</h2>
+    <ul class="blog-links-list">
+        <li><a href="/blog/gel-vs-dip-nails-carmel">Gel vs. Dip Nails: Which Is Right for You?</a></li>
+        <li><a href="/blog/best-spa-services-carmel-indiana">What to Expect at a Spa in Carmel, Indiana</a></li>
+    </ul>
+</section>
+
+<section class="related-services-section">
+    <h2 class="related-heading">Related Services</h2>
+    <ul class="related-list">
+        <li><a href="/services/hair">Hair Services - Cuts, Color &amp; Balayage</a></li>
+        <li><a href="/services/makeup">Waxing &amp; Makeup Services</a></li>
+        <li><a href="/services/bridal">Bridal Hair &amp; Makeup Packages</a></li>
+    </ul>
+</section>
+
+<style>
+    .blog-links-section,
+    .related-services-section {
+        max-width: 720px;
+        margin: 0 auto 3rem;
+        padding: 2rem;
+        border-top: 1px solid var(--blush);
+    }
+
+    .blog-links-heading,
+    .related-heading {
+        font-family: 'Cormorant Garamond', 'Georgia', serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: var(--deep);
+        margin: 0 0 1rem;
+    }
+
+    .blog-links-list,
+    .related-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .blog-links-list li,
+    .related-list li {
+        margin-bottom: 0.6rem;
+    }
+
+    .blog-links-list a,
+    .related-list a {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--rose);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .blog-links-list a:hover,
+    .related-list a:hover {
+        color: var(--deep);
+    }
+</style>

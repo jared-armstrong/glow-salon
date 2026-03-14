@@ -1,0 +1,60 @@
+---
+/**
+ * Blog post: Best spa services in Carmel, Indiana
+ * Single Responsibility: Display spa services guide content targeting local search
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'best-spa-services-carmel-indiana')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>If you are searching for a spa in Carmel, Indiana, you have more options than a traditional day spa. A full-service salon and spa like Glow Salon &amp; Spa offers everything from nail services and waxing to hair color and makeup — all in one appointment, without needing to visit multiple locations. Here is what to know before you book.</p>
+
+    <h2>What Spa Services Are Available in Carmel, Indiana?</h2>
+    <p>Glow Salon &amp; Spa is a full-service salon and spa located in the Village of West Clay in Carmel, Indiana. Our services span several categories, so you can address more than one thing in a single visit.</p>
+
+    <p>Our <a href="/services/nails">nail services</a> include spa pedicures, gel manicures, dip powder, and classic manicures. For <a href="/services/hair">hair</a>, we offer cuts, blowouts, balayage, highlights, all-over color, keratin treatments, and extensions. Our waxing menu covers brow shaping and lip waxing, and our <a href="/services/makeup">makeup</a> services include both touch-up appointments and full glam looks for events. We also offer <a href="/services">bridal hair and makeup</a> packages for wedding parties.</p>
+
+    <p>If you are not sure where to start, our team is happy to walk you through what would make the most sense for your goals and budget during a consultation at your appointment.</p>
+
+    <h2>What to Expect During Your First Spa Visit</h2>
+    <p>First-time clients often wonder what the experience will look like. At Glow Salon &amp; Spa, we keep things straightforward and comfortable. There is no complicated check-in process or pressure to purchase add-ons you did not ask for.</p>
+
+    <p>A few things that make your visit go smoothly: plan to arrive five to ten minutes before your appointment time. This gives you a moment to settle in, review the menu if you have questions, and let your service provider know about any preferences or sensitivities before you start. If you are getting a color service, bring a few inspiration photos — they are genuinely useful and help your stylist understand the result you are imagining, not just the name of a shade.</p>
+
+    <p>Do not hesitate to ask about products used during your service. Our team is happy to explain what they are applying and why, and to recommend at-home care that will extend the results of your appointment.</p>
+
+    <h2>Most Popular Spa Services in Carmel</h2>
+    <p>Based on what clients book most often, here are a few services worth knowing about if you are exploring what a spa in Carmel, Indiana has to offer:</p>
+
+    <ul>
+        <li><strong>Spa Pedicure ($65):</strong> A relaxing, thorough pedicure that goes beyond a standard service — includes a soak, exfoliation, massage, and polish of your choice</li>
+        <li><strong>Gel Manicure ($45):</strong> A long-lasting manicure with gel polish that stays chip-free for two or more weeks</li>
+        <li><strong>Balayage (starting at $175):</strong> A hand-painted color technique that creates soft, natural-looking dimension; one of our most requested hair services</li>
+        <li><strong>Brow Wax ($15):</strong> A quick, precise shaping service that makes a noticeable difference in your overall look</li>
+    </ul>
+
+    <p>Many clients combine services in a single visit — for example, a brow wax and gel manicure together, or a balayage with a blowout. If you are planning a combination appointment, let us know when you book so we can schedule your time appropriately.</p>
+
+    <h2>How to Choose the Right Spa for You</h2>
+    <p>Not every spa or salon is the same, and it is worth taking a few minutes to evaluate your options before booking. Here are a few things to look for when searching for the best spa in Carmel, Indiana or any nearby area.</p>
+
+    <p>Start with reviews. Look for consistent feedback about cleanliness, communication, and whether clients felt heard. A high volume of detailed, positive reviews over time is usually a reliable signal. Check that the salon or spa employs licensed professionals — this is a baseline requirement for any reputable establishment offering nail, waxing, or hair services in Indiana.</p>
+
+    <p>Clear, published pricing matters too. You should not have to call to find out what a service costs. Glow Salon &amp; Spa publishes pricing on our <a href="/services">services page</a> so you can plan your visit confidently. Finally, a good spa should offer a consultation — either at the start of your appointment or before booking — so you feel informed before anything begins.</p>
+
+    <h2>Book Your Spa Appointment in Carmel</h2>
+    <p>Glow Salon &amp; Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032. We are open Tuesday through Friday from 10am to 6pm and Saturday from 10am to 4pm. We serve clients from Carmel, Westfield, Fishers, Noblesville, Zionsville, and the broader Indianapolis area.</p>
+
+    <p>To schedule your appointment, call us at <a href="tel:+13178463073">(317) 846-3073</a> or <a href="/contact">contact us online</a>. We look forward to helping you find the right services for you.</p>
+</BlogPostLayout>
