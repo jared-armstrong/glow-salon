@@ -12,6 +12,7 @@ import {
 	generateArticleSchema,
 } from '../utils/structuredData';
 import { BUSINESS_INFO, SERVICES } from '../config/constants';
+import Analytics from '@vercel/analytics/astro';
 
 export interface Props {
 	title: string;
@@ -189,6 +190,7 @@ if (articlePublishedTime) {
 		<footer role="contentinfo">
 			<!-- footer content will be slotted in -->
 		</footer>
+		<Analytics />
 	</body>
 </html>
 
