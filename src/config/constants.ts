@@ -113,6 +113,22 @@ export const AREAS_SERVED = [
       name: "Indiana",
     },
   },
+  {
+    "@type": "City",
+    name: "Noblesville",
+    containedInPlace: {
+      "@type": "State",
+      name: "Indiana",
+    },
+  },
+  {
+    "@type": "City",
+    name: "Indianapolis",
+    containedInPlace: {
+      "@type": "State",
+      name: "Indiana",
+    },
+  },
 ] as const;
 
 export const NAVIGATION_LINKS = [
