@@ -1,0 +1,74 @@
+---
+/**
+ * Blog post: Spring hair repair tips for winter-damaged hair
+ * Single Responsibility: Display hair repair guide content targeting local search
+ */
+import BlogPostLayout from '../../components/blog/BlogPostLayout.astro';
+import { blogPosts } from '../../data/blog';
+
+const post = blogPosts.find(p => p.slug === 'spring-hair-repair-tips-carmel-indiana')!;
+---
+
+<BlogPostLayout
+    title={post.title}
+    description={post.description}
+    publishedDate={post.publishedDate}
+    author={post.author}
+    category={post.category}
+    tags={post.tags}
+    readTime={post.readTime}
+>
+    <p>By the time March rolls around in Indiana, your hair has been through a lot. Months of dry indoor heat, cold wind, static, and hat friction can leave even healthy hair feeling dull, brittle, and harder to manage. If your ends are splitting, your color looks flat, or your hair just feels off, you are not imagining it — winter takes a real toll.</p>
+
+    <p>The good news is that most winter hair damage is reversible with the right approach. Here is what our stylists at Glow Salon &amp; Spa recommend to get your hair back on track heading into spring.</p>
+
+    <h2>Why Winter Is So Hard on Your Hair</h2>
+    <p>Indiana winters create a cycle that works against your hair from every angle. Cold, dry air outside strips moisture from the hair shaft, while forced-air heating indoors does the same thing. Your hair constantly moves between these two extremes, and the cuticle layer — the outer protective shell of each strand — starts to lift and crack.</p>
+
+    <p>Once that cuticle is compromised, moisture escapes more easily, color fades faster, and hair becomes more prone to breakage and frizz. Add in wool scarves, knit hats, and static from low humidity, and you get the rough, straw-like texture that so many clients describe when they come in for their first spring appointment.</p>
+
+    <h2>Start with a Fresh Cut</h2>
+    <p>The simplest and most effective first step is trimming off the damage. Split ends do not repair themselves, and no product will fuse them back together. If your ends are frayed or thin, removing even half an inch makes a noticeable difference in how your hair looks and behaves.</p>
+
+    <p>A spring trim also resets your shape. Winter styling habits — more ponytails, less heat styling, hat hair — can leave your cut looking grown out and shapeless. A clean-up gives your stylist a chance to restore the movement and layers that may have grown out over the past few months.</p>
+
+    <p>If you are overdue for a <a href="/services/hair">haircut</a>, this is the appointment to prioritize first. Everything else — color, treatments, at-home care — works better on hair that starts with healthy ends.</p>
+
+    <h2>In-Salon Treatments That Make a Real Difference</h2>
+    <p>For hair that needs more than a trim, a professional treatment can restore moisture and strength in a single visit. Here are the options our stylists recommend most for post-winter recovery:</p>
+
+    <ul>
+        <li><strong>Keratin Smoothing Treatment ($275):</strong> This is our go-to for clients dealing with frizz, roughness, and unmanageable texture after winter. It smooths the cuticle, adds shine, and dramatically reduces styling time. Results last three to five months. We also offer an express version ($150) that lasts four to six weeks if you want to try it before committing.</li>
+        <li><strong>Deep Conditioning Treatment:</strong> A professional-grade conditioning service that penetrates deeper than anything you can do at home. It restores elasticity and softness, especially for color-treated or heat-damaged hair. Ask your stylist to add this to any cut or color appointment.</li>
+        <li><strong>Gloss or Glaze:</strong> If your color looks dull or washed out from winter, a gloss deposits a sheer layer of tone and shine without a full color commitment. It refreshes your existing shade and seals the cuticle for smoother, more reflective hair.</li>
+    </ul>
+
+    <p>Not sure which treatment is right for your hair? Your stylist can assess the damage in person and recommend the best approach during your appointment.</p>
+
+    <h2>At-Home Habits That Help Your Hair Recover</h2>
+    <p>Professional treatments do the heavy lifting, but what you do between appointments matters too. A few adjustments to your routine can speed up recovery and prevent new damage as the weather shifts.</p>
+
+    <h3>Lower your water temperature</h3>
+    <p>Hot showers feel great in March, but high water temperature strips natural oils from your hair and scalp. You do not need to take a cold shower — just turn the dial down to warm for the shampoo and rinse steps. If you can finish with a cool-water rinse, even better. Cooler water helps seal the cuticle and adds shine.</p>
+
+    <h3>Cut back on heat styling</h3>
+    <p>Your hair is already stressed from winter. Give it a break from the flat iron and curling wand when you can. If you do use heat, always apply a heat protectant spray first and keep the temperature at 350 degrees or below. Higher settings cause more cuticle damage and speed up color fading.</p>
+
+    <h3>Use a leave-in conditioner</h3>
+    <p>A lightweight leave-in conditioner adds a layer of moisture and protection between washes. Apply it to damp hair from mid-shaft to ends — skip the roots if your hair tends to get oily. This one change can make a significant difference in how your hair feels day to day.</p>
+
+    <h3>Do not over-wash</h3>
+    <p>If you are washing your hair every day, your scalp is working overtime to replace the natural oils you are stripping away. Most hair types do well with two to three washes per week. On off days, dry shampoo at the roots can keep things fresh without drying out your ends.</p>
+
+    <h2>When to Address Your Color</h2>
+    <p>If your <a href="/services/hair">hair color</a> looks faded or brassy after winter, resist the urge to do a dramatic change right away. If your hair is damaged, adding more chemical processing on top of compromised strands can make things worse.</p>
+
+    <p>The better approach is to repair first, then color. Get your trim, do a conditioning treatment, and give your hair a week or two to stabilize. Then book your color appointment. Your stylist can also recommend color-safe products that protect your investment and keep your shade vibrant longer — we covered this in detail in our guide on <a href="/blog/how-to-keep-hair-color-lasting-longer">how to make your hair color last longer</a>.</p>
+
+    <h2>Book Your Spring Hair Recovery Appointment</h2>
+    <p>If your hair needs a reset after winter, our stylists can put together a plan tailored to your hair type, texture, and goals. Whether it is a simple trim and conditioning treatment or a full refresh with color and keratin, we will help you walk into spring with hair that looks and feels healthy again.</p>
+
+    <p>Glow Salon &amp; Spa is located at 1928 Rhettsbury St in the Village of West Clay, Carmel, IN 46032. We are open Tuesday through Friday from 10am to 6pm and Saturday from 10am to 4pm. We serve clients from Carmel, Westfield, Fishers, Noblesville, Zionsville, and the broader Indianapolis area.</p>
+
+    <p>To schedule your appointment, call us at <a href="tel:+13178463073">(317) 846-3073</a> or <a href="/contact">contact us online</a>.</p>
+</BlogPostLayout>
