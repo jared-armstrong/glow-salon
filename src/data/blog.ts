@@ -17,6 +17,16 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "spring-hair-repair-tips-carmel-indiana",
+    title: "How to Repair Winter-Damaged Hair: A Spring Recovery Guide from Our Carmel Stylists",
+    description: "Dry, brittle, or flat after winter? Our Carmel stylists share the treatments and at-home habits that actually restore your hair heading into spring.",
+    publishedDate: "2026-03-20",
+    author: "Glow Salon & Spa",
+    category: "Hair Care",
+    tags: ["hair repair", "spring hair care", "winter hair damage", "hair treatments", "Carmel IN", "Indianapolis"],
+    readTime: "5 min read",
+  },
+  {
     slug: "spring-2026-hair-color-trends-indianapolis",
     title: "Spring 2026 Hair Color Trends: What Our Carmel Stylists Are Booking Right Now",
     description: "Butter blonde, strawberry copper, espresso brunette — these are the spring 2026 hair color trends our Carmel stylists are seeing the most. Here is what to know before your next appointment.",
